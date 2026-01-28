@@ -15,15 +15,19 @@ The system is **Backend Agnostic**, allowing data routing to the provided "Forev
 ## 📦 Packages
 
 ### `@thumbly/core` (The Brain)
+
 The framework-agnostic logic layer. Handles state management, persistence (`localStorage`), and retry logic. Use this if you are using Vanilla JS, Svelte, Vue, or building a custom wrapper.
 
 ### `@thumbly/react` (The Face)
+
 The React-specific wrapper containing hooks and UI components. It offers three tiers of integration:
+
 1.  **Hooks:** Headless logic (`useThumbly`).
 2.  **Headless Components:** Unstyled wiring (`<Thumbly.Root>`, `<Thumbly.Option>`).
 3.  **Preset Components:** Ready-to-use UI (`<ThumblyBinary />`, `<ThumblyStarRating />`, `<ThumblyNPS />`).
 
 ### `apps/web` (Platform)
+
 The centralized developer dashboard (Static Next.js Site) for documentation and survey management.
 
 ## 🚀 Quick Start
@@ -35,7 +39,7 @@ npm install @thumbly/react
 ### Usage (React)
 
 ```tsx
-import { ThumblyBinary } from '@thumbly/react';
+import { ThumblyBinary } from "@thumbly/react";
 
 function App() {
   return (

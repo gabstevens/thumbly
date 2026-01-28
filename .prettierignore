@@ -1,0 +1,5 @@
+# Prettier Ignore File
+# Note: Prettier also respects .gitignore by default.
+# Add files here that are NOT in .gitignore but should still be ignored by Prettier.
+
+pnpm-lock.yaml

@@ -18,20 +18,21 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: "pnpm"
 
       - name: Install dependencies
         run: pnpm install
 
       - name: Build
-        run: pnpm build
-        working-directory: apps/web
+        run: pnpm exec turbo build --filter=web
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./apps/web/out
+          name: thumbly-web-build
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          artifact_name: thumbly-web-build

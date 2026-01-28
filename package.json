@@ -2,29 +2,27 @@
   "name": "thumbly",
   "version": "1.0.0",
   "description": "The open-source modular toolkit for sentiment feedback.",
-  "main": "index.js",
+  "private": true,
+  "author": "Gabriele Stefani",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/gabstevens/thumbly.git"
   },
-  "author": "Gabriele Stevens",
-  "license": "MIT",
+  "packageManager": "pnpm@10.28.2",
   "scripts": {
     "dev": "turbo dev",
     "build": "turbo build",
     "infra:up": "supabase start -x vector,imgproxy --workdir infra",
     "infra:down": "supabase stop --workdir infra",
     "infra:reset": "supabase db reset --workdir infra",
+    "format": "prettier --write .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "packageManager": "pnpm@10.28.2",
   "devDependencies": {
-    "supabase": "^2.12.0",
     "@changesets/cli": "^2.29.8",
     "prettier": "^3.8.1",
+    "supabase": "^2.72.9",
     "turbo": "^2.8.0",
     "typescript": "^5.9.3"
   }
