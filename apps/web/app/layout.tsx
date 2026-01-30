@@ -10,12 +10,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <header>
-          <strong>Thumbly</strong>
-          <nav>
-            <a href="https://github.com/gabstevens/thumbly" style={{ marginLeft: "1rem" }}>
-              GitHub
-            </a>
-          </nav>
+          <div className="container">
+            <div className="header-content">
+              <a href="/" className="logo">
+                Thumbly
+              </a>
+              <nav>
+                <a href="/docs" className="nav-link">
+                  Documentation
+                </a>
+                <a href="https://github.com/gabstevens/thumbly" className="nav-link" target="_blank" rel="noopener noreferrer">
+                  GitHub
+                </a>
+              </nav>
+            </div>
+          </div>
         </header>
         <main>{children}</main>
         <footer>
