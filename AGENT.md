@@ -23,13 +23,14 @@ This project is a Monorepo managed by `pnpm` and `turbo`.
 3.  **Keep it "Plug & Play":** Ensure all components work out-of-the-box but remain overridable.
 4.  **Minimal Dependencies:** especially in `apps/web` (No Tailwind, just CSS) and `@thumbly/core`.
 5.  **Driver Pattern:** Always respect the separation between Logic (`ThumblyClient`) and Transport (`ThumblyDriver`).
+6.  **Commit Promptly:** Commit your changes as soon as any task (on-TODO or off-TODO) is completed and verified. Do not wait for a large batch of changes.
 
 ## 🛠️ Development Workflow
 
 - **Build:** `pnpm build` (Runs Turbo).
 - **Dev:** `pnpm dev` (Runs Turbo).
 - **Lint:** `pnpm lint`.
-- **Commit:** Follow the "Why" over "What" rule.
+- **Commit:** Commit your work immediately after completing a task. Follow the "Why" over "What" rule.
 
 ## 💡 Context
 
