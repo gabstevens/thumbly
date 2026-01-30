@@ -1,42 +1,55 @@
 # Thumbly
 
-**The open-source modular toolkit for sentiment feedback.**
+<p align="center">
+  <strong>The Modular Sentiment Feedback Toolkit.</strong>
+</p>
 
-Thumbly is a comprehensive, "batteries-included" sentiment feedback system designed for maximum developer flexibility. Unlike traditional "headless" tools that force you to build your own UI, or "widget" tools that force a specific design, Thumbly provides both.
+<p align="center">
+  <a href="#-features">Features</a> •
+  <a href="#-installation">Installation</a> •
+  <a href="#-usage">Usage</a> •
+  <a href="#-architecture">Architecture</a> •
+  <a href="#-contributing">Contributing</a>
+</p>
 
-The system is **Backend Agnostic**, allowing data routing to the provided "Forever Free" Supabase stack, a custom API, or internal infrastructure.
+---
 
-## 🌟 Core Principles
+**Thumbly** is a comprehensive, "batteries-included" sentiment feedback system designed for maximum developer flexibility.
 
-- **Plug & Play:** Swap out the UI (`@thumbly/react`), Logic (`@thumbly/core`), or Data layer as needed.
-- **Forever Free Default:** Optional managed backend using Supabase (PostgreSQL) with atomic increments.
-- **Privacy Native:** No PII collection by default.
+Developers shouldn't have to choose between an ugly iframe widget and building a feedback system from scratch. Thumbly provides the middle ground: **Headless logic**, **Ready-made UI**, and a **Free Backend**.
+
+## 🌟 Features
+
+- **🔌 Plug & Play:** Swap out the UI, logic, or data layer as needed.
+- **⚛️ React Ready:** Beautiful, accessible components out of the box (`@thumbly/react`).
+- **🧠 Headless Core:** 100% logic separation in `@thumbly/core` for custom implementations.
+- **🚀 Forever Free Default:** Optional managed backend using Supabase (PostgreSQL).
+- **🛡️ Privacy Native:** No PII collection by default. Only aggregate counts are stored.
+- **🔒 Backend Agnostic:** Use our backend, your own API, or any serverless function.
 
 ## 📦 Packages
 
-### `@thumbly/core` (The Brain)
+| Package | Description | Use Case |
+| :--- | :--- | :--- |
+| **`@thumbly/react`** | The "Face". Hooks & UI Components. | You use React and want a drop-in solution. |
+| **`@thumbly/core`** | The "Brain". Framework-agnostic logic. | You use Vue/Svelte/Vanilla or want total control. |
+| **`apps/web`** | The Platform. Docs & Dashboard. | You want to manage your surveys visually. |
 
-The framework-agnostic logic layer. Handles state management, persistence (`localStorage`), and retry logic. Use this if you are using Vanilla JS, Svelte, Vue, or building a custom wrapper.
-
-### `@thumbly/react` (The Face)
-
-The React-specific wrapper containing hooks and UI components. It offers three tiers of integration:
-
-1.  **Hooks:** Headless logic (`useThumbly`).
-2.  **Headless Components:** Unstyled wiring (`<Thumbly.Root>`, `<Thumbly.Option>`).
-3.  **Preset Components:** Ready-to-use UI (`<ThumblyBinary />`, `<ThumblyStarRating />`, `<ThumblyNPS />`).
-
-### `apps/web` (Platform)
-
-The centralized developer dashboard (Static Next.js Site) for documentation and survey management.
-
-## 🚀 Quick Start
+## 📦 Installation
 
 ```bash
 npm install @thumbly/react
+# or
+pnpm add @thumbly/react
+# or
+yarn add @thumbly/react
 ```
 
-### Usage (React)
+## 💻 Usage
+
+### 1. The "Plug & Play" Way (React)
+
+Import a preset component and drop it into your app.
 
 ```tsx
 import { ThumblyBinary } from "@thumbly/react";
@@ -52,36 +65,42 @@ function App() {
 }
 ```
 
-## 🛠️ Development
+### 2. The "Headless" Way (Custom UI)
 
-This repository is a monorepo managed by [Turborepo](https://turborepo.dev/).
+Use the `useThumbly` hook to build your own UI while keeping the robust state management.
 
-### Setup
+```tsx
+import { useThumbly } from "@thumbly/react";
 
-```bash
-pnpm install
-pnpm infra:up  # Starts local Supabase instance
+function CustomFeedback() {
+  const { vote, isLoading, hasVoted } = useThumbly({
+    surveyId: "your-survey-uuid",
+    // options...
+  });
+
+  if (hasVoted) return <p>Thanks!</p>;
+
+  return (
+    <button disabled={isLoading} onClick={() => vote(1)}>
+      I like this 👍
+    </button>
+  );
+}
 ```
 
-### Build
+## 🏗️ Architecture
 
-To build all packages:
+Thumbly is designed as a Monorepo to ensure modularity.
 
-```bash
-pnpm build
-```
-
-### Develop
-
-To start watch mode for all packages + web app:
-
-```bash
-pnpm dev
-```
-
-### Architecture
+- **Frontend:** Next.js (Static Export)
+- **Database:** Supabase (PostgreSQL + RLS)
+- **Testing:** Vitest & Playwright
 
 For a deep dive into the system design, see [docs/DESIGN.md](./docs/DESIGN.md).
+
+## 🤝 Contributing
+
+We love contributions! Please read our [Contributing Guide](./CONTRIBUTING.md) to get started with setting up the development environment and submitting Pull Requests.
 
 ## 📄 License
 

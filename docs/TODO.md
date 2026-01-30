@@ -32,11 +32,11 @@
 - [x] Create `.env.example` with Supabase config placeholders.
 - [x] Initialize Next.js app (Static Export).
 - [x] Basic Layout (Standard CSS).
-- [ ] **Landing Page Implementation:**
+- [x] **Landing Page Implementation:**
   - [x] Hero Section (Value Prop).
   - [x] Features Section (Modular, Free, Forever).
   - [x] "How it Works" (Code Snippet display).
-- [ ] **Demo Section (`/`):**
+- [x] **Demo Section (`/`):**
   - [x] Import `@thumbly/react` components.
   - [x] Create a live interaction demo.
   - [x] **Dogfooding:** Implement a real `<ThumblyBinary />` or `<ThumblyNPS />` asking "Is Thumbly useful?" connected to our own Supabase backend.
@@ -52,19 +52,18 @@
   - [ ] Write "Self-Hosting" guide (Supabase CLI focus).
   - [ ] Write API Reference (Manual MDX).
 
-## 5. Quality Assurance (Pending)
+## 5. Test Infrastructure Setup (Pending)
 
-- [ ] **Unit Testing (Vitest):**
-  - [ ] `@thumbly/core`: Mock `fetch` to test retry logic and backoff.
-  - [ ] `@thumbly/core`: Test persistence (`localStorage`).
-  - [ ] `@thumbly/react`: Render tests for presets.
-- [ ] **E2E Testing (Playwright):**
-  - [ ] `apps/web`: Test Dashboard login and survey creation.
+- [ ] **Unit Testing (Vitest):** Setup and configuration for `@thumbly/core` and `@thumbly/react`.
+- [ ] **E2E Testing (Playwright):** Setup and configuration for `apps/web`.
 - [ ] **Linting & formatting:** Ensure `pnpm lint` passes root-wide.
 
-## 6. CI/CD & Release (Pending)
+## 6. Community & Maintenance (In Progress)
 
-- [x] Create `ci.yml` (Build & Test).
+- [x] Create `CONTRIBUTING.md`.
+- [x] Refactor `README.md` for better clarity and marketing.
+- [ ] **CI/CD & Release:**
+  - [x] Create `ci.yml` (Build & Test).
 - [x] Create `deploy.yml` (GitHub Pages).
 - [ ] **Release Strategy (Changesets):**
   - [ ] Initialize changesets in root: `pnpm changeset init`.
