@@ -17,7 +17,7 @@
   - [x] Update hooks (`useThumbly`) and context (`ThumblyRoot`).
   - [x] Ensure presets (`ThumblyBinary`, `StarRating`, `NPS`) use the new client.
 
-## 3. Infrastructure (Supabase) (Done)
+## 3. Infrastructure (Supabase) (In Progress)
 
 - [x] Rename `backend` to `infra`.
 - [x] Create migration `20260126001321_init_thumbly_schema.sql`.
@@ -26,6 +26,10 @@
   - [x] `submit_vote` RPC function with `SECURITY DEFINER`.
   - [x] RLS policies for owner access.
   - [x] Create `seed.sql` for "Dogfooding" survey (`5468756d...`).
+- [ ] **Auth Configuration:**
+  - [ ] Configure local Auth (Email/GitHub) in `infra/config.toml` for development.
+  - [ ] Configure production Auth Providers and Site URLs in Supabase Dashboard.
+  - [ ] Verify RLS policies correctly utilize `auth.uid()`.
 
 ## 4. Web Platform (`apps/web`) (In Progress)
 
