@@ -27,7 +27,7 @@
   - [x] RLS policies for owner access.
   - [x] Create `seed.sql` for "Dogfooding" survey (`5468756d...`).
 - [ ] **Auth Configuration:**
-  - [ ] Configure local Auth (Email/GitHub) in `infra/config.toml` for development.
+  - [x] Configure local Auth (Email/GitHub) in `infra/config.toml` for development.
   - [ ] Configure production Auth Providers and Site URLs in Supabase Dashboard.
   - [ ] Verify RLS policies correctly utilize `auth.uid()`.
 
