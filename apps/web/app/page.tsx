@@ -17,63 +17,135 @@ export default function HomePage() {
   const isConfigured = supabaseUrl && supabaseKey;
 
   return (
-    <section className="hero">
-      <h1>Thumbly</h1>
-      <p>The Modular Sentiment Feedback Toolkit.</p>
-      <div style={{ marginTop: "2rem" }}>
-        <a href="#demo" className="btn">
-          Try the Demo
-        </a>
-      </div>
-
-      <div id="demo" style={{ marginTop: "6rem", maxWidth: "600px", margin: "6rem auto 0", textAlign: "left" }}>
-        <h2>Live Demo</h2>
-        <p style={{ marginBottom: "1rem" }}>
-          This is a real <code>&lt;ThumblyBinary /&gt;</code> component connected to our backend.
-        </p>
-
-        <div
-          style={{
-            padding: "2rem",
-            border: "1px solid #eee",
-            borderRadius: "8px",
-            background: "#fafafa",
-            textAlign: "center",
-          }}
-        >
-          <h3>Is this toolkit useful to you?</h3>
-
-          {mounted && isConfigured ? (
-            <ThumblyBinary
-              surveyId={surveyId}
-              supabaseUrl={supabaseUrl}
-              supabaseKey={supabaseKey}
-              style={{
-                display: "flex",
-                gap: "1rem",
-                justifyContent: "center",
-                marginTop: "1.5rem",
-                fontSize: "2rem",
-              }}
-            />
-          ) : (
-            <div style={{ marginTop: "1rem", color: "#666" }}>
-              {!mounted ? "Loading..." : "Please configure .env.local to enable the demo."}
-            </div>
-          )}
-        </div>
-
-        <div style={{ marginTop: "4rem" }}>
-          <h2>Quick Start</h2>
-          <pre style={{ background: "#f4f4f4", padding: "1rem", borderRadius: "4px", overflowX: "auto" }}>
-            <code>npm install @thumbly/react</code>
-          </pre>
+    <>
+      {/* Hero Section */}
+      <section className="hero">
+        <div className="container">
+          <h1>
+            The Modular Sentiment
+            <br />
+            Feedback Toolkit.
+          </h1>
           <p>
-            Thumbly provides everything you need to collect feedback from your users, from ready-made UI components to a
-            flexible backend-agnostic core.
+            Everything you need to collect user feedback. Headless logic, ready-made UI, and a free backend.
           </p>
+          <div className="btn-group">
+            <a href="#how-it-works" className="btn">
+              Get Started
+            </a>
+            <a href="#demo" className="btn secondary">
+              Live Demo
+            </a>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* Features Section */}
+      <section className="section" style={{ background: "var(--secondary-bg)" }}>
+        <div className="container">
+          <h2 className="section-title">Why Thumbly?</h2>
+          <p className="section-subtitle">
+            Designed for developers who want flexibility without reinventing the wheel.
+          </p>
+          <div className="features-grid">
+            <div className="feature-card" style={{ background: "white" }}>
+              <h3>🔌 Plug & Play UI</h3>
+              <p>
+                Drop in ready-made React components like <code>&lt;ThumblyBinary /&gt;</code> or{" "}
+                <code>&lt;ThumblyNPS /&gt;</code> and start collecting feedback instantly.
+              </p>
+            </div>
+            <div className="feature-card" style={{ background: "white" }}>
+              <h3>🚀 Backend Agnostic</h3>
+              <p>
+                Use our "Forever Free" Supabase backend, your own API, or any serverless function. You are in control of your data.
+              </p>
+            </div>
+            <div className="feature-card" style={{ background: "white" }}>
+              <h3>🧠 Headless Core</h3>
+              <p>
+                100% logic separation. Build your own unique UI on top of our robust state management and retry logic.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works Section */}
+      <section id="how-it-works" className="section">
+        <div className="container">
+          <h2 className="section-title">How it works</h2>
+          <p className="section-subtitle">It's as simple as installing a package.</p>
+
+          <div className="code-preview">
+            <div style={{ marginBottom: "1rem" }}>
+              <span className="token-comment">// 1. Install</span>
+              <br />
+              <code>npm install @thumbly/react</code>
+            </div>
+            <div>
+              <span className="token-comment">// 2. Drop it in</span>
+              <br />
+              <span className="token-keyword">import</span> {"{ ThumblyBinary }"} <span className="token-keyword">from</span>{" "}
+              <span className="token-string">"@thumbly/react"</span>;
+              <br />
+              <br />
+              <span className="token-keyword">export default</span> <span className="token-keyword">function</span>{" "}
+              <span className="token-function">App</span>() {"{"}
+              <br />
+              &nbsp;&nbsp;<span className="token-keyword">return</span> (
+              <br />
+              &nbsp;&nbsp;&nbsp;&nbsp;<span className="token-tag">&lt;ThumblyBinary</span>
+              <br />
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="token-keyword">surveyId</span>=
+              <span className="token-string">"..."</span>
+              <br />
+              &nbsp;&nbsp;&nbsp;&nbsp;<span className="token-tag">/&gt;</span>
+              <br />
+              &nbsp;&nbsp;);
+              <br />
+              {"}"}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Demo Section */}
+      <section id="demo" className="section" style={{ background: "white" }}>
+        <div className="container">
+          <h2 className="section-title">Live Demo</h2>
+          <p className="section-subtitle">
+            This is a real component connected to our backend. <br />
+            Go ahead, vote!
+          </p>
+
+          <div className="demo-container">
+            <h3>Is this toolkit useful to you?</h3>
+
+            {mounted && isConfigured ? (
+              <ThumblyBinary
+                surveyId={surveyId}
+                supabaseUrl={supabaseUrl}
+                supabaseKey={supabaseKey}
+                style={{
+                  display: "flex",
+                  gap: "1rem",
+                  justifyContent: "center",
+                  marginTop: "1.5rem",
+                  fontSize: "2rem",
+                }}
+              />
+            ) : (
+              <div style={{ marginTop: "1rem", color: "#666" }}>
+                {!mounted ? "Loading..." : "Please configure .env.local to enable the demo."}
+              </div>
+            )}
+            <p style={{ marginTop: "2rem", fontSize: "0.9rem", color: "#888" }}>
+              (This data is actually saved to our Supabase database)
+            </p>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
