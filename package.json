@@ -16,6 +16,7 @@
     "infra:up": "supabase start -x vector,imgproxy --workdir infra",
     "infra:down": "supabase stop --workdir infra",
     "infra:reset": "supabase db reset --workdir infra",
+    "lint": "turbo lint",
     "format": "prettier --write .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

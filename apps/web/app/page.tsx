@@ -1,14 +1,15 @@
 "use client";
 
-import { ThumblyBinary } from "@thumbly/react";
-import { useEffect, useState } from "react";
+import Link from "next/link";
+import dynamic from "next/dynamic";
+
+const ThumblyBinary = dynamic(() => import("@thumbly/react").then((mod) => mod.ThumblyBinary), {
+  ssr: false,
+  loading: () => <div style={{ color: "#666" }}>Loading...</div>,
+});
 
 export default function HomePage() {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
 
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY || "";
@@ -30,12 +31,12 @@ export default function HomePage() {
             Everything you need to collect user feedback. Headless logic, ready-made UI, and a free backend.
           </p>
           <div className="btn-group">
-            <a href="#how-it-works" className="btn">
+            <Link href="#how-it-works" className="btn">
               Get Started
-            </a>
-            <a href="#demo" className="btn secondary">
+            </Link>
+            <Link href="#demo" className="btn secondary">
               Live Demo
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -58,7 +59,7 @@ export default function HomePage() {
             <div className="feature-card" style={{ background: "white" }}>
               <h3>🚀 Backend Agnostic</h3>
               <p>
-                Use our "Forever Free" Supabase backend, your own API, or any serverless function. You are in control of your data.
+                Use our &quot;Forever Free&quot; Supabase backend, your own API, or any serverless function. You are in control of your data.
               </p>
             </div>
             <div className="feature-card" style={{ background: "white" }}>
@@ -75,19 +76,19 @@ export default function HomePage() {
       <section id="how-it-works" className="section">
         <div className="container">
           <h2 className="section-title">How it works</h2>
-          <p className="section-subtitle">It's as simple as installing a package.</p>
+          <p className="section-subtitle">It&apos;s as simple as installing a package.</p>
 
           <div className="code-preview">
             <div style={{ marginBottom: "1rem" }}>
-              <span className="token-comment">// 1. Install</span>
+              <span className="token-comment">{"// 1. Install"}</span>
               <br />
               <code>npm install @thumbly/react</code>
             </div>
             <div>
-              <span className="token-comment">// 2. Drop it in</span>
+              <span className="token-comment">{"// 2. Drop it in"}</span>
               <br />
               <span className="token-keyword">import</span> {"{ ThumblyBinary }"} <span className="token-keyword">from</span>{" "}
-              <span className="token-string">"@thumbly/react"</span>;
+              <span className="token-string">&quot;@thumbly/react&quot;</span>;
               <br />
               <br />
               <span className="token-keyword">export default</span> <span className="token-keyword">function</span>{" "}
@@ -98,7 +99,7 @@ export default function HomePage() {
               &nbsp;&nbsp;&nbsp;&nbsp;<span className="token-tag">&lt;ThumblyBinary</span>
               <br />
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="token-keyword">surveyId</span>=
-              <span className="token-string">"..."</span>
+              <span className="token-string">&quot;...&quot;</span>
               <br />
               &nbsp;&nbsp;&nbsp;&nbsp;<span className="token-tag">/&gt;</span>
               <br />
@@ -122,7 +123,7 @@ export default function HomePage() {
           <div className="demo-container">
             <h3>Is this toolkit useful to you?</h3>
 
-            {mounted && isConfigured ? (
+            {isConfigured ? (
               <ThumblyBinary
                 surveyId={surveyId}
                 supabaseUrl={supabaseUrl}
@@ -137,7 +138,7 @@ export default function HomePage() {
               />
             ) : (
               <div style={{ marginTop: "1rem", color: "#666" }}>
-                {!mounted ? "Loading..." : "Please configure .env.local to enable the demo."}
+                Please configure .env.local to enable the demo.
               </div>
             )}
             <p style={{ marginTop: "2rem", fontSize: "0.9rem", color: "#888" }}>

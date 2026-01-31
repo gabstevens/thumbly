@@ -3,7 +3,7 @@ export default function SelfHostingPage() {
     <div className="prose">
       <h1>Self-Hosting Guide</h1>
       <p>
-        Thumbly's backend is 100% open-source and built on Supabase. You can host your own instance
+        Thumbly&apos;s backend is 100% open-source and built on Supabase. You can host your own instance
         to have full control over your data.
       </p>
 
@@ -16,7 +16,7 @@ export default function SelfHostingPage() {
 
       <h2>1. Initialize Supabase</h2>
       <p>
-        If you haven't already, clone the Thumbly repository and navigate to the infrastructure folder.
+        If you haven&apos;t already, clone the Thumbly repository and navigate to the infrastructure folder.
       </p>
       <pre>
         <code>
@@ -52,9 +52,9 @@ npx supabase db push --workdir infra
       <pre>
         <code>
 &lt;ThumblyBinary
-  surveyId="..."
-  supabaseUrl="https://your-project.supabase.co"
-  supabaseKey="your-anon-key"
+  surveyId=&quot;...&quot;
+  supabaseUrl=&quot;https://your-project.supabase.co&quot;
+  supabaseKey=&quot;your-anon-key&quot;
 /&gt;
         </code>
       </pre>

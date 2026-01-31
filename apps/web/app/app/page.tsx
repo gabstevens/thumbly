@@ -11,6 +11,19 @@ export default function DashboardPage() {
   const [loading, setLoading] = useState(true);
   const [surveys, setSurveys] = useState<any[]>([]);
 
+  async function fetchSurveys() {
+    setLoading(true);
+    const { data, error } = await supabase
+      .from("surveys")
+      .select("*")
+      .order("last_activity", { ascending: false });
+
+    if (!error && data) {
+      setSurveys(data);
+    }
+    setLoading(false);
+  }
+
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
@@ -28,21 +41,8 @@ export default function DashboardPage() {
     return () => subscription.unsubscribe();
   }, []);
 
-  async function fetchSurveys() {
-    setLoading(true);
-    const { data, error } = await supabase
-      .from("surveys")
-      .select("*")
-      .order("last_activity", { ascending: false });
-
-    if (!error && data) {
-      setSurveys(data);
-    }
-    setLoading(false);
-  }
-
   async function createSurvey() {
-    const { data, error } = await supabase.from("surveys").insert({}).select().single();
+    const { data } = await supabase.from("surveys").insert({}).select().single();
     if (data) {
       setSurveys([data, ...surveys]);
     }
@@ -88,7 +88,7 @@ export default function DashboardPage() {
 
       {surveys.length === 0 ? (
         <div className="feature-card" style={{ padding: "2rem", textAlign: "center", background: "white" }}>
-          <p style={{ color: "#666", marginBottom: "1.5rem" }}>You haven't created any surveys yet.</p>
+          <p style={{ color: "#666", marginBottom: "1.5rem" }}>You haven&apos;t created any surveys yet.</p>
           <button className="btn" onClick={createSurvey}>
             Create New Survey
           </button>
@@ -150,11 +150,11 @@ export default function DashboardPage() {
                     <summary style={{ cursor: "pointer", fontSize: "0.8rem", color: "#3b82f6" }}>Get Code</summary>
                     <div className="code-preview" style={{ marginTop: "0.5rem", fontSize: "0.8rem", padding: "1rem", background: "#f8fafc", borderRadius: "4px" }}>
                       <code>
-                        <span className="token-keyword">import</span> {"{ ThumblyBinary }"} <span className="token-keyword">from</span> <span className="token-string">"@thumbly/react"</span>;
+                        <span className="token-keyword">import</span> {"{ ThumblyBinary }"} <span className="token-keyword">from</span> <span className="token-string">&quot;@thumbly/react&quot;</span>;
                         <br /><br />
                         <span className="token-tag">&lt;ThumblyBinary</span>
                         <br />
-                        &nbsp;&nbsp;<span className="token-keyword">surveyId</span>=<span className="token-string">"{survey.id}"</span>
+                        &nbsp;&nbsp;<span className="token-keyword">surveyId</span>=<span className="token-string">&quot;{survey.id}&quot;</span>
                         <br />
                         <span className="token-tag">/&gt;</span>
                       </code>

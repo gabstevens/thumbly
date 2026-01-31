@@ -1,4 +1,5 @@
 import "./globals.css";
+import Link from "next/link";
 
 export const metadata = {
   title: "Thumbly - Modular Sentiment Feedback Toolkit",
@@ -12,16 +13,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <header>
           <div className="container">
             <div className="header-content">
-              <a href="/" className="logo">
+              <Link href="/" className="logo">
                 Thumbly
-              </a>
+              </Link>
               <nav>
-                <a href="/app" className="nav-link">
+                <Link href="/app" className="nav-link">
                   Dashboard
-                </a>
-                <a href="/docs" className="nav-link">
+                </Link>
+                <Link href="/docs" className="nav-link">
                   Documentation
-                </a>
+                </Link>
                 <a href="https://github.com/gabstevens/thumbly" className="nav-link" target="_blank" rel="noopener noreferrer">
                   GitHub
                 </a>

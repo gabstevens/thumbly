@@ -29,12 +29,12 @@ pnpm add @thumbly/react
       </p>
       <pre>
         <code>
-import {"{ ThumblyBinary }"} from "@thumbly/react";
+import {"{ ThumblyBinary }"} from &quot;@thumbly/react&quot;;
 
 function App() {"{"}
   return (
     &lt;ThumblyBinary
-      surveyId="YOUR_SURVEY_ID_HERE"
+      surveyId=&quot;YOUR_SURVEY_ID_HERE&quot;
     /&gt;
   );
 {"}"}
