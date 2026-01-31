@@ -16,6 +16,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 Thumbly
               </a>
               <nav>
+                <a href="/app" className="nav-link">
+                  Dashboard
+                </a>
                 <a href="/docs" className="nav-link">
                   Documentation
                 </a>
