@@ -46,7 +46,7 @@
   - [x] **Dogfooding:** Implement a real `<ThumblyBinary />` or `<ThumblyNPS />` asking "Is Thumbly useful?" connected to our own Supabase backend.
   - [x] Show resulting state (e.g., "Thanks for voting").
 - [ ] **Dashboard Implementation (`/app`):**
-  - [ ] Setup Supabase Auth UI (Login/Sign up).
+  - [x] Setup Supabase Auth UI (Login/Sign up).
   - [ ] Create "My Surveys" view (List/Create).
   - [ ] Implement Analytics Charts (using lightweight chart lib or CSS).
   - [ ] Implement Snippet Generator.
