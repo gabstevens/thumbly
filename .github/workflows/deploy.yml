@@ -24,6 +24,9 @@ jobs:
 
       - name: Build
         run: pnpm exec turbo build --filter=web
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_KEY }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
