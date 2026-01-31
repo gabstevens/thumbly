@@ -29,7 +29,7 @@
 - [ ] **Auth Configuration:**
   - [x] Configure local Auth (Email/GitHub) in `infra/config.toml` for development.
   - [ ] Configure production Auth Providers and Site URLs in Supabase Dashboard.
-  - [ ] Verify RLS policies correctly utilize `auth.uid()`.
+  - [x] Verify RLS policies correctly utilize `auth.uid()`.
 
 ## 4. Web Platform (`apps/web`) (In Progress)
 
@@ -47,7 +47,7 @@
   - [x] Show resulting state (e.g., "Thanks for voting").
 - [ ] **Dashboard Implementation (`/app`):**
   - [x] Setup Supabase Auth UI (Login/Sign up).
-  - [ ] Create "My Surveys" view (List/Create).
+  - [x] Create "My Surveys" view (List/Create).
   - [ ] Implement Analytics Charts (using lightweight chart lib or CSS).
   - [ ] Implement Snippet Generator.
 - [ ] **Documentation (`/docs`):**
