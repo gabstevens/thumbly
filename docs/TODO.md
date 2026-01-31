@@ -56,9 +56,9 @@
   - [x] Write "Self-Hosting" guide (Supabase CLI focus).
   - [x] Write API Reference (Manual MDX).
 
-## 5. Test Infrastructure Setup (Pending)
+## 5. Test Infrastructure Setup (In Progress)
 
-- [ ] **Unit Testing (Vitest):** Setup and configuration for `@thumbly/core` and `@thumbly/react`.
+- [x] **Unit Testing (Vitest):** Setup and configuration for `@thumbly/core` and `@thumbly/react`.
 - [ ] **E2E Testing (Playwright):** Setup and configuration for `apps/web`.
 - [x] **Linting & formatting:** Ensure `pnpm lint` passes root-wide.
 
@@ -66,9 +66,9 @@
 
 - [x] Create `CONTRIBUTING.md`.
 - [x] Refactor `README.md` for better clarity and marketing.
-- [ ] **CI/CD & Release:**
-  - [x] Create `ci.yml` (Build & Test).
-- [x] Create `deploy.yml` (GitHub Pages).
+- [x] **CI/CD & Release:**
+  - [x] Create `ci.yml` (Build, Lint, Test).
+  - [x] Create `deploy.yml` (GitHub Pages).
 - [ ] **Release Strategy (Changesets):**
   - [ ] Initialize changesets in root: `pnpm changeset init`.
   - [ ] Configure fixed versioning in `.changeset/config.json`.
