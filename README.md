@@ -5,6 +5,7 @@
 </p>
 
 <p align="center">
+  <a href="https://gabstevens.github.io/thumbly/">Website</a> •
   <a href="#-features">Features</a> •
   <a href="#-installation">Installation</a> •
   <a href="#-usage">Usage</a> •
