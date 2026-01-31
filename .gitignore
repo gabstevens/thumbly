@@ -42,5 +42,9 @@ Thumbs.db
 
 coverage
 
+# Playwright
+playwright-report
+test-results
+
 # Next.js
 next-env.d.ts
