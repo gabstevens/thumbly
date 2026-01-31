@@ -48,7 +48,7 @@
 - [ ] **Dashboard Implementation (`/app`):**
   - [x] Setup Supabase Auth UI (Login/Sign up).
   - [x] Create "My Surveys" view (List/Create).
-  - [ ] Implement Analytics Charts (using lightweight chart lib or CSS).
+  - [x] Implement Analytics Charts (using lightweight chart lib or CSS).
   - [ ] Implement Snippet Generator.
 - [ ] **Documentation (`/docs`):**
   - [ ] Create `docs/` route layout.
