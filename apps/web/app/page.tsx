@@ -9,9 +9,9 @@ const ThumblyBinary = dynamic(() => import("@thumbly/react").then((mod) => mod.T
 });
 
 export default function HomePage() {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
 
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
+
   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY || "";
   const surveyId = process.env.NEXT_PUBLIC_DOGFOOD_SURVEY_ID || "5468756d-626c-7930-0000-000000000000";
 
