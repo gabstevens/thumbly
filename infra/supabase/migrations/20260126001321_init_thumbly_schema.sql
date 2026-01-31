@@ -9,7 +9,7 @@ create table surveys (
   option_5 int4 default 0,
   
   last_activity timestamptz default now(),
-  owner_id uuid references auth.users(id)
+  owner_id uuid references auth.users(id) default auth.uid()
 );
 
 -- Enable RLS
@@ -18,6 +18,15 @@ alter table surveys enable row level security;
 -- Policy: Owner can view/delete
 create policy "Developers can see own surveys" 
 on surveys for select using (auth.uid() = owner_id);
+
+create policy "Developers can create own surveys"
+on surveys for insert with check (auth.uid() = owner_id);
+
+create policy "Developers can update own surveys"
+on surveys for update using (auth.uid() = owner_id);
+
+create policy "Developers can delete own surveys"
+on surveys for delete using (auth.uid() = owner_id);
 
 create or replace function submit_vote(
   survey_id uuid,
