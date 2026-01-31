@@ -103,9 +103,46 @@ export default function DashboardPage() {
                     {survey.id}
                   </h3>
                   <div style={{ display: "flex", gap: "1.5rem", fontSize: "0.9rem", color: "#666" }}>
-                    <span>👍 {survey.option_1}</span>
-                    <span>👎 {survey.option_2}</span>
                     <span>Last Active: {new Date(survey.last_activity).toLocaleDateString()}</span>
+                  </div>
+                  
+                  {/* Simple Analytics Bar */}
+                  <div style={{ marginTop: "1rem", display: "flex", gap: "4px", height: "20px", width: "100%", maxWidth: "400px" }}>
+                    {[
+                      { val: survey.option_1, color: "#22c55e", label: "👍" },
+                      { val: survey.option_2, color: "#ef4444", label: "👎" },
+                      { val: survey.option_3, color: "#eab308", label: "⭐" },
+                      { val: survey.option_4, color: "#3b82f6", label: "4" },
+                      { val: survey.option_5, color: "#a855f7", label: "5" },
+                    ].map((opt, idx) => {
+                      const total =
+                        survey.option_1 +
+                        survey.option_2 +
+                        survey.option_3 +
+                        survey.option_4 +
+                        survey.option_5;
+                      const pct = total > 0 ? (opt.val / total) * 100 : 0;
+                      
+                      if (pct === 0) return null;
+
+                      return (
+                        <div
+                          key={idx}
+                          title={`${opt.label}: ${opt.val} votes (${Math.round(pct)}%)`}
+                          style={{
+                            width: `${pct}%`,
+                            background: opt.color,
+                            opacity: 0.8,
+                            borderRadius: "2px",
+                          }}
+                        />
+                      );
+                    })}
+                    {(survey.option_1 + survey.option_2 + survey.option_3 + survey.option_4 + survey.option_5) === 0 && (
+                      <div style={{ width: "100%", background: "#e5e7eb", borderRadius: "2px", fontSize: "0.7rem", display: "flex", alignItems: "center", justifyContent: "center", color: "#888" }}>
+                        No votes yet
+                      </div>
+                    )}
                   </div>
                 </div>
                 <button
