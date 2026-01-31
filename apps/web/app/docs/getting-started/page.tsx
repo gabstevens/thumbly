@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function GettingStartedPage() {
   return (
     <div className="prose">
@@ -15,7 +17,7 @@ export default function GettingStartedPage() {
 
       <h2>2. Create a Survey</h2>
       <p>
-        Go to the <a href="/app">Dashboard</a> to create your first survey. You will get a unique
+        Go to the <Link href="/app">Dashboard</Link> to create your first survey. You will get a unique
         <code>surveyId</code> (UUID) which links your frontend component to the database.
       </p>
 

@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function DocsPage() {
   return (
     <div className="prose">
@@ -22,7 +24,7 @@ export default function DocsPage() {
 
       <h2>Next Steps</h2>
       <p>
-        Check out the <a href="/docs/getting-started">Getting Started</a> guide to integrate Thumbly in under 5 minutes.
+        Check out the <Link href="/docs/getting-started">Getting Started</Link> guide to integrate Thumbly in under 5 minutes.
       </p>
     </div>
   );
