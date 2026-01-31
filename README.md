@@ -30,11 +30,11 @@ Developers shouldn't have to choose between an ugly iframe widget and building a
 
 ## 📦 Packages
 
-| Package | Description | Use Case |
-| :--- | :--- | :--- |
-| **`@thumbly/react`** | The "Face". Hooks & UI Components. | You use React and want a drop-in solution. |
-| **`@thumbly/core`** | The "Brain". Framework-agnostic logic. | You use Vue/Svelte/Vanilla or want total control. |
-| **`apps/web`** | The Platform. Docs & Dashboard. | You want to manage your surveys visually. |
+| Package              | Description                            | Use Case                                          |
+| :------------------- | :------------------------------------- | :------------------------------------------------ |
+| **`@thumbly/react`** | The "Face". Hooks & UI Components.     | You use React and want a drop-in solution.        |
+| **`@thumbly/core`**  | The "Brain". Framework-agnostic logic. | You use Vue/Svelte/Vanilla or want total control. |
+| **`apps/web`**       | The Platform. Docs & Dashboard.        | You want to manage your surveys visually.         |
 
 ## 📦 Installation
 

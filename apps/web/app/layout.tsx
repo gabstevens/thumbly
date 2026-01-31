@@ -23,7 +23,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <Link href="/docs" className="nav-link">
                   Documentation
                 </Link>
-                <a href="https://github.com/gabstevens/thumbly" className="nav-link" target="_blank" rel="noopener noreferrer">
+                <a
+                  href="https://github.com/gabstevens/thumbly"
+                  className="nav-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   GitHub
                 </a>
               </nav>

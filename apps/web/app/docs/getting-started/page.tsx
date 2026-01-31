@@ -3,18 +3,14 @@ export default function GettingStartedPage() {
     <div className="prose">
       <h1>Getting Started</h1>
       <p>
-        Thumbly is designed to be the fastest way to add sentiment feedback to your React application.
-        Follow these steps to get up and running in minutes.
+        Thumbly is designed to be the fastest way to add sentiment feedback to your React application. Follow these
+        steps to get up and running in minutes.
       </p>
 
       <h2>1. Installation</h2>
       <p>Install the React package using your preferred package manager:</p>
       <pre>
-        <code>
-npm install @thumbly/react
-# or
-pnpm add @thumbly/react
-        </code>
+        <code>npm install @thumbly/react # or pnpm add @thumbly/react</code>
       </pre>
 
       <h2>2. Create a Survey</h2>
@@ -29,22 +25,16 @@ pnpm add @thumbly/react
       </p>
       <pre>
         <code>
-import {"{ ThumblyBinary }"} from &quot;@thumbly/react&quot;;
-
-function App() {"{"}
-  return (
-    &lt;ThumblyBinary
-      surveyId=&quot;YOUR_SURVEY_ID_HERE&quot;
-    /&gt;
-  );
-{"}"}
+          import {"{ ThumblyBinary }"} from &quot;@thumbly/react&quot;; function App() {"{"}
+          return ( &lt;ThumblyBinary surveyId=&quot;YOUR_SURVEY_ID_HERE&quot; /&gt; );
+          {"}"}
         </code>
       </pre>
 
       <h2>4. Customization (Optional)</h2>
       <p>
-        You can customize the styling by passing a <code>className</code> or <code>style</code> prop,
-        or build your own UI using the <code>useThumbly</code> hook.
+        You can customize the styling by passing a <code>className</code> or <code>style</code> prop, or build your own
+        UI using the <code>useThumbly</code> hook.
       </p>
     </div>
   );

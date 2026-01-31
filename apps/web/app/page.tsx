@@ -27,9 +27,7 @@ export default function HomePage() {
             <br />
             Feedback Toolkit.
           </h1>
-          <p>
-            Everything you need to collect user feedback. Headless logic, ready-made UI, and a free backend.
-          </p>
+          <p>Everything you need to collect user feedback. Headless logic, ready-made UI, and a free backend.</p>
           <div className="btn-group">
             <Link href="#how-it-works" className="btn">
               Get Started
@@ -59,7 +57,8 @@ export default function HomePage() {
             <div className="feature-card" style={{ background: "white" }}>
               <h3>🚀 Backend Agnostic</h3>
               <p>
-                Use our &quot;Forever Free&quot; Supabase backend, your own API, or any serverless function. You are in control of your data.
+                Use our &quot;Forever Free&quot; Supabase backend, your own API, or any serverless function. You are in
+                control of your data.
               </p>
             </div>
             <div className="feature-card" style={{ background: "white" }}>
@@ -87,7 +86,8 @@ export default function HomePage() {
             <div>
               <span className="token-comment">{"// 2. Drop it in"}</span>
               <br />
-              <span className="token-keyword">import</span> {"{ ThumblyBinary }"} <span className="token-keyword">from</span>{" "}
+              <span className="token-keyword">import</span> {"{ ThumblyBinary }"}{" "}
+              <span className="token-keyword">from</span>{" "}
               <span className="token-string">&quot;@thumbly/react&quot;</span>;
               <br />
               <br />
@@ -137,9 +137,7 @@ export default function HomePage() {
                 }}
               />
             ) : (
-              <div style={{ marginTop: "1rem", color: "#666" }}>
-                Please configure .env.local to enable the demo.
-              </div>
+              <div style={{ marginTop: "1rem", color: "#666" }}>Please configure .env.local to enable the demo.</div>
             )}
             <p style={{ marginTop: "2rem", fontSize: "0.9rem", color: "#888" }}>
               (This data is actually saved to our Supabase database)
