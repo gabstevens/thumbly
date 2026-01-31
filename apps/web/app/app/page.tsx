@@ -144,6 +144,22 @@ export default function DashboardPage() {
                       </div>
                     )}
                   </div>
+                  
+                  {/* Code Snippet Toggle */}
+                  <details style={{ marginTop: "1rem", borderTop: "1px solid #eee", paddingTop: "1rem" }}>
+                    <summary style={{ cursor: "pointer", fontSize: "0.8rem", color: "#3b82f6" }}>Get Code</summary>
+                    <div className="code-preview" style={{ marginTop: "0.5rem", fontSize: "0.8rem", padding: "1rem", background: "#f8fafc", borderRadius: "4px" }}>
+                      <code>
+                        <span className="token-keyword">import</span> {"{ ThumblyBinary }"} <span className="token-keyword">from</span> <span className="token-string">"@thumbly/react"</span>;
+                        <br /><br />
+                        <span className="token-tag">&lt;ThumblyBinary</span>
+                        <br />
+                        &nbsp;&nbsp;<span className="token-keyword">surveyId</span>=<span className="token-string">"{survey.id}"</span>
+                        <br />
+                        <span className="token-tag">/&gt;</span>
+                      </code>
+                    </div>
+                  </details>
                 </div>
                 <button
                   className="btn secondary"
