@@ -50,11 +50,11 @@
   - [x] Create "My Surveys" view (List/Create).
   - [x] Implement Analytics Charts (using lightweight chart lib or CSS).
   - [x] Implement Snippet Generator.
-- [ ] **Documentation (`/docs`):**
-  - [ ] Create `docs/` route layout.
-  - [ ] Write "Getting Started" guide.
-  - [ ] Write "Self-Hosting" guide (Supabase CLI focus).
-  - [ ] Write API Reference (Manual MDX).
+- [x] **Documentation (`/docs`):**
+  - [x] Create `docs/` route layout.
+  - [x] Write "Getting Started" guide.
+  - [x] Write "Self-Hosting" guide (Supabase CLI focus).
+  - [x] Write API Reference (Manual MDX).
 
 ## 5. Test Infrastructure Setup (Pending)
 
