@@ -60,7 +60,7 @@
 
 - [ ] **Unit Testing (Vitest):** Setup and configuration for `@thumbly/core` and `@thumbly/react`.
 - [ ] **E2E Testing (Playwright):** Setup and configuration for `apps/web`.
-- [ ] **Linting & formatting:** Ensure `pnpm lint` passes root-wide.
+- [x] **Linting & formatting:** Ensure `pnpm lint` passes root-wide.
 
 ## 6. Community & Maintenance (In Progress)
 
