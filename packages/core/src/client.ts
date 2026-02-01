@@ -7,14 +7,14 @@ const STORAGE_KEY_PREFIX = "thumbly:voted:";
 /**
  * The main entry point for Thumbly's headless logic.
  * Handles state, persistence, and network retries.
- * 
+ *
  * @example
  * ```ts
  * const client = new ThumblyClient({
  *   surveyId: "...",
  *   supabase: { url: "...", key: "..." }
  * });
- * 
+ *
  * await client.vote(1);
  * ```
  */
@@ -79,12 +79,16 @@ export class ThumblyClient {
 
   /**
    * Submits a vote for the specified option.
-   * 
+   *
+   * @template TMetadata - The type of the metadata object.
    * @param optionIndex - The index of the selected option.
    * @param metadata - Optional contextual data (e.g., page URL).
    * @throws {Error} If validation fails or submission fails after retries.
    */
-  async vote(optionIndex: number, metadata?: any): Promise<void> {
+  async vote<TMetadata = Record<string, unknown>>(
+    optionIndex: number,
+    metadata?: TMetadata,
+  ): Promise<void> {
     try {
       this.driver.validate?.(optionIndex);
 
@@ -93,7 +97,7 @@ export class ThumblyClient {
         return;
       }
 
-      const payload: VotePayload = {
+      const payload: VotePayload<TMetadata> = {
         surveyId: this.surveyId,
         optionIndex,
         metadata,
@@ -102,9 +106,10 @@ export class ThumblyClient {
       await this.retryWithBackoff(() => this.driver.submitVote(payload));
       this.markAsVoted();
       this.onSuccess?.();
-    } catch (error: any) {
-      this.onError?.(error);
-      throw error;
+    } catch (error: unknown) {
+      const err = error instanceof Error ? error : new Error(String(error));
+      this.onError?.(err);
+      throw err;
     }
   }
 
@@ -115,7 +120,7 @@ export class ThumblyClient {
   private async retryWithBackoff(fn: () => Promise<void>, retries = 3, delay = 500): Promise<void> {
     try {
       await fn();
-    } catch (error: any) {
+    } catch (error: unknown) {
       if (retries > 0 && error instanceof TransientError) {
         await new Promise((resolve) => setTimeout(resolve, delay));
         return this.retryWithBackoff(fn, retries - 1, delay * 2);

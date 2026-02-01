@@ -14,7 +14,10 @@ export class ThumblyError extends Error {
  * The client will attempt to retry these using exponential backoff.
  */
 export class TransientError extends ThumblyError {
-  constructor(message: string, public statusCode?: number) {
+  constructor(
+    message: string,
+    public statusCode?: number,
+  ) {
     super(message);
     this.name = "TransientError";
     Object.setPrototypeOf(this, TransientError.prototype);
@@ -26,7 +29,10 @@ export class TransientError extends ThumblyError {
  * The client will NOT attempt to retry these.
  */
 export class PermanentError extends ThumblyError {
-  constructor(message: string, public statusCode?: number) {
+  constructor(
+    message: string,
+    public statusCode?: number,
+  ) {
     super(message);
     this.name = "PermanentError";
     Object.setPrototypeOf(this, PermanentError.prototype);

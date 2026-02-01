@@ -19,7 +19,7 @@ export class SupabaseDriver implements ThumblyDriver {
    * Submits a vote via the `submit_vote` RPC function.
    * Implements retry-friendly error messages for transient failures.
    */
-  async submitVote({ surveyId, optionIndex }: VotePayload): Promise<void> {
+  async submitVote<TMetadata>({ surveyId, optionIndex }: VotePayload<TMetadata>): Promise<void> {
     const endpoint = `${this.url}/rest/v1/rpc/submit_vote`;
     const response = await fetch(endpoint, {
       method: "POST",
@@ -64,7 +64,7 @@ export class FetchDriver implements ThumblyDriver {
     private headers: Record<string, string> = {},
   ) {}
 
-  async submitVote(payload: VotePayload): Promise<void> {
+  async submitVote<TMetadata>(payload: VotePayload<TMetadata>): Promise<void> {
     const response = await fetch(this.url, {
       method: "POST",
       headers: {
@@ -86,7 +86,7 @@ export class FetchDriver implements ThumblyDriver {
 /**
  * An adapter for functional voting logic.
  * Useful for prototyping or wrapping existing SDKs.
- * 
+ *
  * @example
  * ```ts
  * const driver = new CustomDriver({
@@ -99,13 +99,13 @@ export class CustomDriver implements ThumblyDriver {
   constructor(
     private config: {
       /** Function to execute when a vote is submitted. */
-      submitVote: (payload: VotePayload) => Promise<void>;
+      submitVote: <TMetadata>(payload: VotePayload<TMetadata>) => Promise<void>;
       /** Optional function to validate the option index. */
       validate?: (optionIndex: number) => void;
     },
   ) {}
 
-  async submitVote(payload: VotePayload): Promise<void> {
+  async submitVote<TMetadata>(payload: VotePayload<TMetadata>): Promise<void> {
     await this.config.submitVote(payload);
   }
 

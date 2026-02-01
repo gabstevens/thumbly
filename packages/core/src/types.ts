@@ -1,13 +1,14 @@
 /**
  * The data structure sent to a driver when a vote is submitted.
+ * @template TMetadata - The shape of the optional metadata attached to the vote.
  */
-export interface VotePayload {
+export interface VotePayload<TMetadata = Record<string, unknown>> {
   /** The unique identifier of the survey. */
   surveyId: string;
   /** The index of the selected option (typically 1-based). */
   optionIndex: number;
   /** Optional arbitrary data to attach to the vote. */
-  metadata?: Record<string, any>;
+  metadata?: TMetadata;
 }
 
 /**
@@ -16,10 +17,11 @@ export interface VotePayload {
 export interface ThumblyDriver {
   /**
    * Submits a vote payload to the backend.
+   * @template TMetadata - The shape of the metadata in the payload.
    * @param payload - The vote data to submit.
    * @throws {Error} Should throw for network or server errors.
    */
-  submitVote(payload: VotePayload): Promise<void>;
+  submitVote<TMetadata>(payload: VotePayload<TMetadata>): Promise<void>;
 
   /**
    * Optional method to validate the option index before submission.
@@ -44,9 +46,9 @@ export type ThumblyConfig = {
   onSuccess?: () => void;
   /** Callback triggered if the vote submission fails after all retries. */
   onError?: (error: Error) => void;
-} & (
+} &
   /** Use a pre-configured or custom driver instance. */
-  | { driver: ThumblyDriver }
-  /** Automatically use the built-in {@link SupabaseDriver}. */
-  | { supabase: { url: string; key: string } }
-);
+  (| { driver: ThumblyDriver }
+    /** Automatically use the built-in {@link SupabaseDriver}. */
+    | { supabase: { url: string; key: string } }
+  );
