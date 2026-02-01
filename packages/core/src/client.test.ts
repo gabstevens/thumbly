@@ -2,6 +2,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { ThumblyClient } from './client';
 import { CustomDriver } from './drivers';
 import { ThumblyDriver } from './types';
+import { TransientError } from './errors';
 
 describe('ThumblyClient', () => {
   let mockDriver: ThumblyDriver;
@@ -113,6 +114,26 @@ describe('ThumblyClient', () => {
 
     await expect(client.vote(1)).rejects.toThrow('Permanent error');
     expect(onError).toHaveBeenCalledWith(error);
+  });
+
+  it('should retry on TransientError', async () => {
+    const error = new TransientError('Rate limit', 429);
+    mockDriver.submitVote = vi.fn()
+      .mockRejectedValueOnce(error)
+      .mockResolvedValueOnce(undefined);
+
+    const client = new ThumblyClient({ surveyId: 'test-survey', driver: mockDriver });
+    
+    // We need to speed up timers for the test
+    vi.useFakeTimers();
+    const votePromise = client.vote(1);
+    
+    // Advance timers to trigger retry
+    await vi.runAllTimersAsync();
+    await votePromise;
+
+    expect(mockDriver.submitVote).toHaveBeenCalledTimes(2);
+    vi.useRealTimers();
   });
 
   it('should work with CustomDriver', async () => {

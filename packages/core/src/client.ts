@@ -1,5 +1,6 @@
 import { ThumblyConfig, ThumblyDriver, VotePayload } from "./types";
 import { SupabaseDriver } from "./drivers";
+import { TransientError, ValidationError } from "./errors";
 
 const STORAGE_KEY_PREFIX = "thumbly:voted:";
 
@@ -27,7 +28,7 @@ export class ThumblyClient {
   /**
    * Initializes a new Thumbly client.
    * @param config - Configuration object.
-   * @throws {Error} If configuration is invalid.
+   * @throws {ValidationError} If configuration is invalid.
    */
   constructor(config: ThumblyConfig) {
     const { surveyId, disablePersistence = false, onSuccess, onError } = config;
@@ -51,7 +52,7 @@ export class ThumblyClient {
       return new SupabaseDriver(config.supabase.url, config.supabase.key);
     }
 
-    throw new Error(
+    throw new ValidationError(
       "ThumblyClient: Invalid configuration. You must provide either a 'driver' instance or a 'supabase' object with 'url' and 'key'.",
     );
   }
@@ -109,13 +110,13 @@ export class ThumblyClient {
 
   /**
    * Internal helper to retry failed requests with exponential backoff.
-   * Only retries on errors identified as "Transient" by the driver.
+   * Only retries on instances of {@link TransientError}.
    */
   private async retryWithBackoff(fn: () => Promise<void>, retries = 3, delay = 500): Promise<void> {
     try {
       await fn();
     } catch (error: any) {
-      if (retries > 0 && error.message.includes("Transient")) {
+      if (retries > 0 && error instanceof TransientError) {
         await new Promise((resolve) => setTimeout(resolve, delay));
         return this.retryWithBackoff(fn, retries - 1, delay * 2);
       }

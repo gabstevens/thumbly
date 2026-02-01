@@ -1,4 +1,5 @@
 import { ThumblyDriver, VotePayload } from "./types";
+import { TransientError, PermanentError, ValidationError } from "./errors";
 
 /**
  * Driver for the official Thumbly backend (Supabase).
@@ -32,19 +33,19 @@ export class SupabaseDriver implements ThumblyDriver {
 
     if (!response.ok) {
       if (response.status === 429 || response.status >= 500) {
-        throw new Error(`Transient error: ${response.status}`);
+        throw new TransientError(`Server error: ${response.status}`, response.status);
       }
-      throw new Error(`Permanent error: ${response.status}`);
+      throw new PermanentError(`Request failed: ${response.status}`, response.status);
     }
   }
 
   /**
    * Validates that the index is an integer between 1 and 5.
-   * @throws {Error} If index is out of range.
+   * @throws {ValidationError} If index is out of range.
    */
   validate(optionIndex: number): void {
     if (!Number.isInteger(optionIndex) || optionIndex < 1 || optionIndex > 5) {
-      throw new Error("SupabaseDriver: 'optionIndex' must be an integer between 1 and 5.");
+      throw new ValidationError("SupabaseDriver: 'optionIndex' must be an integer between 1 and 5.");
     }
   }
 }
@@ -75,9 +76,9 @@ export class FetchDriver implements ThumblyDriver {
 
     if (!response.ok) {
       if (response.status === 429 || response.status >= 500) {
-        throw new Error(`Transient error: ${response.status}`);
+        throw new TransientError(`Server error: ${response.status}`, response.status);
       }
-      throw new Error(`Permanent error: ${response.status}`);
+      throw new PermanentError(`Request failed: ${response.status}`, response.status);
     }
   }
 }
@@ -90,7 +91,7 @@ export class FetchDriver implements ThumblyDriver {
  * ```ts
  * const driver = new CustomDriver({
  *   submitVote: async (p) => console.log('Vote:', p),
- *   validate: (i) => { if (i < 0) throw new Error('Bad index') }
+ *   validate: (i) => { if (i < 0) throw new ValidationError('Bad index') }
  * });
  * ```
  */
