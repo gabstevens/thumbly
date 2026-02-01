@@ -25,6 +25,12 @@ export class SupabaseDriver implements ThumblyDriver {
       throw new Error(`Permanent error: ${response.status}`);
     }
   }
+
+  validate(optionIndex: number): void {
+    if (!Number.isInteger(optionIndex) || optionIndex < 1 || optionIndex > 5) {
+      throw new Error("SupabaseDriver: 'optionIndex' must be an integer between 1 and 5.");
+    }
+  }
 }
 
 export class FetchDriver implements ThumblyDriver {

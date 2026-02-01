@@ -67,6 +67,32 @@ describe('ThumblyClient', () => {
     expect(onSuccess).toHaveBeenCalled();
   });
 
+  it('should call driver.validate if it exists', async () => {
+    mockDriver.validate = vi.fn();
+    const client = new ThumblyClient({ surveyId: 'test-survey', driver: mockDriver });
+    
+    await client.vote(1);
+
+    expect(mockDriver.validate).toHaveBeenCalledWith(1);
+  });
+
+  it('should call onError and rethrow if validate fails', async () => {
+    const error = new Error('Invalid option');
+    mockDriver.validate = vi.fn().mockImplementation(() => {
+      throw error;
+    });
+    
+    const onError = vi.fn();
+    const client = new ThumblyClient({ 
+      surveyId: 'test-survey', 
+      driver: mockDriver,
+      onError 
+    });
+
+    await expect(client.vote(99)).rejects.toThrow('Invalid option');
+    expect(onError).toHaveBeenCalledWith(error);
+  });
+
   it('should call onError when vote fails', async () => {
     const onError = vi.fn();
     const error = new Error('Permanent error');

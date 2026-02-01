@@ -39,18 +39,20 @@ export class ThumblyClient {
   }
 
   async vote(optionIndex: number, metadata?: any): Promise<void> {
-    if (this.hasVoted()) {
-      console.warn("User has already voted for this survey.");
-      return;
-    }
-
-    const payload: VotePayload = {
-      surveyId: this.surveyId,
-      optionIndex,
-      metadata,
-    };
-
     try {
+      this.driver.validate?.(optionIndex);
+
+      if (this.hasVoted()) {
+        console.warn("User has already voted for this survey.");
+        return;
+      }
+
+      const payload: VotePayload = {
+        surveyId: this.surveyId,
+        optionIndex,
+        metadata,
+      };
+
       await this.retryWithBackoff(() => this.driver.submitVote(payload));
       this.markAsVoted();
       this.onSuccess?.();

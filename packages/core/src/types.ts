@@ -6,6 +6,7 @@ export interface VotePayload {
 
 export interface ThumblyDriver {
   submitVote(payload: VotePayload): Promise<void>;
+  validate?(optionIndex: number): void;
 }
 
 interface BaseThumblyConfig {
