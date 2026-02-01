@@ -19,6 +19,7 @@
     "lint": "turbo lint",
     "typecheck": "turbo typecheck",
     "format": "prettier --write .",
+    "check-format": "prettier --check .",
     "test": "turbo test",
     "test:e2e": "turbo test:e2e",
     "prepare": "husky"
