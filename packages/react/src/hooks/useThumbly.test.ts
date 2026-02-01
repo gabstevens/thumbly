@@ -1,9 +1,9 @@
-import { renderHook, act } from '@testing-library/react';
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { useThumbly } from './useThumbly';
-import { ThumblyClient } from '@thumbly/core';
+import { renderHook, act } from "@testing-library/react";
+import { describe, it, expect, vi, beforeEach } from "vitest";
+import { useThumbly } from "./useThumbly";
+import { ThumblyClient } from "@thumbly/core";
 
-describe('useThumbly', () => {
+describe("useThumbly", () => {
   let client: ThumblyClient;
   let mockDriver: any;
 
@@ -12,20 +12,20 @@ describe('useThumbly', () => {
     mockDriver = {
       submitVote: vi.fn().mockResolvedValue(undefined),
     };
-    
+
     // Create a real client with a mock driver
     // This ensures 'instanceof ThumblyClient' returns true
-    client = new ThumblyClient({ 
-      surveyId: 'test-survey', 
-      driver: mockDriver 
+    client = new ThumblyClient({
+      surveyId: "test-survey",
+      driver: mockDriver,
     });
 
     // We can still spy on the client methods if we want to ensure the hook calls them
-    vi.spyOn(client, 'vote');
-    vi.spyOn(client, 'hasVoted').mockReturnValue(false);
+    vi.spyOn(client, "vote");
+    vi.spyOn(client, "hasVoted").mockReturnValue(false);
   });
 
-  it('should initialize with default state', () => {
+  it("should initialize with default state", () => {
     const { result } = renderHook(() => useThumbly(client));
 
     expect(result.current.isLoading).toBe(false);
@@ -33,7 +33,7 @@ describe('useThumbly', () => {
     expect(result.current.hasVoted).toBe(false);
   });
 
-  it('should update state when voting', async () => {
+  it("should update state when voting", async () => {
     const { result } = renderHook(() => useThumbly(client));
 
     await act(async () => {
@@ -45,8 +45,8 @@ describe('useThumbly', () => {
     expect(result.current.isLoading).toBe(false);
   });
 
-  it('should handle errors', async () => {
-    const error = new Error('Vote failed');
+  it("should handle errors", async () => {
+    const error = new Error("Vote failed");
     // We mock the implementation of the spy, not the original method on the prototype
     vi.mocked(client.vote).mockRejectedValue(error);
 
@@ -61,13 +61,15 @@ describe('useThumbly', () => {
     expect(result.current.hasVoted).toBe(false);
   });
 
-  it('should call callbacks passed via config', async () => {
+  it("should call callbacks passed via config", async () => {
     const onSuccess = vi.fn();
-    const { result } = renderHook(() => useThumbly({ 
-      surveyId: 'test-survey', 
-      driver: mockDriver,
-      onSuccess 
-    }));
+    const { result } = renderHook(() =>
+      useThumbly({
+        surveyId: "test-survey",
+        driver: mockDriver,
+        onSuccess,
+      }),
+    );
 
     await act(async () => {
       await result.current.vote(1);
