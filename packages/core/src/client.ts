@@ -85,10 +85,7 @@ export class ThumblyClient {
    * @param metadata - Optional contextual data (e.g., page URL).
    * @throws {Error} If validation fails or submission fails after retries.
    */
-  async vote<TMetadata = Record<string, unknown>>(
-    optionIndex: number,
-    metadata?: TMetadata,
-  ): Promise<void> {
+  async vote<TMetadata = Record<string, unknown>>(optionIndex: number, metadata?: TMetadata): Promise<void> {
     try {
       this.driver.validate?.(optionIndex);
 

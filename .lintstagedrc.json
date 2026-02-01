@@ -1,6 +1,6 @@
 {
-  "*": ["prettier --write --ignore-unknown"],
-  "packages/core/**/*.{ts,tsx}": ["eslint --fix"],
-  "packages/react/**/*.{ts,tsx}": ["eslint --fix"],
-  "apps/web/**/*.{ts,tsx}": ["eslint --fix"]
+  "*": ["pnpm exec prettier --write --ignore-unknown"],
+  "packages/core/**/*.{ts,tsx}": ["pnpm --filter @thumbly/core exec eslint --fix"],
+  "packages/react/**/*.{ts,tsx}": ["pnpm --filter @thumbly/react exec eslint --fix"],
+  "apps/web/**/*.{ts,tsx}": ["pnpm --filter web exec eslint --fix"]
 }
