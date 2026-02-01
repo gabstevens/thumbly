@@ -21,13 +21,13 @@ export function useThumbly(config: ThumblyConfig | ThumblyClient) {
       try {
         await client.vote(optionIndex);
         setHasVoted(true);
-      } catch (err: any) {
-        setError(err);
+      } catch (err: unknown) {
+        setError(err instanceof Error ? err : new Error(String(err)));
       } finally {
         setIsLoading(false);
       }
     },
-    [client, config],
+    [client],
   );
 
   return { vote, isLoading, error, hasVoted };

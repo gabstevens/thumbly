@@ -40,7 +40,7 @@ export const ThumblyOption = ({
   const { vote, isLoading, hasVoted } = context;
 
   return (
-    <button onClick={() => vote(index)} disabled={isLoading || hasVoted} className={className} type="button">
+    <button onClick={() => void vote(index)} disabled={isLoading || hasVoted} className={className} type="button">
       {children}
     </button>
   );

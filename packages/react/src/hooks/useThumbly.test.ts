@@ -1,17 +1,17 @@
 import { renderHook, act } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { useThumbly } from "./useThumbly";
-import { ThumblyClient } from "@thumbly/core";
+import { ThumblyClient, ThumblyDriver } from "@thumbly/core";
 
 describe("useThumbly", () => {
   let client: ThumblyClient;
-  let mockDriver: any;
+  let mockDriver: ThumblyDriver;
 
   beforeEach(() => {
     localStorage.clear();
     mockDriver = {
       submitVote: vi.fn().mockResolvedValue(undefined),
-    };
+    } as unknown as ThumblyDriver;
 
     // Create a real client with a mock driver
     // This ensures 'instanceof ThumblyClient' returns true
