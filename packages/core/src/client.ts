@@ -11,18 +11,27 @@ export class ThumblyClient {
   private onError?: (error: Error) => void;
 
   constructor(config: ThumblyConfig) {
-    this.surveyId = config.surveyId;
-    this.disablePersistence = config.disablePersistence ?? false;
-    this.onSuccess = config.onSuccess;
-    this.onError = config.onError;
+    const { surveyId, disablePersistence = false, onSuccess, onError } = config;
 
-    if (config.driver) {
-      this.driver = config.driver;
-    } else if (config.supabaseUrl) {
-      this.driver = new SupabaseDriver(config.supabaseUrl, config.supabaseKey!);
-    } else {
-      throw new Error("ThumblyClient: You must provide either a 'driver' instance or 'supabaseUrl' and 'supabaseKey'.");
+    this.surveyId = surveyId;
+    this.disablePersistence = disablePersistence;
+    this.onSuccess = onSuccess;
+    this.onError = onError;
+    this.driver = this.initializeDriver(config);
+  }
+
+  private initializeDriver(config: ThumblyConfig): ThumblyDriver {
+    if ("driver" in config && config.driver) {
+      return config.driver;
     }
+
+    if ("supabase" in config && config.supabase?.url && config.supabase?.key) {
+      return new SupabaseDriver(config.supabase.url, config.supabase.key);
+    }
+
+    throw new Error(
+      "ThumblyClient: Invalid configuration. You must provide either a 'driver' instance or a 'supabase' object with 'url' and 'key'.",
+    );
   }
 
   hasVoted(): boolean {

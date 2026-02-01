@@ -15,6 +15,12 @@ describe('ThumblyClient', () => {
     vi.spyOn(Storage.prototype, 'setItem');
   });
 
+  it('should throw error if neither driver nor supabase config is provided', () => {
+    // @ts-expect-error - testing invalid JS usage
+    expect(() => new ThumblyClient({ surveyId: 'test' }))
+      .toThrow("ThumblyClient: Invalid configuration");
+  });
+
   it('should call driver.submitVote when voting', async () => {
     const client = new ThumblyClient({ surveyId: 'test-survey', driver: mockDriver });
     await client.vote(1);

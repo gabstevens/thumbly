@@ -38,8 +38,10 @@ import { ThumblyClient } from "@thumbly/core";
 
 const client = new ThumblyClient({
   surveyId: "your-survey-uuid",
-  supabaseUrl: "https://your-project.supabase.co",
-  supabaseKey: "your-anon-key",
+  supabase: {
+    url: "https://your-project.supabase.co",
+    key: "your-anon-key",
+  },
 });
 
 // Check if user already voted

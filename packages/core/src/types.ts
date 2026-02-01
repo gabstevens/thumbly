@@ -9,23 +9,12 @@ export interface ThumblyDriver {
   validate?(optionIndex: number): void;
 }
 
-interface BaseThumblyConfig {
+export type ThumblyConfig = {
   surveyId: string;
   disablePersistence?: boolean;
   onSuccess?: () => void;
   onError?: (error: Error) => void;
-}
-
-export interface ThumblyConfigWithDriver extends BaseThumblyConfig {
-  driver: ThumblyDriver;
-  supabaseUrl?: never;
-  supabaseKey?: never;
-}
-
-export interface ThumblyConfigWithSupabase extends BaseThumblyConfig {
-  driver?: never;
-  supabaseUrl: string;
-  supabaseKey: string;
-}
-
-export type ThumblyConfig = ThumblyConfigWithDriver | ThumblyConfigWithSupabase;
+} & (
+  | { driver: ThumblyDriver }
+  | { supabase: { url: string; key: string } }
+);
