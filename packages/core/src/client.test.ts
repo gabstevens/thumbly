@@ -1,5 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { ThumblyClient } from './client';
+import { CustomDriver } from './drivers';
 import { ThumblyDriver } from './types';
 
 describe('ThumblyClient', () => {
@@ -106,5 +107,21 @@ describe('ThumblyClient', () => {
 
     await expect(client.vote(1)).rejects.toThrow('Permanent error');
     expect(onError).toHaveBeenCalledWith(error);
+  });
+
+  it('should work with CustomDriver', async () => {
+    const submitVote = vi.fn().mockResolvedValue(undefined);
+    const validate = vi.fn();
+    const driver = new CustomDriver({ submitVote, validate });
+    const client = new ThumblyClient({ surveyId: 'test-survey', driver });
+
+    await client.vote(1);
+
+    expect(validate).toHaveBeenCalledWith(1);
+    expect(submitVote).toHaveBeenCalledWith({
+      surveyId: 'test-survey',
+      optionIndex: 1,
+      metadata: undefined,
+    });
   });
 });

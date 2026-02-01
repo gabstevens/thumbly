@@ -59,9 +59,18 @@ export class FetchDriver implements ThumblyDriver {
 }
 
 export class CustomDriver implements ThumblyDriver {
-  constructor(private fn: (payload: VotePayload) => Promise<void>) {}
+  constructor(
+    private config: {
+      submitVote: (payload: VotePayload) => Promise<void>;
+      validate?: (optionIndex: number) => void;
+    },
+  ) {}
 
   async submitVote(payload: VotePayload): Promise<void> {
-    await this.fn(payload);
+    await this.config.submitVote(payload);
+  }
+
+  validate(optionIndex: number): void {
+    this.config.validate?.(optionIndex);
   }
 }
