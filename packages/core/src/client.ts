@@ -3,6 +3,20 @@ import { SupabaseDriver } from "./drivers";
 
 const STORAGE_KEY_PREFIX = "thumbly:voted:";
 
+/**
+ * The main entry point for Thumbly's headless logic.
+ * Handles state, persistence, and network retries.
+ * 
+ * @example
+ * ```ts
+ * const client = new ThumblyClient({
+ *   surveyId: "...",
+ *   supabase: { url: "...", key: "..." }
+ * });
+ * 
+ * await client.vote(1);
+ * ```
+ */
 export class ThumblyClient {
   private driver: ThumblyDriver;
   private surveyId: string;
@@ -10,6 +24,11 @@ export class ThumblyClient {
   private onSuccess?: () => void;
   private onError?: (error: Error) => void;
 
+  /**
+   * Initializes a new Thumbly client.
+   * @param config - Configuration object.
+   * @throws {Error} If configuration is invalid.
+   */
   constructor(config: ThumblyConfig) {
     const { surveyId, disablePersistence = false, onSuccess, onError } = config;
 
@@ -20,6 +39,9 @@ export class ThumblyClient {
     this.driver = this.initializeDriver(config);
   }
 
+  /**
+   * Helper to determine which driver to instantiate based on configuration.
+   */
   private initializeDriver(config: ThumblyConfig): ThumblyDriver {
     if ("driver" in config && config.driver) {
       return config.driver;
@@ -34,12 +56,19 @@ export class ThumblyClient {
     );
   }
 
+  /**
+   * Checks if the user has already voted for this survey in the current browser.
+   * @returns true if a vote is recorded in localStorage.
+   */
   hasVoted(): boolean {
     if (this.disablePersistence) return false;
     if (typeof window === "undefined") return false;
     return !!localStorage.getItem(`${STORAGE_KEY_PREFIX}${this.surveyId}`);
   }
 
+  /**
+   * Records that a vote has been cast in localStorage.
+   */
   private markAsVoted() {
     if (this.disablePersistence) return;
     if (typeof window !== "undefined") {
@@ -47,6 +76,13 @@ export class ThumblyClient {
     }
   }
 
+  /**
+   * Submits a vote for the specified option.
+   * 
+   * @param optionIndex - The index of the selected option.
+   * @param metadata - Optional contextual data (e.g., page URL).
+   * @throws {Error} If validation fails or submission fails after retries.
+   */
   async vote(optionIndex: number, metadata?: any): Promise<void> {
     try {
       this.driver.validate?.(optionIndex);
@@ -71,6 +107,10 @@ export class ThumblyClient {
     }
   }
 
+  /**
+   * Internal helper to retry failed requests with exponential backoff.
+   * Only retries on errors identified as "Transient" by the driver.
+   */
   private async retryWithBackoff(fn: () => Promise<void>, retries = 3, delay = 500): Promise<void> {
     try {
       await fn();
