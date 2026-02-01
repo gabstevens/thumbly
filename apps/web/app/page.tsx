@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import type { ThumblyBinaryProps } from "@thumbly/react";
 
-const ThumblyBinary = dynamic(() => import("@thumbly/react").then((mod) => mod.ThumblyBinary), {
+const ThumblyBinary = dynamic<ThumblyBinaryProps>(() => import("@thumbly/react").then((mod) => mod.ThumblyBinary), {
   ssr: false,
   loading: () => <div style={{ color: "#666" }}>Loading...</div>,
 });
@@ -125,8 +126,7 @@ export default function HomePage() {
             {isConfigured ? (
               <ThumblyBinary
                 surveyId={surveyId}
-                supabaseUrl={supabaseUrl}
-                supabaseKey={supabaseKey}
+                supabase={{ url: supabaseUrl, key: supabaseKey }}
                 style={{
                   display: "flex",
                   gap: "1rem",
