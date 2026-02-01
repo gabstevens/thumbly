@@ -7,10 +7,14 @@ export class ThumblyClient {
   private driver: ThumblyDriver;
   private surveyId: string;
   private disablePersistence: boolean;
+  private onSuccess?: () => void;
+  private onError?: (error: Error) => void;
 
   constructor(config: ThumblyConfig) {
     this.surveyId = config.surveyId;
     this.disablePersistence = config.disablePersistence ?? false;
+    this.onSuccess = config.onSuccess;
+    this.onError = config.onError;
 
     if (config.driver) {
       this.driver = config.driver;
@@ -46,8 +50,14 @@ export class ThumblyClient {
       metadata,
     };
 
-    await this.retryWithBackoff(() => this.driver.submitVote(payload));
-    this.markAsVoted();
+    try {
+      await this.retryWithBackoff(() => this.driver.submitVote(payload));
+      this.markAsVoted();
+      this.onSuccess?.();
+    } catch (error: any) {
+      this.onError?.(error);
+      throw error;
+    }
   }
 
   private async retryWithBackoff(fn: () => Promise<void>, retries = 3, delay = 500): Promise<void> {

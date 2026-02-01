@@ -6,6 +6,8 @@
       "outputs": ["dist/**", "out/**"]
     },
     "lint": {},
+    "test": {},
+    "test:e2e": {},
     "dev": {
       "cache": false,
       "persistent": true

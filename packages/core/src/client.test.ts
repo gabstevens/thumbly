@@ -53,4 +53,32 @@ describe('ThumblyClient', () => {
 
     expect(mockDriver.submitVote).toHaveBeenCalled();
   });
+
+  it('should call onSuccess when vote succeeds', async () => {
+    const onSuccess = vi.fn();
+    const client = new ThumblyClient({ 
+      surveyId: 'test-survey', 
+      driver: mockDriver,
+      onSuccess 
+    });
+
+    await client.vote(1);
+
+    expect(onSuccess).toHaveBeenCalled();
+  });
+
+  it('should call onError when vote fails', async () => {
+    const onError = vi.fn();
+    const error = new Error('Permanent error');
+    mockDriver.submitVote = vi.fn().mockRejectedValue(error);
+    
+    const client = new ThumblyClient({ 
+      surveyId: 'test-survey', 
+      driver: mockDriver,
+      onError 
+    });
+
+    await expect(client.vote(1)).rejects.toThrow('Permanent error');
+    expect(onError).toHaveBeenCalledWith(error);
+  });
 });

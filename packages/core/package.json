@@ -9,6 +9,24 @@
     "url": "https://github.com/gabstevens/thumbly.git",
     "directory": "packages/core"
   },
+  "homepage": "https://thumbly.dev",
+  "bugs": {
+    "url": "https://github.com/gabstevens/thumbly/issues"
+  },
+  "keywords": [
+    "feedback",
+    "sentiment",
+    "survey",
+    "headless",
+    "supabase",
+    "sdk"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist"
+  ],
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
