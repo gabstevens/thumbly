@@ -1,5 +1,6 @@
 {
   "*": ["prettier --write --ignore-unknown"],
   "packages/core/**/*.{ts,tsx}": ["eslint --fix"],
+  "packages/react/**/*.{ts,tsx}": ["eslint --fix"],
   "apps/web/**/*.{ts,tsx}": ["eslint --fix"]
 }
