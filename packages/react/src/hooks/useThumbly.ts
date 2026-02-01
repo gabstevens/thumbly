@@ -21,14 +21,8 @@ export function useThumbly(config: ThumblyConfig | ThumblyClient) {
       try {
         await client.vote(optionIndex);
         setHasVoted(true);
-        if (!(config instanceof ThumblyClient) && config.onSuccess) {
-          config.onSuccess();
-        }
       } catch (err: any) {
         setError(err);
-        if (!(config instanceof ThumblyClient) && config.onError) {
-          config.onError(err);
-        }
       } finally {
         setIsLoading(false);
       }

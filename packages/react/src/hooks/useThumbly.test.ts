@@ -8,6 +8,7 @@ describe('useThumbly', () => {
   let mockDriver: any;
 
   beforeEach(() => {
+    localStorage.clear();
     mockDriver = {
       submitVote: vi.fn().mockResolvedValue(undefined),
     };
@@ -58,5 +59,20 @@ describe('useThumbly', () => {
     expect(result.current.error).toBe(error);
     expect(result.current.isLoading).toBe(false);
     expect(result.current.hasVoted).toBe(false);
+  });
+
+  it('should call callbacks passed via config', async () => {
+    const onSuccess = vi.fn();
+    const { result } = renderHook(() => useThumbly({ 
+      surveyId: 'test-survey', 
+      driver: mockDriver,
+      onSuccess 
+    }));
+
+    await act(async () => {
+      await result.current.vote(1);
+    });
+
+    expect(onSuccess).toHaveBeenCalled();
   });
 });
