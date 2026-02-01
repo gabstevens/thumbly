@@ -17,6 +17,7 @@
     "infra:down": "supabase stop --workdir infra",
     "infra:reset": "supabase db reset --workdir infra",
     "lint": "turbo lint",
+    "typecheck": "turbo typecheck",
     "format": "prettier --write .",
     "test": "turbo test",
     "test:e2e": "turbo test:e2e",
