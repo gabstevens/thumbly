@@ -19,10 +19,13 @@
     "lint": "turbo lint",
     "format": "prettier --write .",
     "test": "turbo test",
-    "test:e2e": "turbo test:e2e"
+    "test:e2e": "turbo test:e2e",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.8",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
     "prettier": "^3.8.1",
     "supabase": "^2.72.9",
     "turbo": "^2.8.0",
