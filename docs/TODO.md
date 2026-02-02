@@ -28,7 +28,9 @@
   - [x] Create `seed.sql` for "Dogfooding" survey (`5468756d...`).
 - [ ] **Auth Configuration:**
   - [x] Configure local Auth (Email/GitHub) in `infra/config.toml` for development.
-  - [ ] Configure production Auth Providers and Site URLs in Supabase Dashboard.
+  - [ ] **Manual:** Configure production Auth Providers (GitHub Identity Provider) in Supabase Dashboard.
+  - [ ] **Manual:** Configure SMTP Settings for email confirmations in Supabase Dashboard.
+  - [ ] **Manual:** Configure Site URL and Redirect URLs in Supabase Dashboard.
   - [x] Verify RLS policies correctly utilize `auth.uid()`.
 
 ## 4. Web Platform (`apps/web`) (In Progress)
