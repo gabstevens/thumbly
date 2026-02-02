@@ -25,17 +25,20 @@ const BinaryContent = ({
 
   if (hasVoted)
     return (
-      <div className={className} style={{ ...theme.root, ...theme.successMessage, ...style }}>
+      <div
+        className={`thumbly-root thumbly-success ${className || ""}`}
+        style={{ ...theme.root, ...theme.successMessage, ...style }}
+      >
         {successMessage}
       </div>
     );
 
   return (
-    <div className={className} style={{ ...theme.root, ...style }}>
-      <Thumbly.Option index={1} style={theme.option}>
+    <div className={`thumbly-root ${className || ""}`} style={{ ...theme.root, ...style }}>
+      <Thumbly.Option index={1} className="thumbly-option" style={theme.option}>
         {labels[0]}
       </Thumbly.Option>
-      <Thumbly.Option index={2} style={theme.option}>
+      <Thumbly.Option index={2} className="thumbly-option" style={theme.option}>
         {labels[1]}
       </Thumbly.Option>
     </div>

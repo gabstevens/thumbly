@@ -25,15 +25,18 @@ const StarRatingContent = ({
 
   if (hasVoted)
     return (
-      <div className={className} style={{ ...theme.root, ...theme.successMessage, ...style }}>
+      <div
+        className={`thumbly-root thumbly-success ${className || ""}`}
+        style={{ ...theme.root, ...theme.successMessage, ...style }}
+      >
         {successMessage}
       </div>
     );
 
   return (
-    <div className={className} style={{ ...theme.root, ...style }}>
+    <div className={`thumbly-root ${className || ""}`} style={{ ...theme.root, ...style }}>
       {Array.from({ length: count }).map((_, i) => (
-        <Thumbly.Option key={i} index={i + 1} style={theme.option}>
+        <Thumbly.Option key={i} index={i + 1} className="thumbly-option" style={theme.option}>
           {icon}
         </Thumbly.Option>
       ))}
