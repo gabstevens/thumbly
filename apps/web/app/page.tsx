@@ -1,13 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import dynamic from "next/dynamic";
-import type { ThumblyBinaryProps } from "@thumbly/react";
-
-const ThumblyBinary = dynamic<ThumblyBinaryProps>(() => import("@thumbly/react").then((mod) => mod.ThumblyBinary), {
-  ssr: false,
-  loading: () => <div style={{ color: "#666" }}>Loading...</div>,
-});
+import { ThumblyBinary } from "@thumbly/react";
 
 export default function HomePage() {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
