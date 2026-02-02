@@ -1,8 +1,7 @@
-"use client";
-
 import React, { ReactNode } from "react";
 import { Thumbly, useThumblyContext } from "../headless";
 import { ThumblyConfig } from "@thumbly/core";
+import { getTheme, ThemeName } from "../../themes";
 
 export type ThumblyStarRatingProps = ThumblyConfig & {
   className?: string;
@@ -10,6 +9,7 @@ export type ThumblyStarRatingProps = ThumblyConfig & {
   icon?: ReactNode;
   count?: number;
   successMessage?: ReactNode;
+  theme?: ThemeName;
 };
 
 const StarRatingContent = ({
@@ -17,21 +17,23 @@ const StarRatingContent = ({
   style,
   icon = "⭐",
   count = 5,
-  successMessage = "Thanks for voting!",
+  successMessage = "Thanks for your feedback!",
+  theme: themeName = "minimal",
 }: Omit<ThumblyStarRatingProps, keyof ThumblyConfig>) => {
   const { hasVoted } = useThumblyContext();
+  const theme = getTheme(themeName);
 
   if (hasVoted)
     return (
-      <div className={className} style={style}>
+      <div className={className} style={{ ...theme.root, ...theme.successMessage, ...style }}>
         {successMessage}
       </div>
     );
 
   return (
-    <div className={className} style={style}>
-      {Array.from({ length: count }, (_, i) => i + 1).map((i) => (
-        <Thumbly.Option key={i} index={i}>
+    <div className={className} style={{ ...theme.root, ...style }}>
+      {Array.from({ length: count }).map((_, i) => (
+        <Thumbly.Option key={i} index={i + 1} style={theme.option}>
           {icon}
         </Thumbly.Option>
       ))}
@@ -45,6 +47,7 @@ export const ThumblyStarRating = ({
   icon,
   count,
   successMessage,
+  theme,
   ...config
 }: ThumblyStarRatingProps) => {
   return (
@@ -55,6 +58,7 @@ export const ThumblyStarRating = ({
         icon={icon}
         count={count}
         successMessage={successMessage}
+        theme={theme}
       />
     </Thumbly.Root>
   );
