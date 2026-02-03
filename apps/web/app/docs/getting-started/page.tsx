@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CodeBlock } from "../../components/CodeBlock";
 
 export default function GettingStartedPage() {
   return (
@@ -11,9 +12,7 @@ export default function GettingStartedPage() {
 
       <h2>1. Installation</h2>
       <p>Install the React package using your preferred package manager:</p>
-      <pre>
-        <code>npm install @thumbly/react # or pnpm add @thumbly/react</code>
-      </pre>
+      <CodeBlock code="npm install @thumbly/react" language="bash" />
 
       <h2>2. Create a Survey</h2>
       <p>
@@ -25,13 +24,17 @@ export default function GettingStartedPage() {
       <p>
         Import a preset component like <code>ThumblyBinary</code> and drop it into your JSX.
       </p>
-      <pre>
-        <code>
-          import {"{ ThumblyBinary }"} from &quot;@thumbly/react&quot;; function App() {"{"}
-          return ( &lt;ThumblyBinary surveyId=&quot;YOUR_SURVEY_ID_HERE&quot; /&gt; );
-          {"}"}
-        </code>
-      </pre>
+      <CodeBlock
+        code={`
+import { ThumblyBinary } from "@thumbly/react";
+
+function App() {
+  return (
+    <ThumblyBinary surveyId="YOUR_SURVEY_ID_HERE" />
+  );
+}`}
+        language="tsx"
+      />
 
       <h2>4. Customization (Optional)</h2>
       <p>

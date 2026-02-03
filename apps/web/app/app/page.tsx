@@ -5,6 +5,7 @@ import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { supabase } from "../../lib/supabase";
 import { Session } from "@supabase/supabase-js";
+import { CodeBlock } from "../components/CodeBlock";
 
 export default function DashboardPage() {
   const [session, setSession] = useState<Session | null>(null);
@@ -154,29 +155,16 @@ export default function DashboardPage() {
                   {/* Code Snippet Toggle */}
                   <details style={{ marginTop: "1rem", borderTop: "1px solid #eee", paddingTop: "1rem" }}>
                     <summary style={{ cursor: "pointer", fontSize: "0.8rem", color: "#3b82f6" }}>Get Code</summary>
-                    <div
-                      className="code-preview"
-                      style={{
-                        marginTop: "0.5rem",
-                        fontSize: "0.8rem",
-                        padding: "1rem",
-                        background: "#f8fafc",
-                        borderRadius: "4px",
-                      }}
-                    >
-                      <code>
-                        <span className="token-keyword">import</span> {"{ ThumblyBinary }"}{" "}
-                        <span className="token-keyword">from</span>{" "}
-                        <span className="token-string">&quot;@thumbly/react&quot;</span>;
-                        <br />
-                        <br />
-                        <span className="token-tag">&lt;ThumblyBinary</span>
-                        <br />
-                        &nbsp;&nbsp;<span className="token-keyword">surveyId</span>=
-                        <span className="token-string">&quot;{survey.id}&quot;</span>
-                        <br />
-                        <span className="token-tag">/&gt;</span>
-                      </code>
+                    <div style={{ marginTop: "0.5rem" }}>
+                      <CodeBlock
+                        code={`
+import { ThumblyBinary } from "@thumbly/react";
+
+<ThumblyBinary
+  surveyId="${survey.id}"
+/>`}
+                        language="tsx"
+                      />
                     </div>
                   </details>
                 </div>

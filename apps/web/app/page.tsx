@@ -2,14 +2,26 @@
 
 import Link from "next/link";
 import { ThumblyBinary } from "@thumbly/react";
+import { CodeBlock } from "./components/CodeBlock";
 
 export default function HomePage() {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
-
   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY || "";
   const surveyId = process.env.NEXT_PUBLIC_DOGFOOD_SURVEY_ID || "5468756d-626c-7930-0000-000000000000";
 
   const isConfigured = supabaseUrl && supabaseKey;
+
+  const installCode = `npm install @thumbly/react`;
+  const usageCode = `
+import { ThumblyBinary } from "@thumbly/react";
+
+export default function App() {
+  return (
+    <ThumblyBinary
+      surveyId="..."
+    />
+  );
+}`;
 
   return (
     <>
@@ -71,36 +83,14 @@ export default function HomePage() {
           <h2 className="section-title">How it works</h2>
           <p className="section-subtitle">It&apos;s as simple as installing a package.</p>
 
-          <div className="code-preview">
-            <div style={{ marginBottom: "1rem" }}>
-              <span className="token-comment">{"// 1. Install"}</span>
-              <br />
-              <code>npm install @thumbly/react</code>
-            </div>
-            <div>
-              <span className="token-comment">{"// 2. Drop it in"}</span>
-              <br />
-              <span className="token-keyword">import</span> {"{ ThumblyBinary }"}{" "}
-              <span className="token-keyword">from</span>{" "}
-              <span className="token-string">&quot;@thumbly/react&quot;</span>;
-              <br />
-              <br />
-              <span className="token-keyword">export default</span> <span className="token-keyword">function</span>{" "}
-              <span className="token-function">App</span>() {"{"}
-              <br />
-              &nbsp;&nbsp;<span className="token-keyword">return</span> (
-              <br />
-              &nbsp;&nbsp;&nbsp;&nbsp;<span className="token-tag">&lt;ThumblyBinary</span>
-              <br />
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="token-keyword">surveyId</span>=
-              <span className="token-string">&quot;...&quot;</span>
-              <br />
-              &nbsp;&nbsp;&nbsp;&nbsp;<span className="token-tag">/&gt;</span>
-              <br />
-              &nbsp;&nbsp;);
-              <br />
-              {"}"}
-            </div>
+          <div style={{ maxWidth: "600px", margin: "0 auto", textAlign: "left" }}>
+            <h3 style={{ fontSize: "1.1rem", marginBottom: "0.5rem" }}>1. Install the package</h3>
+            <CodeBlock code={installCode} language="bash" />
+
+            <h3 style={{ fontSize: "1.1rem", marginTop: "2rem", marginBottom: "0.5rem" }}>
+              2. Drop it in your component
+            </h3>
+            <CodeBlock code={usageCode} language="tsx" />
           </div>
         </div>
       </section>

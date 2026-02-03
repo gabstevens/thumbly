@@ -1,0 +1,36 @@
+"use client";
+
+import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
+import ts from "react-syntax-highlighter/dist/esm/languages/prism/typescript";
+import tsx from "react-syntax-highlighter/dist/esm/languages/prism/tsx";
+import bash from "react-syntax-highlighter/dist/esm/languages/prism/bash";
+import { vs } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+SyntaxHighlighter.registerLanguage("typescript", ts);
+SyntaxHighlighter.registerLanguage("tsx", tsx);
+SyntaxHighlighter.registerLanguage("bash", bash);
+
+interface CodeBlockProps {
+  code: string;
+  language?: string;
+  showLineNumbers?: boolean;
+}
+
+export const CodeBlock = ({ code, language = "typescript", showLineNumbers = false }: CodeBlockProps) => {
+  return (
+    <SyntaxHighlighter
+      language={language}
+      style={vs}
+      showLineNumbers={showLineNumbers}
+      customStyle={{
+        margin: 0,
+        borderRadius: "4px",
+        fontSize: "0.9rem",
+        backgroundColor: "#f8fafc",
+        border: "1px solid #e2e8f0",
+      }}
+    >
+      {code.trim()}
+    </SyntaxHighlighter>
+  );
+};
