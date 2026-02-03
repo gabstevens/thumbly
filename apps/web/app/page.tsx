@@ -46,28 +46,28 @@ export default function App() {
       </section>
 
       {/* Features Section */}
-      <section className="section" style={{ background: "var(--secondary-bg)" }}>
+      <section className="section" style={{ background: "var(--muted)" }}>
         <div className="container">
           <h2 className="section-title">Why Thumbly?</h2>
           <p className="section-subtitle">
             Designed for developers who want flexibility without reinventing the wheel.
           </p>
           <div className="features-grid">
-            <div className="feature-card" style={{ background: "white" }}>
+            <div className="feature-card">
               <h3>🔌 Plug & Play UI</h3>
               <p>
                 Drop in ready-made React components like <code>&lt;ThumblyBinary /&gt;</code> or{" "}
                 <code>&lt;ThumblyNPS /&gt;</code> and start collecting feedback instantly.
               </p>
             </div>
-            <div className="feature-card" style={{ background: "white" }}>
+            <div className="feature-card">
               <h3>🚀 Backend Agnostic</h3>
               <p>
                 Use our &quot;Forever Free&quot; Supabase backend, your own API, or any serverless function. You are in
                 control of your data.
               </p>
             </div>
-            <div className="feature-card" style={{ background: "white" }}>
+            <div className="feature-card">
               <h3>🧠 Headless Core</h3>
               <p>
                 100% logic separation. Build your own unique UI on top of our robust state management and retry logic.
@@ -96,7 +96,7 @@ export default function App() {
       </section>
 
       {/* Demo Section */}
-      <section id="demo" className="section" style={{ background: "white" }}>
+      <section id="demo" className="section">
         <div className="container">
           <h2 className="section-title">Live Demo</h2>
           <p className="section-subtitle">

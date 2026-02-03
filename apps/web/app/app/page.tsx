@@ -80,8 +80,10 @@ export default function DashboardPage() {
       </div>
 
       {surveys.length === 0 ? (
-        <div className="feature-card" style={{ padding: "2rem", textAlign: "center", background: "white" }}>
-          <p style={{ color: "#666", marginBottom: "1.5rem" }}>You haven&apos;t created any surveys yet.</p>
+        <div className="feature-card" style={{ padding: "2rem", textAlign: "center" }}>
+          <p style={{ color: "var(--muted-foreground)", marginBottom: "1.5rem" }}>
+            You haven&apos;t created any surveys yet.
+          </p>
           <button className="btn" onClick={createSurvey}>
             Create New Survey
           </button>
@@ -89,11 +91,11 @@ export default function DashboardPage() {
       ) : (
         <div style={{ display: "grid", gap: "1rem" }}>
           {surveys.map((survey) => (
-            <div key={survey.id} className="feature-card" style={{ background: "white", padding: "1.5rem" }}>
+            <div key={survey.id} className="feature-card" style={{ padding: "1.5rem" }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
                 <div>
                   <h3 style={{ fontSize: "1.1rem", fontFamily: "monospace", marginBottom: "0.5rem" }}>{survey.id}</h3>
-                  <div style={{ display: "flex", gap: "1.5rem", fontSize: "0.9rem", color: "#666" }}>
+                  <div style={{ display: "flex", gap: "1.5rem", fontSize: "0.9rem", color: "var(--muted-foreground)" }}>
                     <span>Last Active: {new Date(survey.last_activity).toLocaleDateString()}</span>
                   </div>
 
@@ -154,8 +156,19 @@ export default function DashboardPage() {
 
                   {/* Code Snippet Toggle */}
                   <details style={{ marginTop: "1rem", borderTop: "1px solid #eee", paddingTop: "1rem" }}>
-                    <summary style={{ cursor: "pointer", fontSize: "0.8rem", color: "#3b82f6" }}>Get Code</summary>
-                    <div style={{ marginTop: "0.5rem" }}>
+                    <summary style={{ cursor: "pointer", fontSize: "0.8rem", color: "var(--primary)" }}>
+                      Get Code
+                    </summary>
+                    <div
+                      className="code-preview"
+                      style={{
+                        marginTop: "0.5rem",
+                        fontSize: "0.8rem",
+                        padding: "1rem",
+                        background: "var(--code-bg)",
+                        borderRadius: "4px",
+                      }}
+                    >
                       <CodeBlock
                         code={`
 import { ThumblyBinary } from "@thumbly/react";
