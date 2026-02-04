@@ -1,7 +1,12 @@
+"use client";
+
 import Link from "next/link";
 import { ThumblyBinary } from "@thumbly/react";
 import { CodeBlock } from "./components/CodeBlock";
-import { ArrowRight, Box, BrainCircuit, Check, Copy, Server, Zap } from "lucide-react";
+import { ArrowRight, BrainCircuit, Check, Server, Zap } from "lucide-react";
+import { motion } from "motion/react";
+import { Button } from "./components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "./components/ui/card";
 
 export default function HomePage() {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
@@ -23,199 +28,141 @@ export default function App() {
 }`;
 
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <section className="hero">
-        <div className="container">
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "0.5rem",
-              padding: "0.5rem 1rem",
-              borderRadius: "999px",
-              background: "var(--code-bg)",
-              fontSize: "0.85rem",
-              marginBottom: "1.5rem",
-              color: "var(--foreground)",
-              border: "1px solid var(--border)",
-            }}
+      <section className="relative py-24 lg:py-32 overflow-hidden">
+        <div className="container px-4 md:px-6 relative z-10 flex flex-col items-center text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80 mb-6"
           >
-            <span style={{ fontSize: "1.2em" }}>🚀</span> v1.0.0 is now available
-          </div>
-          <h1>
+            🚀 v1.0.0 is now available
+          </motion.div>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-4xl font-extrabold tracking-tight lg:text-6xl mb-6"
+          >
             The Modular Sentiment
             <br />
-            <span style={{ color: "var(--primary)" }}>Feedback Toolkit.</span>
-          </h1>
-          <p>
+            <span className="text-primary">Feedback Toolkit.</span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-xl text-muted-foreground max-w-[600px] mb-10"
+          >
             Collecting user feedback shouldn&apos;t be hard. Thumbly gives you headless logic, ready-made UI, and a free
             backend—so you can focus on building.
-          </p>
-          <div className="btn-group">
-            <Link href="#how-it-works" className="btn">
-              Get Started <ArrowRight size={18} style={{ marginLeft: "0.5rem" }} />
-            </Link>
-            <Link href="#demo" className="btn secondary">
-              Live Demo
-            </Link>
-          </div>
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="flex flex-col sm:flex-row gap-4"
+          >
+            <Button size="lg" asChild>
+              <Link href="#how-it-works">
+                Get Started <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+            <Button size="lg" variant="outline" asChild>
+              <Link href="#demo">Live Demo</Link>
+            </Button>
+          </motion.div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="section" style={{ background: "var(--muted)" }}>
-        <div className="container">
-          <h2 className="section-title">Why Thumbly?</h2>
-          <p className="section-subtitle">
-            Designed for the modern stack. Flexible, type-safe, and batteries-included.
-          </p>
-          <div className="features-grid">
-            <div className="feature-card">
-              <div
-                style={{
-                  width: "48px",
-                  height: "48px",
-                  borderRadius: "12px",
-                  background: "var(--primary)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  marginBottom: "1rem",
-                  color: "white",
-                }}
-              >
-                <Zap size={24} />
-              </div>
-              <h3>Plug & Play UI</h3>
-              <p>
+      <section className="py-24 bg-muted/50">
+        <div className="container px-4 md:px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Why Thumbly?</h2>
+            <p className="mt-4 text-muted-foreground text-lg max-w-[700px] mx-auto">
+              Designed for the modern stack. Flexible, type-safe, and batteries-included.
+            </p>
+          </div>
+
+          <div className="grid gap-8 md:grid-cols-3">
+            <Card>
+              <CardHeader>
+                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 text-primary">
+                  <Zap size={24} />
+                </div>
+                <CardTitle>Plug & Play UI</CardTitle>
+              </CardHeader>
+              <CardContent className="text-muted-foreground">
                 Drop in ready-made React components like <code>&lt;ThumblyBinary /&gt;</code> and start collecting
                 feedback instantly. Accessible and themable by default.
-              </p>
-            </div>
-            <div className="feature-card">
-              <div
-                style={{
-                  width: "48px",
-                  height: "48px",
-                  borderRadius: "12px",
-                  background: "#10b981", // Emerald
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  marginBottom: "1rem",
-                  color: "white",
-                }}
-              >
-                <Server size={24} />
-              </div>
-              <h3>Backend Agnostic</h3>
-              <p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <div className="w-12 h-12 rounded-lg bg-emerald-500/10 flex items-center justify-center mb-4 text-emerald-500">
+                  <Server size={24} />
+                </div>
+                <CardTitle>Backend Agnostic</CardTitle>
+              </CardHeader>
+              <CardContent className="text-muted-foreground">
                 Use our &quot;Forever Free&quot; Supabase backend, your own API, or serverless functions. You own your
                 data, always.
-              </p>
-            </div>
-            <div className="feature-card">
-              <div
-                style={{
-                  width: "48px",
-                  height: "48px",
-                  borderRadius: "12px",
-                  background: "#8b5cf6", // Violet
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  marginBottom: "1rem",
-                  color: "white",
-                }}
-              >
-                <BrainCircuit size={24} />
-              </div>
-              <h3>Headless Core</h3>
-              <p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <div className="w-12 h-12 rounded-lg bg-violet-500/10 flex items-center justify-center mb-4 text-violet-500">
+                  <BrainCircuit size={24} />
+                </div>
+                <CardTitle>Headless Core</CardTitle>
+              </CardHeader>
+              <CardContent className="text-muted-foreground">
                 100% logic separation. Build your own unique UI on top of our robust state management, persistence, and
                 retry logic.
-              </p>
-            </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
 
       {/* How It Works Section */}
-      <section id="how-it-works" className="section">
-        <div className="container">
-          <h2 className="section-title">How it works</h2>
-          <p className="section-subtitle">From zero to feedback in under 60 seconds.</p>
+      <section id="how-it-works" className="py-24">
+        <div className="container px-4 md:px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">How it works</h2>
+            <p className="mt-4 text-muted-foreground text-lg">From zero to feedback in under 60 seconds.</p>
+          </div>
 
-          <div
-            style={{
-              maxWidth: "800px",
-              margin: "0 auto",
-              textAlign: "left",
-              display: "grid",
-              gridTemplateColumns: "1fr",
-              gap: "3rem",
-            }}
-          >
-            <div style={{ display: "flex", gap: "1.5rem" }}>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                }}
-              >
-                <div
-                  style={{
-                    width: "32px",
-                    height: "32px",
-                    borderRadius: "50%",
-                    background: "var(--primary)",
-                    color: "white",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontWeight: "bold",
-                    fontSize: "0.9rem",
-                  }}
-                >
+          <div className="max-w-3xl mx-auto space-y-12">
+            <div className="flex gap-6">
+              <div className="flex flex-col items-center">
+                <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-sm z-10">
                   1
                 </div>
-                <div style={{ width: "2px", flex: 1, background: "var(--border)", margin: "0.5rem 0" }} />
+                <div className="w-px h-full bg-border -my-2" />
               </div>
-              <div style={{ flex: 1 }}>
-                <h3 style={{ fontSize: "1.2rem", margin: "0 0 1rem" }}>Install the package</h3>
+              <div className="flex-1 pb-8">
+                <h3 className="text-xl font-semibold mb-4">Install the package</h3>
                 <CodeBlock code={installCode} language="bash" />
               </div>
             </div>
 
-            <div style={{ display: "flex", gap: "1.5rem" }}>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                }}
-              >
-                <div
-                  style={{
-                    width: "32px",
-                    height: "32px",
-                    borderRadius: "50%",
-                    background: "var(--primary)",
-                    color: "white",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontWeight: "bold",
-                    fontSize: "0.9rem",
-                  }}
-                >
+            <div className="flex gap-6">
+              <div className="flex flex-col items-center">
+                <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-sm z-10">
                   2
                 </div>
               </div>
-              <div style={{ flex: 1 }}>
-                <h3 style={{ fontSize: "1.2rem", margin: "0 0 1rem" }}>Drop it in your component</h3>
+              <div className="flex-1">
+                <h3 className="text-xl font-semibold mb-4">Drop it in your component</h3>
                 <CodeBlock code={usageCode} language="tsx" />
               </div>
             </div>
@@ -224,51 +171,41 @@ export default function App() {
       </section>
 
       {/* Demo Section */}
-      <section id="demo" className="section" style={{ background: "var(--muted)" }}>
-        <div className="container">
-          <h2 className="section-title">Live Demo</h2>
-          <p className="section-subtitle">
-            Experience the interaction. This is a real component connected to our Supabase backend.
-          </p>
+      <section id="demo" className="py-24 bg-muted/50">
+        <div className="container px-4 md:px-6 text-center">
+          <div className="mb-12">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Live Demo</h2>
+            <p className="mt-4 text-muted-foreground text-lg">
+              Experience the interaction. This is a real component connected to our Supabase backend.
+            </p>
+          </div>
 
-          <div className="demo-container">
-            <h3 style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem" }}>
-              <Box size={20} /> Is this toolkit useful to you?
-            </h3>
+          <div className="max-w-xl mx-auto">
+            <Card className="bg-background">
+              <CardContent className="pt-12 pb-8">
+                <h3 className="text-xl font-semibold mb-8">Is this toolkit useful to you?</h3>
 
-            {isConfigured ? (
-              <ThumblyBinary
-                surveyId={surveyId}
-                supabase={{ url: supabaseUrl, key: supabaseKey }}
-                style={{
-                  display: "flex",
-                  gap: "1rem",
-                  justifyContent: "center",
-                  marginTop: "2rem",
-                  fontSize: "2rem",
-                }}
-              />
-            ) : (
-              <div style={{ marginTop: "1rem", color: "var(--muted-foreground)" }}>
-                Please configure .env.local to enable the demo.
-              </div>
-            )}
-            <div
-              style={{
-                marginTop: "2rem",
-                fontSize: "0.85rem",
-                color: "var(--muted-foreground)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "0.5rem",
-              }}
-            >
-              <Check size={14} /> Data is persisted to Supabase
-            </div>
+                {isConfigured ? (
+                  <div className="flex justify-center scale-125 mb-8">
+                    <ThumblyBinary
+                      surveyId={surveyId}
+                      supabase={{ url: supabaseUrl, key: supabaseKey }}
+                      style={{ gap: "1.5rem" }}
+                    />
+                  </div>
+                ) : (
+                  <div className="text-muted-foreground mb-8">Please configure .env.local to enable the demo.</div>
+                )}
+
+                <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+                  <Check size={14} className="text-green-500" />
+                  Data is persisted to Supabase
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }

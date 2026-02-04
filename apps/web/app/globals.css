@@ -1,256 +1,87 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+}
+
+/* Shadcn UI Variables (Tailwind 4 Compatible) */
 :root {
-  /* Light Theme */
-  --background: #ffffff;
-  --foreground: #09090b;
-
-  --primary: #0070f3;
-  --primary-foreground: #ffffff;
-
-  --secondary: #f4f4f5;
-  --secondary-foreground: #18181b;
-
-  --muted: #f4f4f5;
-  --muted-foreground: #71717a;
-
-  --border: #e4e4e7;
-  --input: #e4e4e7;
-
-  --card: #ffffff;
-  --card-foreground: #09090b;
-  --card-border: #e4e4e7;
-
-  --code-bg: #f4f4f5;
-  --code-fg: #09090b;
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222.2 84% 4.9%;
+  --primary: 221.2 83.2% 53.3%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 210 40% 96.1%;
+  --secondary-foreground: 222.2 47.4% 11.2%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --accent: 210 40% 96.1%;
+  --accent-foreground: 222.2 47.4% 11.2%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 221.2 83.2% 53.3%;
+  --radius: 0.5rem;
 }
 
 [data-theme="dark"] {
-  /* Dark Theme - Slate/Zinc inspired */
-  --background: #09090b;
-  --foreground: #fafafa;
-
-  --primary: #3b82f6; /* Lighter blue for dark mode */
-  --primary-foreground: #ffffff;
-
-  --secondary: #27272a;
-  --secondary-foreground: #fafafa;
-
-  --muted: #27272a;
-  --muted-foreground: #a1a1aa;
-
-  --border: #27272a;
-  --input: #27272a;
-
-  --card: #18181b;
-  --card-foreground: #fafafa;
-  --card-border: #27272a;
-
-  --code-bg: #18181b;
-  --code-fg: #e4e4e7;
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  --card: 222.2 84% 4.9%;
+  --card-foreground: 210 40% 98%;
+  --popover: 222.2 84% 4.9%;
+  --popover-foreground: 210 40% 98%;
+  --primary: 217.2 91.2% 59.8%;
+  --primary-foreground: 222.2 47.4% 11.2%;
+  --secondary: 217.2 32.6% 17.5%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 217.2 32.6% 17.5%;
+  --muted-foreground: 215 20.2% 65.1%;
+  --accent: 217.2 32.6% 17.5%;
+  --accent-foreground: 210 40% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 217.2 32.6% 17.5%;
+  --input: 217.2 32.6% 17.5%;
+  --ring: 224.3 76.3% 48%;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  line-height: 1.6;
-}
-
-/* Header */
-header {
-  padding: 1rem 0;
-  border-bottom: 1px solid var(--border);
-  background: var(--background); /* Removed blur for simplicity/consistency */
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
-.logo {
-  font-size: 1.5rem;
-  font-weight: 700;
-  text-decoration: none;
-  color: var(--foreground);
-}
-
-.nav-link {
-  color: var(--muted-foreground);
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 0.95rem;
-  transition: color 0.2s;
-  margin-left: 2rem;
-}
-
-.nav-link:hover {
-  color: var(--foreground);
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.header-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-main {
-  flex: 1;
-}
-
-footer {
-  padding: 4rem 0;
-  border-top: 1px solid var(--border);
-  text-align: center;
-  color: var(--muted-foreground);
-  background: var(--muted);
-}
-
-/* Hero */
-.hero {
-  text-align: center;
-  padding: 8rem 0 6rem;
-}
-
-.hero h1 {
-  font-size: 4rem;
-  line-height: 1.1;
-  margin-bottom: 1.5rem;
-  color: var(--foreground);
-}
-
-.hero p {
-  font-size: 1.5rem;
-  color: var(--muted-foreground);
-  max-width: 600px;
-  margin: 0 auto 2.5rem;
-}
-
-.btn-group {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--primary);
-  color: var(--primary-foreground);
-  padding: 0.8rem 1.6rem;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: 600;
-  border: 1px solid transparent;
-  cursor: pointer;
-}
-
-.btn:hover {
-  opacity: 0.9;
-}
-
-.btn.secondary {
-  background: var(--secondary);
-  color: var(--secondary-foreground);
-  border-color: var(--border);
-}
-
-.btn.secondary:hover {
-  background: var(--muted);
-}
-
-/* Sections */
-.section {
-  padding: 6rem 0;
-}
-
-.section-title {
-  text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-}
-
-.section-subtitle {
-  text-align: center;
-  color: var(--muted-foreground);
-  font-size: 1.2rem;
-  margin-bottom: 4rem;
-}
-
-/* Features Grid */
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-}
-
-.feature-card {
-  padding: 2rem;
-  background: var(--card);
-  border: 1px solid var(--card-border);
-  border-radius: 12px;
-  color: var(--card-foreground);
-}
-
-.feature-card h3 {
-  font-size: 1.5rem;
-  margin: 0 0 0.5rem;
-}
-
-.feature-card p {
-  color: var(--muted-foreground);
-  margin: 0;
-}
-
-/* Inline Code */
-:not(pre) > code {
-  background: var(--code-bg);
-  color: var(--code-fg);
-  padding: 0.2rem 0.4rem;
-  border-radius: 4px;
-  font-family: monospace;
-  font-size: 0.9em;
-  border: 1px solid var(--border);
-}
-
-/* Demo Section */
-.demo-container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 3rem;
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  background: var(--card);
-  text-align: center;
-}
-
-/* Prose (Docs) */
-.prose {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.prose h1,
-.prose h2,
-.prose h3 {
-  color: var(--foreground);
-}
-
-.prose p,
-.prose li {
-  color: var(--foreground);
-}
-
-.prose a {
-  color: var(--primary);
+  @apply bg-background text-foreground;
 }

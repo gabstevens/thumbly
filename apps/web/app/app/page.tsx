@@ -7,11 +7,13 @@ import { supabase } from "../../lib/supabase";
 import { Session } from "@supabase/supabase-js";
 import { CodeBlock } from "../components/CodeBlock";
 import { BarChart3, Copy, LogOut, Plus, Terminal } from "lucide-react";
+import { useTheme } from "next-themes";
 
 export default function DashboardPage() {
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
   const [surveys, setSurveys] = useState<any[]>([]);
+  const { theme } = useTheme();
 
   async function fetchSurveys() {
     setLoading(true);
@@ -60,7 +62,12 @@ export default function DashboardPage() {
       <div className="container" style={{ padding: "4rem 0" }}>
         <div style={{ maxWidth: "400px", margin: "0 auto" }}>
           <h1 style={{ textAlign: "center", marginBottom: "2rem" }}>Log in to Thumbly</h1>
-          <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} providers={["github"]} theme="light" />
+          <Auth
+            supabaseClient={supabase}
+            appearance={{ theme: ThemeSupa }}
+            providers={["github"]}
+            theme={theme === "dark" ? "dark" : "default"}
+          />
         </div>
       </div>
     );
