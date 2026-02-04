@@ -3,7 +3,7 @@ import { CodeBlock } from "../../components/CodeBlock";
 
 export default function GettingStartedPage() {
   return (
-    <div className="prose">
+    <>
       <h1>Getting Started</h1>
       <p>
         Thumbly is designed to be the fastest way to add sentiment feedback to your React application. Follow these
@@ -41,6 +41,6 @@ function App() {
         You can customize the styling by passing a <code>className</code> or <code>style</code> prop, or build your own
         UI using the <code>useThumbly</code> hook.
       </p>
-    </div>
+    </>
   );
 }

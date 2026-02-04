@@ -2,7 +2,7 @@ import { CodeBlock } from "../../components/CodeBlock";
 
 export default function SelfHostingPage() {
   return (
-    <div className="prose">
+    <>
       <h1>Self-Hosting Guide</h1>
       <p>
         Thumbly&apos;s backend is 100% open-source and built on Supabase. You can host your own instance to have full
@@ -12,7 +12,7 @@ export default function SelfHostingPage() {
       <h2>Prerequisites</h2>
       <ul>
         <li>
-          <a href="https://supabase.com" target="_blank">
+          <a href="https://supabase.com" target="_blank" rel="noreferrer">
             Supabase Account
           </a>{" "}
           (Free Tier works great)
@@ -51,6 +51,6 @@ cd thumbly`}
 />`}
         language="tsx"
       />
-    </div>
+    </>
   );
 }

@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function DocsPage() {
   return (
-    <div className="prose">
+    <>
       <h1>Documentation</h1>
       <p>
         Welcome to the Thumbly documentation. Here you will find everything you need to know about integrating and
@@ -27,6 +27,6 @@ export default function DocsPage() {
         Check out the <Link href="/docs/getting-started">Getting Started</Link> guide to integrate Thumbly in under 5
         minutes.
       </p>
-    </div>
+    </>
   );
 }
