@@ -6,6 +6,7 @@ import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { supabase } from "../../lib/supabase";
 import { Session } from "@supabase/supabase-js";
 import { CodeBlock } from "../components/CodeBlock";
+import { BarChart3, Copy, LogOut, Plus, Terminal } from "lucide-react";
 
 export default function DashboardPage() {
   const [session, setSession] = useState<Session | null>(null);
@@ -71,16 +72,19 @@ export default function DashboardPage() {
         <h1>My Surveys</h1>
         <div style={{ display: "flex", gap: "1rem" }}>
           <button className="btn" onClick={createSurvey}>
-            New Survey
+            <Plus size={16} style={{ marginRight: "0.5rem" }} /> New Survey
           </button>
           <button className="btn secondary" onClick={() => supabase.auth.signOut()}>
-            Sign Out
+            <LogOut size={16} style={{ marginRight: "0.5rem" }} /> Sign Out
           </button>
         </div>
       </div>
 
       {surveys.length === 0 ? (
         <div className="feature-card" style={{ padding: "2rem", textAlign: "center" }}>
+          <div style={{ marginBottom: "1rem", color: "var(--muted-foreground)" }}>
+            <BarChart3 size={48} />
+          </div>
           <p style={{ color: "var(--muted-foreground)", marginBottom: "1.5rem" }}>
             You haven&apos;t created any surveys yet.
           </p>
@@ -93,7 +97,7 @@ export default function DashboardPage() {
           {surveys.map((survey) => (
             <div key={survey.id} className="feature-card" style={{ padding: "1.5rem" }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-                <div>
+                <div style={{ width: "100%" }}>
                   <h3 style={{ fontSize: "1.1rem", fontFamily: "monospace", marginBottom: "0.5rem" }}>{survey.id}</h3>
                   <div style={{ display: "flex", gap: "1.5rem", fontSize: "0.9rem", color: "var(--muted-foreground)" }}>
                     <span>Last Active: {new Date(survey.last_activity).toLocaleDateString()}</span>
@@ -155,20 +159,20 @@ export default function DashboardPage() {
                   </div>
 
                   {/* Code Snippet Toggle */}
-                  <details style={{ marginTop: "1rem", borderTop: "1px solid #eee", paddingTop: "1rem" }}>
-                    <summary style={{ cursor: "pointer", fontSize: "0.8rem", color: "var(--primary)" }}>
-                      Get Code
-                    </summary>
-                    <div
-                      className="code-preview"
+                  <details style={{ marginTop: "1rem", borderTop: "1px solid var(--border)", paddingTop: "1rem" }}>
+                    <summary
                       style={{
-                        marginTop: "0.5rem",
-                        fontSize: "0.8rem",
-                        padding: "1rem",
-                        background: "var(--code-bg)",
-                        borderRadius: "4px",
+                        cursor: "pointer",
+                        fontSize: "0.85rem",
+                        color: "var(--primary)",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "0.5rem",
                       }}
                     >
+                      <Terminal size={14} /> Get Integration Code
+                    </summary>
+                    <div style={{ marginTop: "0.5rem" }}>
                       <CodeBlock
                         code={`
 import { ThumblyBinary } from "@thumbly/react";
@@ -183,10 +187,11 @@ import { ThumblyBinary } from "@thumbly/react";
                 </div>
                 <button
                   className="btn secondary"
-                  style={{ fontSize: "0.8rem", padding: "0.3rem 0.8rem" }}
+                  style={{ fontSize: "0.8rem", padding: "0.4rem 0.8rem", marginLeft: "1rem" }}
                   onClick={() => navigator.clipboard.writeText(survey.id)}
+                  title="Copy ID"
                 >
-                  Copy ID
+                  <Copy size={14} />
                 </button>
               </div>
             </div>
