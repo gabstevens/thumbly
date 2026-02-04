@@ -8,6 +8,8 @@ import { Session } from "@supabase/supabase-js";
 import { CodeBlock } from "../components/CodeBlock";
 import { BarChart3, Copy, LogOut, Plus, Terminal } from "lucide-react";
 import { useTheme } from "next-themes";
+import { Button } from "../components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
 
 export default function DashboardPage() {
   const [session, setSession] = useState<Session | null>(null);
@@ -50,158 +52,131 @@ export default function DashboardPage() {
   }
 
   if (loading) {
-    return (
-      <div className="container" style={{ padding: "4rem 0", textAlign: "center" }}>
-        Loading...
-      </div>
-    );
+    return <div className="container mx-auto py-16 text-center">Loading...</div>;
   }
 
   if (!session) {
     return (
-      <div className="container" style={{ padding: "4rem 0" }}>
-        <div style={{ maxWidth: "400px", margin: "0 auto" }}>
-          <h1 style={{ textAlign: "center", marginBottom: "2rem" }}>Log in to Thumbly</h1>
-          <Auth
-            supabaseClient={supabase}
-            appearance={{ theme: ThemeSupa }}
-            providers={["github"]}
-            theme={theme === "dark" ? "dark" : "default"}
-          />
-        </div>
+      <div className="container mx-auto py-16 px-4">
+        <Card className="max-w-md mx-auto">
+          <CardHeader>
+            <CardTitle className="text-center">Log in to Thumbly</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <Auth
+              supabaseClient={supabase}
+              appearance={{ theme: ThemeSupa }}
+              providers={["github"]}
+              theme={theme === "dark" ? "dark" : "default"}
+            />
+          </CardContent>
+        </Card>
       </div>
     );
   }
 
   return (
-    <div className="container" style={{ padding: "4rem 0" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "2rem" }}>
-        <h1>My Surveys</h1>
-        <div style={{ display: "flex", gap: "1rem" }}>
-          <button className="btn" onClick={createSurvey}>
-            <Plus size={16} style={{ marginRight: "0.5rem" }} /> New Survey
-          </button>
-          <button className="btn secondary" onClick={() => supabase.auth.signOut()}>
-            <LogOut size={16} style={{ marginRight: "0.5rem" }} /> Sign Out
-          </button>
+    <div className="container mx-auto py-10 px-4 md:px-8">
+      <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
+        <h1 className="text-3xl font-bold tracking-tight">My Surveys</h1>
+        <div className="flex gap-4">
+          <Button onClick={createSurvey}>
+            <Plus size={16} className="mr-2" /> New Survey
+          </Button>
+          <Button variant="outline" onClick={() => supabase.auth.signOut()}>
+            <LogOut size={16} className="mr-2" /> Sign Out
+          </Button>
         </div>
       </div>
 
       {surveys.length === 0 ? (
-        <div className="feature-card" style={{ padding: "2rem", textAlign: "center" }}>
-          <div style={{ marginBottom: "1rem", color: "var(--muted-foreground)" }}>
-            <BarChart3 size={48} />
-          </div>
-          <p style={{ color: "var(--muted-foreground)", marginBottom: "1.5rem" }}>
-            You haven&apos;t created any surveys yet.
-          </p>
-          <button className="btn" onClick={createSurvey}>
-            Create New Survey
-          </button>
-        </div>
+        <Card className="text-center py-12">
+          <CardContent className="flex flex-col items-center">
+            <div className="mb-4 text-muted-foreground p-4 bg-muted rounded-full">
+              <BarChart3 size={48} />
+            </div>
+            <p className="text-muted-foreground mb-6">You haven&apos;t created any surveys yet.</p>
+            <Button onClick={createSurvey}>Create New Survey</Button>
+          </CardContent>
+        </Card>
       ) : (
-        <div style={{ display: "grid", gap: "1rem" }}>
+        <div className="grid gap-6">
           {surveys.map((survey) => (
-            <div key={survey.id} className="feature-card" style={{ padding: "1.5rem" }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-                <div style={{ width: "100%" }}>
-                  <h3 style={{ fontSize: "1.1rem", fontFamily: "monospace", marginBottom: "0.5rem" }}>{survey.id}</h3>
-                  <div style={{ display: "flex", gap: "1.5rem", fontSize: "0.9rem", color: "var(--muted-foreground)" }}>
-                    <span>Last Active: {new Date(survey.last_activity).toLocaleDateString()}</span>
-                  </div>
-
-                  {/* Simple Analytics Bar */}
-                  <div
-                    style={{
-                      marginTop: "1rem",
-                      display: "flex",
-                      gap: "4px",
-                      height: "20px",
-                      width: "100%",
-                      maxWidth: "400px",
-                    }}
-                  >
-                    {[
-                      { val: survey.option_1, color: "#22c55e", label: "👍" },
-                      { val: survey.option_2, color: "#ef4444", label: "👎" },
-                      { val: survey.option_3, color: "#eab308", label: "⭐" },
-                      { val: survey.option_4, color: "#3b82f6", label: "4" },
-                      { val: survey.option_5, color: "#a855f7", label: "5" },
-                    ].map((opt, idx) => {
-                      const total =
-                        survey.option_1 + survey.option_2 + survey.option_3 + survey.option_4 + survey.option_5;
-                      const pct = total > 0 ? (opt.val / total) * 100 : 0;
-
-                      if (pct === 0) return null;
-
-                      return (
-                        <div
-                          key={idx}
-                          title={`${opt.label}: ${opt.val} votes (${Math.round(pct)}%)`}
-                          style={{
-                            width: `${pct}%`,
-                            background: opt.color,
-                            opacity: 0.8,
-                            borderRadius: "2px",
-                          }}
-                        />
-                      );
-                    })}
-                    {survey.option_1 + survey.option_2 + survey.option_3 + survey.option_4 + survey.option_5 === 0 && (
-                      <div
-                        style={{
-                          width: "100%",
-                          background: "#e5e7eb",
-                          borderRadius: "2px",
-                          fontSize: "0.7rem",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          color: "#888",
-                        }}
-                      >
-                        No votes yet
+            <Card key={survey.id}>
+              <CardContent className="p-6">
+                <div className="flex flex-col md:flex-row justify-between items-start gap-6">
+                  <div className="w-full">
+                    <div className="flex items-center justify-between mb-2">
+                      <h3 className="font-mono text-lg font-medium">{survey.id}</h3>
+                      <div className="text-sm text-muted-foreground">
+                        Last Active: {new Date(survey.last_activity).toLocaleDateString()}
                       </div>
-                    )}
-                  </div>
+                    </div>
 
-                  {/* Code Snippet Toggle */}
-                  <details style={{ marginTop: "1rem", borderTop: "1px solid var(--border)", paddingTop: "1rem" }}>
-                    <summary
-                      style={{
-                        cursor: "pointer",
-                        fontSize: "0.85rem",
-                        color: "var(--primary)",
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "0.5rem",
-                      }}
-                    >
-                      <Terminal size={14} /> Get Integration Code
-                    </summary>
-                    <div style={{ marginTop: "0.5rem" }}>
-                      <CodeBlock
-                        code={`
+                    {/* Simple Analytics Bar */}
+                    <div className="flex h-4 w-full rounded-sm overflow-hidden bg-muted mt-4">
+                      {[
+                        { val: survey.option_1, color: "#22c55e", label: "👍" },
+                        { val: survey.option_2, color: "#ef4444", label: "👎" },
+                        { val: survey.option_3, color: "#eab308", label: "⭐" },
+                        { val: survey.option_4, color: "#3b82f6", label: "4" },
+                        { val: survey.option_5, color: "#a855f7", label: "5" },
+                      ].map((opt, idx) => {
+                        const total =
+                          survey.option_1 + survey.option_2 + survey.option_3 + survey.option_4 + survey.option_5;
+                        const pct = total > 0 ? (opt.val / total) * 100 : 0;
+
+                        if (pct === 0) return null;
+
+                        return (
+                          <div
+                            key={idx}
+                            title={`${opt.label}: ${opt.val} votes (${Math.round(pct)}%)`}
+                            style={{
+                              width: `${pct}%`,
+                              background: opt.color,
+                            }}
+                          />
+                        );
+                      })}
+                      {survey.option_1 + survey.option_2 + survey.option_3 + survey.option_4 + survey.option_5 ===
+                        0 && (
+                        <div className="w-full h-full flex items-center justify-center text-xs text-muted-foreground">
+                          No votes yet
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Code Snippet Toggle */}
+                    <details className="mt-6 border-t border-border pt-4 group">
+                      <summary className="cursor-pointer text-sm font-medium text-primary flex items-center gap-2 select-none group-open:mb-2">
+                        <Terminal size={14} /> Get Integration Code
+                      </summary>
+                      <div>
+                        <CodeBlock
+                          code={`
 import { ThumblyBinary } from "@thumbly/react";
 
 <ThumblyBinary
   surveyId="${survey.id}"
 />`}
-                        language="tsx"
-                      />
-                    </div>
-                  </details>
+                          language="tsx"
+                        />
+                      </div>
+                    </details>
+                  </div>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="ml-auto"
+                    onClick={() => navigator.clipboard.writeText(survey.id)}
+                    title="Copy ID"
+                  >
+                    <Copy size={16} />
+                  </Button>
                 </div>
-                <button
-                  className="btn secondary"
-                  style={{ fontSize: "0.8rem", padding: "0.4rem 0.8rem", marginLeft: "1rem" }}
-                  onClick={() => navigator.clipboard.writeText(survey.id)}
-                  title="Copy ID"
-                >
-                  <Copy size={14} />
-                </button>
-              </div>
-            </div>
+              </CardContent>
+            </Card>
           ))}
         </div>
       )}
