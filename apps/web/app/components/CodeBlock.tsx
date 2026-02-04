@@ -4,7 +4,7 @@ import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
 import ts from "react-syntax-highlighter/dist/esm/languages/prism/typescript";
 import tsx from "react-syntax-highlighter/dist/esm/languages/prism/tsx";
 import bash from "react-syntax-highlighter/dist/esm/languages/prism/bash";
-import { prism } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 SyntaxHighlighter.registerLanguage("typescript", ts);
 SyntaxHighlighter.registerLanguage("tsx", tsx);
@@ -20,11 +20,17 @@ export const CodeBlock = ({ code, language = "typescript", showLineNumbers = fal
   return (
     <SyntaxHighlighter
       language={language}
-      style={prism}
+      style={vscDarkPlus}
       showLineNumbers={showLineNumbers}
       customStyle={{
-        borderRadius: "4px",
+        margin: 0,
+        padding: 0,
+        background: "transparent",
+        fontSize: "0.875rem",
+        lineHeight: "1.5",
       }}
+      wrapLines={true}
+      wrapLongLines={true}
     >
       {code.trim()}
     </SyntaxHighlighter>

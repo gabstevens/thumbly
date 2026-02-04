@@ -1,15 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { supabase } from "../../lib/supabase";
 import { Session } from "@supabase/supabase-js";
 import { CodeBlock } from "../components/CodeBlock";
-import { BarChart3, Copy, LogOut, Plus, Terminal } from "lucide-react";
+import { BarChart3, Copy, LogOut, Plus, Terminal, Loader2, ArrowUpRight } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "../components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card";
+import { motion } from "motion/react";
+import { cn } from "@/lib/utils";
 
 export default function DashboardPage() {
   const [session, setSession] = useState<Session | null>(null);
@@ -52,131 +55,186 @@ export default function DashboardPage() {
   }
 
   if (loading) {
-    return <div className="container mx-auto py-16 text-center">Loading...</div>;
+    return (
+      <div className="flex h-[50vh] w-full items-center justify-center">
+        <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+      </div>
+    );
   }
 
   if (!session) {
     return (
-      <div className="container mx-auto py-16 px-4">
-        <Card className="max-w-md mx-auto">
-          <CardHeader>
-            <CardTitle className="text-center">Log in to Thumbly</CardTitle>
-          </CardHeader>
-          <CardContent>
+      <div className="flex flex-col items-center justify-center min-h-[60vh] px-4">
+        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-sm">
+          <div className="text-center mb-8">
+            <h1 className="text-2xl font-bold tracking-tight">Welcome back</h1>
+            <p className="text-muted-foreground mt-2 text-sm">Sign in to manage your feedback</p>
+          </div>
+
+          <div className="bg-card border border-border rounded-3xl p-6 shadow-sm">
             <Auth
               supabaseClient={supabase}
-              appearance={{ theme: ThemeSupa }}
+              appearance={{
+                theme: ThemeSupa,
+                variables: {
+                  default: {
+                    colors: {
+                      brand: "hsl(var(--primary))",
+                      brandAccent: "hsl(var(--primary) / 0.8)",
+                    },
+                    radii: {
+                      borderRadiusButton: "0.75rem",
+                      inputBorderRadius: "0.75rem",
+                    },
+                  },
+                },
+                className: {
+                  button: "h-10 font-medium",
+                  input: "h-10",
+                },
+              }}
               providers={["github"]}
               theme={theme === "dark" ? "dark" : "default"}
+              showLinks={false}
             />
-          </CardContent>
-        </Card>
+          </div>
+        </motion.div>
       </div>
     );
   }
 
   return (
-    <div className="container mx-auto py-10 px-4 md:px-8">
-      <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
-        <h1 className="text-3xl font-bold tracking-tight">My Surveys</h1>
-        <div className="flex gap-4">
-          <Button onClick={createSurvey}>
+    <div className="max-w-5xl mx-auto space-y-10">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-bold tracking-tight text-foreground">My Surveys</h1>
+          <p className="text-muted-foreground text-sm mt-1">Overview of your feedback endpoints.</p>
+        </div>
+        <div className="flex gap-3">
+          <Button onClick={createSurvey} className="rounded-xl h-10 px-5 shadow-sm">
             <Plus size={16} className="mr-2" /> New Survey
           </Button>
-          <Button variant="outline" onClick={() => supabase.auth.signOut()}>
-            <LogOut size={16} className="mr-2" /> Sign Out
+          <Button variant="outline" onClick={() => supabase.auth.signOut()} className="rounded-xl h-10 px-4">
+            <LogOut size={16} />
           </Button>
         </div>
       </div>
 
       {surveys.length === 0 ? (
-        <Card className="text-center py-12">
-          <CardContent className="flex flex-col items-center">
-            <div className="mb-4 text-muted-foreground p-4 bg-muted rounded-full">
-              <BarChart3 size={48} />
-            </div>
-            <p className="text-muted-foreground mb-6">You haven&apos;t created any surveys yet.</p>
-            <Button onClick={createSurvey}>Create New Survey</Button>
-          </CardContent>
-        </Card>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="rounded-3xl border border-dashed border-border bg-muted/20 p-12 text-center"
+        >
+          <div className="mx-auto w-12 h-12 rounded-2xl bg-muted flex items-center justify-center mb-4 text-muted-foreground">
+            <BarChart3 size={20} />
+          </div>
+          <h3 className="text-lg font-medium text-foreground">No surveys created</h3>
+          <p className="text-muted-foreground text-sm mt-2 mb-8 max-w-xs mx-auto">
+            Get started by creating your first survey endpoint.
+          </p>
+          <Button onClick={createSurvey} variant="secondary" className="rounded-xl">
+            Create Survey
+          </Button>
+        </motion.div>
       ) : (
         <div className="grid gap-6">
-          {surveys.map((survey) => (
-            <Card key={survey.id}>
-              <CardContent className="p-6">
-                <div className="flex flex-col md:flex-row justify-between items-start gap-6">
-                  <div className="w-full">
-                    <div className="flex items-center justify-between mb-2">
-                      <h3 className="font-mono text-lg font-medium">{survey.id}</h3>
-                      <div className="text-sm text-muted-foreground">
-                        Last Active: {new Date(survey.last_activity).toLocaleDateString()}
+          {surveys.map((survey, index) => (
+            <motion.div
+              key={survey.id}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.05 }}
+            >
+              <div className="group rounded-3xl border border-border bg-card p-1 hover:shadow-md transition-all duration-300">
+                <div className="p-6 md:p-8 flex flex-col gap-8">
+                  {/* Header Row */}
+                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div className="flex items-center gap-3">
+                      <div className="h-10 w-10 rounded-xl bg-primary/5 flex items-center justify-center text-primary">
+                        <BarChart3 size={18} />
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <span className="font-mono text-sm font-medium text-foreground">{survey.id}</span>
+                          <button
+                            onClick={() => navigator.clipboard.writeText(survey.id)}
+                            className="p-1 rounded-md text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+                            title="Copy ID"
+                          >
+                            <Copy size={12} />
+                          </button>
+                        </div>
+                        <div className="text-xs text-muted-foreground mt-0.5">
+                          Last active {new Date(survey.last_activity).toLocaleDateString()}
+                        </div>
                       </div>
                     </div>
 
-                    {/* Simple Analytics Bar */}
-                    <div className="flex h-4 w-full rounded-sm overflow-hidden bg-muted mt-4">
+                    <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground bg-muted/50 px-3 py-1.5 rounded-lg">
+                      <Terminal size={12} />
+                      Managed Endpoint
+                    </div>
+                  </div>
+
+                  {/* Visualization Row */}
+                  <div className="space-y-3">
+                    <div className="flex h-10 w-full rounded-xl overflow-hidden bg-muted/30">
                       {[
-                        { val: survey.option_1, color: "#22c55e", label: "👍" },
-                        { val: survey.option_2, color: "#ef4444", label: "👎" },
-                        { val: survey.option_3, color: "#eab308", label: "⭐" },
-                        { val: survey.option_4, color: "#3b82f6", label: "4" },
-                        { val: survey.option_5, color: "#a855f7", label: "5" },
+                        { val: survey.option_1, color: "bg-emerald-500", label: "👍" },
+                        { val: survey.option_2, color: "bg-rose-500", label: "👎" },
+                        { val: survey.option_3, color: "bg-amber-400", label: "⭐" },
+                        { val: survey.option_4, color: "bg-blue-500", label: "4" },
+                        { val: survey.option_5, color: "bg-violet-500", label: "5" },
                       ].map((opt, idx) => {
                         const total =
                           survey.option_1 + survey.option_2 + survey.option_3 + survey.option_4 + survey.option_5;
                         const pct = total > 0 ? (opt.val / total) * 100 : 0;
-
                         if (pct === 0) return null;
 
                         return (
                           <div
                             key={idx}
-                            title={`${opt.label}: ${opt.val} votes (${Math.round(pct)}%)`}
-                            style={{
-                              width: `${pct}%`,
-                              background: opt.color,
-                            }}
-                          />
+                            className={cn(
+                              opt.color,
+                              "h-full border-r border-background/20 last:border-0 relative group/bar",
+                            )}
+                            style={{ width: `${pct}%` }}
+                          >
+                            <div className="opacity-0 group-hover/bar:opacity-100 absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-popover text-popover-foreground text-xs px-2 py-1 rounded-md shadow-sm whitespace-nowrap z-10 pointer-events-none transition-opacity">
+                              {opt.label}: {opt.val} ({Math.round(pct)}%)
+                            </div>
+                          </div>
                         );
                       })}
                       {survey.option_1 + survey.option_2 + survey.option_3 + survey.option_4 + survey.option_5 ===
                         0 && (
-                        <div className="w-full h-full flex items-center justify-center text-xs text-muted-foreground">
-                          No votes yet
+                        <div className="w-full h-full flex items-center justify-center text-xs text-muted-foreground/50 font-medium">
+                          No feedback collected yet
                         </div>
                       )}
                     </div>
-
-                    {/* Code Snippet Toggle */}
-                    <details className="mt-6 border-t border-border pt-4 group">
-                      <summary className="cursor-pointer text-sm font-medium text-primary flex items-center gap-2 select-none group-open:mb-2">
-                        <Terminal size={14} /> Get Integration Code
-                      </summary>
-                      <div>
-                        <CodeBlock
-                          code={`
-import { ThumblyBinary } from "@thumbly/react";
-
-<ThumblyBinary
-  surveyId="${survey.id}"
-/>`}
-                          language="tsx"
-                        />
-                      </div>
-                    </details>
+                    <div className="flex justify-between text-[10px] text-muted-foreground uppercase tracking-widest px-1">
+                      <span>0%</span>
+                      <span>100%</span>
+                    </div>
                   </div>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="ml-auto"
-                    onClick={() => navigator.clipboard.writeText(survey.id)}
-                    title="Copy ID"
-                  >
-                    <Copy size={16} />
-                  </Button>
+
+                  {/* Code Snippet Row */}
+                  <div className="bg-muted/30 rounded-2xl p-4 border border-border/50">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-xs font-semibold text-muted-foreground uppercase">Integration</span>
+                      <Link href="/docs" className="text-xs flex items-center hover:underline text-primary">
+                        View Docs <ArrowUpRight size={10} className="ml-1" />
+                      </Link>
+                    </div>
+                    <div className="relative group/code">
+                      <CodeBlock code={`<ThumblyBinary surveyId="${survey.id}" />`} language="tsx" />
+                    </div>
+                  </div>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </motion.div>
           ))}
         </div>
       )}
