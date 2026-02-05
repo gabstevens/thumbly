@@ -3,9 +3,10 @@
 import Link from "next/link";
 import { ThumblyBinary } from "@thumbly/react";
 import { CodeBlock } from "./components/CodeBlock";
-import { ArrowRight, Box, Database, Terminal, Zap, CheckCircle2, Shield, Layout, Settings, Server } from "lucide-react";
+import { ArrowRight, Settings } from "lucide-react";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
+import { LandingContent } from "@/lib/content";
 
 export default function HomePage() {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
@@ -25,7 +26,7 @@ export default function HomePage() {
           className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-[13px] font-medium text-primary mb-10"
         >
           <span className="flex h-2 w-2 rounded-full bg-primary animate-pulse" />
-          Released v1.5.2
+          {LandingContent.hero.badge}
           <ArrowRight size={14} className="ml-1" />
         </motion.div>
 
@@ -35,8 +36,8 @@ export default function HomePage() {
           transition={{ duration: 0.4, delay: 0.1 }}
           className="text-5xl md:text-7xl font-extrabold tracking-tight text-foreground mb-8"
         >
-          Self-Hosted Feedback <br />
-          <span className="text-primary italic">Simple & Private</span>
+          {LandingContent.hero.title.plain} <br />
+          <span className="text-primary italic">{LandingContent.hero.title.italic}</span>
         </motion.h1>
 
         <motion.p
@@ -45,8 +46,7 @@ export default function HomePage() {
           transition={{ duration: 0.4, delay: 0.2 }}
           className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed"
         >
-          A lightweight, modular sentiment feedback toolkit for effortlessly capturing user thoughts. Open source, no
-          tracking, free forever.
+          {LandingContent.hero.description}
         </motion.p>
 
         <motion.div
@@ -56,16 +56,16 @@ export default function HomePage() {
           className="flex flex-col sm:flex-row gap-4 justify-center items-center"
         >
           <Link
-            href="/docs"
+            href={LandingContent.hero.cta.primary.href}
             className="inline-flex h-12 items-center justify-center rounded-2xl bg-primary px-10 text-[15px] font-bold text-primary-foreground shadow-xl shadow-primary/20 transition-all hover:opacity-90 hover:scale-[1.02] active:scale-95"
           >
-            Get Started
+            {LandingContent.hero.cta.primary.label}
           </Link>
           <Link
-            href="#demo"
+            href={LandingContent.hero.cta.secondary.href}
             className="inline-flex h-12 items-center justify-center rounded-2xl border border-input bg-card px-10 text-[15px] font-bold text-foreground transition-all hover:bg-accent active:scale-95 shadow-sm"
           >
-            Live Demo <ArrowRight className="ml-2 h-4 w-4" />
+            {LandingContent.hero.cta.secondary.label} <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
         </motion.div>
       </section>
@@ -89,7 +89,7 @@ export default function HomePage() {
             </div>
             <div className="flex-1 flex justify-center">
               <div className="bg-background rounded-lg px-4 py-1.5 text-[11px] text-muted-foreground flex items-center gap-2 w-full max-w-md justify-center border border-border font-mono uppercase tracking-wider">
-                demo.thumbly.dev
+                {LandingContent.demo.browserUrl}
               </div>
             </div>
             <div className="w-12" />
@@ -97,7 +97,7 @@ export default function HomePage() {
 
           {/* Browser Content */}
           <div className="p-16 md:p-24 flex flex-col items-center justify-center bg-card relative">
-            <h3 className="text-2xl font-bold mb-14 text-foreground text-center">How are you liking this redesign?</h3>
+            <h3 className="text-2xl font-bold mb-14 text-foreground text-center">{LandingContent.demo.question}</h3>
 
             <div className="relative group">
               <div className="absolute -inset-4 bg-primary/10 rounded-3xl blur-2xl group-hover:bg-primary/20 transition-all opacity-0 group-hover:opacity-100" />
@@ -118,7 +118,7 @@ export default function HomePage() {
 
             <div className="mt-20 flex items-center gap-3 text-[11px] text-muted-foreground font-bold uppercase tracking-widest bg-secondary px-5 py-2 rounded-full border border-border">
               <span className="flex h-2 w-2 rounded-full bg-primary" />
-              Connected to Supabase
+              {LandingContent.demo.footer}
             </div>
           </div>
         </div>
@@ -130,45 +130,16 @@ export default function HomePage() {
           <div className="w-14 h-14 rounded-2xl bg-primary/10 text-primary mx-auto flex items-center justify-center mb-8 border border-primary/20">
             <Settings size={28} />
           </div>
-          <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tight text-foreground">Why Thumbly?</h2>
+          <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tight text-foreground">
+            {LandingContent.why.title}
+          </h2>
           <p className="text-muted-foreground text-xl max-w-2xl mx-auto font-medium">
-            Self-hosted, fast, and private. Everything you need, nothing you don&apos;t.
+            {LandingContent.why.description}
           </p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {[
-            {
-              icon: Shield,
-              title: "100% Private",
-              desc: "Your thoughts are yours alone. No tracking, no analytics, no data harvesting. Ever.",
-            },
-            {
-              icon: Zap,
-              title: "Blazing Fast",
-              desc: "Capture ideas at the speed of thought. Local-first architecture means zero lag, even with thousands of notes.",
-            },
-            {
-              icon: Database,
-              title: "Future-Proof Format",
-              desc: "Write in Markdown. Own your content forever. No proprietary formats or vendor lock-in, just plain text that lasts.",
-            },
-            {
-              icon: Server,
-              title: "Deploy Anywhere",
-              desc: "From a Raspberry Pi to enterprise clusters. Thumbly runs everywhere you can run a container.",
-            },
-            {
-              icon: Layout,
-              title: "Truly Open Source",
-              desc: "MIT licensed and transparent. Join over 1,000 contributors on GitHub.",
-            },
-            {
-              icon: Box,
-              title: "Free Forever",
-              desc: "Every feature. Every update. No subscriptions, no tiers. Just free software for everyone.",
-            },
-          ].map((feature, i) => (
+          {LandingContent.why.features.map((feature, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 20 }}
@@ -208,24 +179,24 @@ export default function HomePage() {
             </svg>
           </div>
           <h2 className="text-4xl md:text-6xl font-black mb-8 text-foreground tracking-tighter">
-            Ready to Get Started?
+            {LandingContent.cta.title}
           </h2>
-          <p className="text-xl text-muted-foreground mb-12 max-w-xl font-medium">
-            Deploy your own Thumbly instance in minutes. Keep your feedback private, organized, and always accessible.
-          </p>
+          <p className="text-xl text-muted-foreground mb-12 max-w-xl font-medium">{LandingContent.cta.description}</p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center w-full max-w-md">
-            <Link
-              href="/docs"
-              className="flex-1 inline-flex h-14 items-center justify-center rounded-2xl bg-primary text-primary-foreground text-lg font-black shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all"
-            >
-              Install Now
-            </Link>
-            <Link
-              href="https://github.com/gabstevens/thumbly"
-              className="flex-1 inline-flex h-14 items-center justify-center rounded-2xl border border-input bg-card text-foreground text-lg font-bold hover:bg-accent active:scale-95 transition-all shadow-sm"
-            >
-              View on GitHub
-            </Link>
+            {LandingContent.cta.buttons.map((btn, i) => (
+              <Link
+                key={i}
+                href={btn.href}
+                className={cn(
+                  "flex-1 inline-flex h-14 items-center justify-center rounded-2xl text-lg font-bold transition-all",
+                  btn.primary
+                    ? "bg-primary text-primary-foreground font-black shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-95"
+                    : "border border-input bg-card text-foreground hover:bg-accent active:scale-95 shadow-sm",
+                )}
+              >
+                {btn.label}
+              </Link>
+            ))}
           </div>
         </div>
       </section>
