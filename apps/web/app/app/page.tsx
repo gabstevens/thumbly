@@ -7,7 +7,18 @@ import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { supabase } from "../../lib/supabase";
 import { Session } from "@supabase/supabase-js";
 import { CodeBlock } from "../components/CodeBlock";
-import { BarChart3, Copy, LogOut, Plus, Terminal, Loader2, ArrowUpRight } from "lucide-react";
+import {
+  BarChart3,
+  Copy,
+  LogOut,
+  Plus,
+  Terminal,
+  Loader2,
+  ArrowUpRight,
+  Trash2,
+  RotateCcw,
+  Download,
+} from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "../components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card";
@@ -18,6 +29,7 @@ export default function DashboardPage() {
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
   const [surveys, setSurveys] = useState<any[]>([]);
+  const [snippetTypes, setSnippetTypes] = useState<Record<string, string>>({});
   const { theme } = useTheme();
 
   async function fetchSurveys() {
@@ -52,6 +64,38 @@ export default function DashboardPage() {
     if (data) {
       setSurveys([data, ...surveys]);
     }
+  }
+
+  async function deleteSurvey(id: string) {
+    if (!confirm("Are you sure you want to delete this survey? All data will be lost.")) return;
+    const { error } = await supabase.from("surveys").delete().eq("id", id);
+    if (!error) {
+      setSurveys(surveys.filter((s) => s.id !== id));
+    }
+  }
+
+  async function resetSurvey(id: string) {
+    if (!confirm("Are you sure you want to reset this survey? All votes will be cleared.")) return;
+    const { data, error } = await supabase
+      .from("surveys")
+      .update({ option_1: 0, option_2: 0, option_3: 0, option_4: 0, option_5: 0 })
+      .eq("id", id)
+      .select()
+      .single();
+    if (!error && data) {
+      setSurveys(surveys.map((s) => (s.id === id ? data : s)));
+    }
+  }
+
+  function exportSurvey(survey: any) {
+    const data = JSON.stringify(survey, null, 2);
+    const blob = new Blob([data], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `thumbly-survey-${survey.id}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
   }
 
   if (loading) {
@@ -175,6 +219,30 @@ export default function DashboardPage() {
                       <Terminal size={12} />
                       Managed Endpoint
                     </div>
+
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => exportSurvey(survey)}
+                        className="p-2 rounded-lg text-muted-foreground hover:bg-primary/10 hover:text-primary transition-all"
+                        title="Export Data (JSON)"
+                      >
+                        <Download size={16} />
+                      </button>
+                      <button
+                        onClick={() => resetSurvey(survey.id)}
+                        className="p-2 rounded-lg text-muted-foreground hover:bg-amber-500/10 hover:text-amber-500 transition-all"
+                        title="Reset Votes"
+                      >
+                        <RotateCcw size={16} />
+                      </button>
+                      <button
+                        onClick={() => deleteSurvey(survey.id)}
+                        className="p-2 rounded-lg text-muted-foreground hover:bg-rose-500/10 hover:text-rose-500 transition-all"
+                        title="Delete Survey"
+                      >
+                        <Trash2 size={16} />
+                      </button>
+                    </div>
                   </div>
 
                   {/* Visualization Row */}
@@ -223,15 +291,36 @@ export default function DashboardPage() {
                   {/* Code Snippet Row */}
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold text-muted-foreground uppercase tracking-widest">
-                        Integration
-                      </span>
+                      <div className="flex items-center gap-4">
+                        <span className="text-xs font-bold text-muted-foreground uppercase tracking-widest">
+                          Integration
+                        </span>
+                        <div className="flex bg-muted rounded-lg p-0.5">
+                          {["Binary", "StarRating", "NPS"].map((type) => (
+                            <button
+                              key={type}
+                              onClick={() => setSnippetTypes({ ...snippetTypes, [survey.id]: type })}
+                              className={cn(
+                                "text-[10px] px-2 py-1 rounded-md font-bold transition-all",
+                                (snippetTypes[survey.id] || "Binary") === type
+                                  ? "bg-background text-foreground shadow-sm"
+                                  : "text-muted-foreground hover:text-foreground",
+                              )}
+                            >
+                              {type}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
                       <Link href="/docs" className="text-xs flex items-center hover:underline text-primary font-bold">
                         View Docs <ArrowUpRight size={10} className="ml-1" />
                       </Link>
                     </div>
                     <div className="relative group/code">
-                      <CodeBlock code={`<ThumblyBinary surveyId="${survey.id}" />`} language="tsx" />
+                      <CodeBlock
+                        code={`<Thumbly${snippetTypes[survey.id] || "Binary"} surveyId="${survey.id}" />`}
+                        language="tsx"
+                      />
                     </div>
                   </div>
                 </div>
