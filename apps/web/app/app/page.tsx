@@ -67,8 +67,8 @@ export default function DashboardPage() {
       <div className="flex flex-col items-center justify-center min-h-[60vh] px-4">
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-sm">
           <div className="text-center mb-8">
-            <h1 className="text-2xl font-bold tracking-tight">Welcome back</h1>
-            <p className="text-muted-foreground mt-2 text-sm">Sign in to manage your feedback</p>
+            <h1 className="text-2xl font-bold tracking-tight">Get Started</h1>
+            <p className="text-muted-foreground mt-2 text-sm">Sign in or create an account to manage your feedback</p>
           </div>
 
           <div className="bg-card border border-border rounded-3xl p-6 shadow-sm">
@@ -95,7 +95,7 @@ export default function DashboardPage() {
               }}
               providers={["github"]}
               theme={theme === "dark" ? "dark" : "default"}
-              showLinks={false}
+              showLinks={true}
             />
           </div>
         </motion.div>
@@ -124,7 +124,7 @@ export default function DashboardPage() {
         <motion.div
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="rounded-3xl border border-dashed border-border bg-muted/20 p-12 text-center"
+          className="rounded-3xl border border-dashed border-border bg-muted/50 p-12 text-center"
         >
           <div className="mx-auto w-12 h-12 rounded-2xl bg-muted flex items-center justify-center mb-4 text-muted-foreground">
             <BarChart3 size={20} />
@@ -151,7 +151,7 @@ export default function DashboardPage() {
                   {/* Header Row */}
                   <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div className="flex items-center gap-3">
-                      <div className="h-10 w-10 rounded-xl bg-primary/5 flex items-center justify-center text-primary">
+                      <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
                         <BarChart3 size={18} />
                       </div>
                       <div>
@@ -171,7 +171,7 @@ export default function DashboardPage() {
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground bg-muted/50 px-3 py-1.5 rounded-lg">
+                    <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground bg-muted px-3 py-1.5 rounded-lg">
                       <Terminal size={12} />
                       Managed Endpoint
                     </div>
@@ -179,7 +179,7 @@ export default function DashboardPage() {
 
                   {/* Visualization Row */}
                   <div className="space-y-3">
-                    <div className="flex h-10 w-full rounded-xl overflow-hidden bg-muted/30">
+                    <div className="flex h-10 w-full rounded-xl overflow-hidden bg-muted/60">
                       {[
                         { val: survey.option_1, color: "bg-emerald-500", label: "👍" },
                         { val: survey.option_2, color: "bg-rose-500", label: "👎" },
@@ -209,7 +209,7 @@ export default function DashboardPage() {
                       })}
                       {survey.option_1 + survey.option_2 + survey.option_3 + survey.option_4 + survey.option_5 ===
                         0 && (
-                        <div className="w-full h-full flex items-center justify-center text-xs text-muted-foreground/50 font-medium">
+                        <div className="w-full h-full flex items-center justify-center text-xs text-muted-foreground font-medium">
                           No feedback collected yet
                         </div>
                       )}
@@ -221,10 +221,12 @@ export default function DashboardPage() {
                   </div>
 
                   {/* Code Snippet Row */}
-                  <div className="bg-muted/30 rounded-2xl p-4 border border-border/50">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-xs font-semibold text-muted-foreground uppercase">Integration</span>
-                      <Link href="/docs" className="text-xs flex items-center hover:underline text-primary">
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-bold text-muted-foreground uppercase tracking-widest">
+                        Integration
+                      </span>
+                      <Link href="/docs" className="text-xs flex items-center hover:underline text-primary font-bold">
                         View Docs <ArrowUpRight size={10} className="ml-1" />
                       </Link>
                     </div>

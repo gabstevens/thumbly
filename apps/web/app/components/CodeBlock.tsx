@@ -18,21 +18,23 @@ interface CodeBlockProps {
 
 export const CodeBlock = ({ code, language = "typescript", showLineNumbers = false }: CodeBlockProps) => {
   return (
-    <SyntaxHighlighter
-      language={language}
-      style={vscDarkPlus}
-      showLineNumbers={showLineNumbers}
-      customStyle={{
-        margin: 0,
-        padding: 0,
-        background: "transparent",
-        fontSize: "0.875rem",
-        lineHeight: "1.5",
-      }}
-      wrapLines={true}
-      wrapLongLines={true}
-    >
-      {code.trim()}
-    </SyntaxHighlighter>
+    <div className="not-prose rounded-xl overflow-hidden border border-border/50 bg-slate-950 shadow-sm my-4">
+      <SyntaxHighlighter
+        language={language}
+        style={vscDarkPlus}
+        showLineNumbers={showLineNumbers}
+        customStyle={{
+          margin: 0,
+          padding: "1.25rem",
+          background: "transparent", // Background handled by wrapper
+          fontSize: "0.875rem",
+          lineHeight: "1.6",
+        }}
+        wrapLines={true}
+        wrapLongLines={true}
+      >
+        {code.trim()}
+      </SyntaxHighlighter>
+    </div>
   );
 };

@@ -20,7 +20,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
       <aside className="w-full lg:w-64 flex-shrink-0 lg:sticky lg:top-32">
         <div className="space-y-6">
           <div className="px-4">
-            <h3 className="text-[11px] font-black uppercase tracking-[0.2em] text-muted-foreground/60 mb-6 px-1">
+            <h3 className="text-[11px] font-black uppercase tracking-[0.2em] text-muted-foreground mb-6 px-1">
               Documentation
             </h3>
             <nav className="flex flex-col gap-1.5">
@@ -35,7 +35,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
                       "flex items-center gap-3 rounded-xl px-4 py-2.5 text-[14px] font-bold transition-all duration-200",
                       isActive
                         ? "bg-primary/10 text-primary shadow-[inset_0_0_0_1px_rgba(16,185,129,0.2)]"
-                        : "text-muted-foreground hover:bg-white/[0.03] hover:text-foreground",
+                        : "text-muted-foreground hover:bg-muted hover:text-foreground",
                     )}
                   >
                     <Icon
@@ -50,8 +50,8 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
             </nav>
           </div>
 
-          <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 mx-4 hidden lg:block">
-            <h4 className="text-xs font-bold text-white mb-2">Need help?</h4>
+          <div className="p-6 rounded-2xl bg-card border border-border mx-4 hidden lg:block shadow-sm">
+            <h4 className="text-xs font-bold text-foreground mb-2">Need help?</h4>
             <p className="text-[12px] text-muted-foreground leading-relaxed mb-4 font-medium">
               Join our community discord to get help from other developers.
             </p>
@@ -62,9 +62,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
         </div>
       </aside>
 
-      <article className="flex-1 min-w-0 prose prose-zinc prose-invert prose-headings:font-black prose-headings:tracking-tight prose-h1:text-5xl prose-h1:mb-10 prose-p:text-muted-foreground prose-p:leading-relaxed prose-p:text-lg prose-strong:text-white prose-code:text-primary prose-code:bg-primary/5 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none max-w-none">
-        {children}
-      </article>
+      <article className="flex-1 min-w-0 prose-custom max-w-none">{children}</article>
     </div>
   );
 }

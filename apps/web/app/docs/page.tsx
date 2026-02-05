@@ -5,7 +5,7 @@ export default function DocsPage() {
   return (
     <>
       <h1>Introduction</h1>
-      <p className="lead text-xl font-medium !text-muted-foreground/80 mb-12">
+      <p className="lead text-xl font-medium text-foreground mb-12">
         Thumbly is a comprehensive, modular sentiment feedback toolkit designed for the modern web.
       </p>
 
@@ -15,11 +15,12 @@ export default function DocsPage() {
       </p>
 
       <p>
-        Thumbly offers the middle ground: <strong>Headless logic + Presetted UI + Free Backend</strong>.
+        Thumbly offers the middle ground:{" "}
+        <strong className="text-foreground">Headless logic + Presetted UI + Free Backend</strong>.
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 not-prose my-16">
-        <div className="p-10 rounded-3xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-all group">
+        <div className="p-10 rounded-3xl border border-border bg-card hover:border-primary/20 transition-all group shadow-sm">
           <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-6 border border-primary/20">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -37,13 +38,13 @@ export default function DocsPage() {
               <path d="m14.5 4-5 16" />
             </svg>
           </div>
-          <h3 className="font-black text-xl mb-3 text-white">For Frontend Devs</h3>
-          <p className="text-muted-foreground font-medium text-[15px] leading-relaxed opacity-80">
+          <h3 className="font-black text-xl mb-3 text-foreground">For Frontend Devs</h3>
+          <p className="text-muted-foreground font-medium text-[15px] leading-relaxed">
             Import <code>@thumbly/react</code> and drop in a component. It handles the API calls, loading states, and
             optimism for you.
           </p>
         </div>
-        <div className="p-10 rounded-3xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-all group">
+        <div className="p-10 rounded-3xl border border-border bg-card hover:border-primary/20 transition-all group shadow-sm">
           <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-6 border border-primary/20">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -61,8 +62,8 @@ export default function DocsPage() {
               <path d="M3 12A9 3 0 0 0 21 12" />
             </svg>
           </div>
-          <h3 className="font-black text-xl mb-3 text-white">For Backend Devs</h3>
-          <p className="text-muted-foreground font-medium text-[15px] leading-relaxed opacity-80">
+          <h3 className="font-black text-xl mb-3 text-foreground">For Backend Devs</h3>
+          <p className="text-muted-foreground font-medium text-[15px] leading-relaxed">
             Use our core library to send data anywhere. We provide a default Supabase driver, but writing a custom
             driver takes 5 lines of code.
           </p>
@@ -76,7 +77,7 @@ export default function DocsPage() {
             <div className="w-2 h-2 rounded-full bg-primary" />
           </div>
           <div>
-            <strong className="text-white">Modular Architecture</strong>
+            <strong className="text-foreground">Modular Architecture</strong>
             <p className="text-muted-foreground mt-1 text-[16px]">
               The architecture is split into <code>core</code> (logic) and <code>react</code> (UI). You can use one
               without the other.
@@ -88,7 +89,7 @@ export default function DocsPage() {
             <div className="w-2 h-2 rounded-full bg-primary" />
           </div>
           <div>
-            <strong className="text-white">Privacy-Native</strong>
+            <strong className="text-foreground">Privacy-Native</strong>
             <p className="text-muted-foreground mt-1 text-[16px]">
               We only store aggregate counts. No IP addresses, User IDs, or timestamps are stored by default.
             </p>
@@ -99,7 +100,7 @@ export default function DocsPage() {
             <div className="w-2 h-2 rounded-full bg-primary" />
           </div>
           <div>
-            <strong className="text-white">Batteries Included</strong>
+            <strong className="text-foreground">Batteries Included</strong>
             <p className="text-muted-foreground mt-1 text-[16px]">
               We provide a hosted Supabase instance for free. You don&apos;t need to set up a database to start.
             </p>
@@ -113,7 +114,7 @@ export default function DocsPage() {
       <div className="not-prose mt-10">
         <Link
           href="/docs/getting-started"
-          className="inline-flex items-center justify-center rounded-2xl bg-primary text-background text-[15px] font-black h-12 px-8 shadow-xl shadow-primary/20 hover:scale-[1.02] transition-all"
+          className="inline-flex items-center justify-center rounded-2xl bg-primary text-primary-foreground text-[15px] font-black h-12 px-8 shadow-xl shadow-primary/20 hover:scale-[1.02] transition-all"
         >
           Get Started <ArrowRight className="ml-2 h-4 w-4" />
         </Link>

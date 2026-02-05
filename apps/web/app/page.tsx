@@ -33,7 +33,7 @@ export default function HomePage() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.1 }}
-          className="text-5xl md:text-7xl font-extrabold tracking-tight text-white mb-8"
+          className="text-5xl md:text-7xl font-extrabold tracking-tight text-foreground mb-8"
         >
           Self-Hosted Feedback <br />
           <span className="text-primary italic">Simple & Private</span>
@@ -57,13 +57,13 @@ export default function HomePage() {
         >
           <Link
             href="/docs"
-            className="inline-flex h-12 items-center justify-center rounded-2xl bg-primary px-10 text-[15px] font-bold text-background shadow-xl shadow-primary/20 transition-all hover:opacity-90 hover:scale-[1.02] active:scale-95"
+            className="inline-flex h-12 items-center justify-center rounded-2xl bg-primary px-10 text-[15px] font-bold text-primary-foreground shadow-xl shadow-primary/20 transition-all hover:opacity-90 hover:scale-[1.02] active:scale-95"
           >
             Get Started
           </Link>
           <Link
             href="#demo"
-            className="inline-flex h-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5 px-10 text-[15px] font-bold text-white transition-all hover:bg-white/10 active:scale-95"
+            className="inline-flex h-12 items-center justify-center rounded-2xl border border-input bg-card px-10 text-[15px] font-bold text-foreground transition-all hover:bg-accent active:scale-95 shadow-sm"
           >
             Live Demo <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
@@ -79,16 +79,16 @@ export default function HomePage() {
         transition={{ duration: 0.5 }}
         className="max-w-5xl mx-auto w-full px-4"
       >
-        <div className="rounded-2xl border border-white/5 bg-[#1e293b] shadow-[0_0_50px_-12px_rgba(0,0,0,0.5)] overflow-hidden ring-1 ring-white/10">
+        <div className="rounded-2xl border border-border bg-card shadow-xl overflow-hidden ring-1 ring-border">
           {/* Browser Toolbar */}
-          <div className="flex items-center gap-4 px-4 py-3 bg-[#0f172a] border-b border-white/5">
+          <div className="flex items-center gap-4 px-4 py-3 bg-muted border-b border-border">
             <div className="flex gap-2">
               <div className="w-3 h-3 rounded-full bg-[#ff5f56]" />
               <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
               <div className="w-3 h-3 rounded-full bg-[#27c93f]" />
             </div>
             <div className="flex-1 flex justify-center">
-              <div className="bg-[#1e293b] rounded-lg px-4 py-1.5 text-[11px] text-muted-foreground flex items-center gap-2 w-full max-w-md justify-center border border-white/5 font-mono uppercase tracking-wider">
+              <div className="bg-background rounded-lg px-4 py-1.5 text-[11px] text-muted-foreground flex items-center gap-2 w-full max-w-md justify-center border border-border font-mono uppercase tracking-wider">
                 demo.thumbly.dev
               </div>
             </div>
@@ -96,8 +96,8 @@ export default function HomePage() {
           </div>
 
           {/* Browser Content */}
-          <div className="p-16 md:p-24 flex flex-col items-center justify-center bg-[#1e293b]/50 relative">
-            <h3 className="text-2xl font-bold mb-14 text-white text-center">How are you liking this redesign?</h3>
+          <div className="p-16 md:p-24 flex flex-col items-center justify-center bg-card relative">
+            <h3 className="text-2xl font-bold mb-14 text-foreground text-center">How are you liking this redesign?</h3>
 
             <div className="relative group">
               <div className="absolute -inset-4 bg-primary/10 rounded-3xl blur-2xl group-hover:bg-primary/20 transition-all opacity-0 group-hover:opacity-100" />
@@ -116,7 +116,7 @@ export default function HomePage() {
               )}
             </div>
 
-            <div className="mt-20 flex items-center gap-3 text-[11px] text-muted-foreground font-bold uppercase tracking-widest bg-black/30 px-5 py-2 rounded-full border border-white/5">
+            <div className="mt-20 flex items-center gap-3 text-[11px] text-muted-foreground font-bold uppercase tracking-widest bg-secondary px-5 py-2 rounded-full border border-border">
               <span className="flex h-2 w-2 rounded-full bg-primary" />
               Connected to Supabase
             </div>
@@ -130,7 +130,7 @@ export default function HomePage() {
           <div className="w-14 h-14 rounded-2xl bg-primary/10 text-primary mx-auto flex items-center justify-center mb-8 border border-primary/20">
             <Settings size={28} />
           </div>
-          <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tight">Why Thumbly?</h2>
+          <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tight text-foreground">Why Thumbly?</h2>
           <p className="text-muted-foreground text-xl max-w-2xl mx-auto font-medium">
             Self-hosted, fast, and private. Everything you need, nothing you don&apos;t.
           </p>
@@ -175,20 +175,20 @@ export default function HomePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.05 }}
-              className="p-10 rounded-3xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-all group hover:-translate-y-1"
+              className="p-10 rounded-3xl border border-border bg-card hover:border-primary/20 transition-all group hover:-translate-y-1 shadow-sm"
             >
               <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-8 group-hover:scale-110 transition-transform border border-primary/20">
                 <feature.icon size={22} strokeWidth={2.5} />
               </div>
-              <h3 className="text-xl font-bold mb-4 text-white tracking-tight">{feature.title}</h3>
-              <p className="text-muted-foreground leading-relaxed text-[15px] font-medium opacity-80">{feature.desc}</p>
+              <h3 className="text-xl font-bold mb-4 text-foreground tracking-tight">{feature.title}</h3>
+              <p className="text-muted-foreground leading-relaxed text-[15px] font-medium">{feature.desc}</p>
             </motion.div>
           ))}
         </div>
       </section>
 
       {/* Bottom CTA */}
-      <section className="text-center py-32 bg-gradient-to-t from-primary/10 to-transparent border-t border-white/5 mt-20">
+      <section className="text-center py-32 bg-gradient-to-t from-primary/5 to-transparent border-t border-border/50 mt-20">
         <div className="max-w-3xl mx-auto px-4 flex flex-col items-center">
           <div className="w-20 h-20 rounded-[2rem] bg-gradient-to-br from-teal-400 to-emerald-600 flex items-center justify-center shadow-[0_0_40px_-5px_rgba(16,185,129,0.3)] mb-12">
             <svg
@@ -207,20 +207,22 @@ export default function HomePage() {
               <path d="m9 12 2 2 4-4" />
             </svg>
           </div>
-          <h2 className="text-4xl md:text-6xl font-black mb-8 text-white tracking-tighter">Ready to Get Started?</h2>
+          <h2 className="text-4xl md:text-6xl font-black mb-8 text-foreground tracking-tighter">
+            Ready to Get Started?
+          </h2>
           <p className="text-xl text-muted-foreground mb-12 max-w-xl font-medium">
             Deploy your own Thumbly instance in minutes. Keep your feedback private, organized, and always accessible.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center w-full max-w-md">
             <Link
               href="/docs"
-              className="flex-1 inline-flex h-14 items-center justify-center rounded-2xl bg-primary text-background text-lg font-black shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all"
+              className="flex-1 inline-flex h-14 items-center justify-center rounded-2xl bg-primary text-primary-foreground text-lg font-black shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all"
             >
               Install Now
             </Link>
             <Link
               href="https://github.com/gabstevens/thumbly"
-              className="flex-1 inline-flex h-14 items-center justify-center rounded-2xl border border-white/10 bg-[#1e293b] text-white text-lg font-bold hover:bg-white/5 active:scale-95 transition-all"
+              className="flex-1 inline-flex h-14 items-center justify-center rounded-2xl border border-input bg-card text-foreground text-lg font-bold hover:bg-accent active:scale-95 transition-all shadow-sm"
             >
               View on GitHub
             </Link>
