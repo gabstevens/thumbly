@@ -45,6 +45,7 @@ INSERT INTO auth.identities (
   user_id, 
   identity_data, 
   provider, 
+  provider_id,
   last_sign_in_at, 
   created_at, 
   updated_at
@@ -54,6 +55,7 @@ VALUES (
   'd7b3a2a1-1234-4321-abcd-000000000000', 
   format('{"sub":"%s","email":"%s"}', 'd7b3a2a1-1234-4321-abcd-000000000000', 'test@test.com')::jsonb, 
   'email', 
+  'd7b3a2a1-1234-4321-abcd-000000000000',
   now(), 
   now(), 
   now()
