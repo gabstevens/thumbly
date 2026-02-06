@@ -22,7 +22,9 @@
     "check-format": "prettier --check .",
     "test": "turbo test",
     "test:e2e": "turbo test:e2e",
-    "prepare": "husky"
+    "prepare": "husky",
+    "version-packages": "changeset version",
+    "release": "turbo build && changeset publish"
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.8",

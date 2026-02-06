@@ -71,7 +71,7 @@
 - [x] **CI/CD & Release:**
   - [x] Create `ci.yml` (Build, Lint, Test).
   - [x] Create `deploy.yml` (GitHub Pages).
-- [ ] **Release Strategy (Changesets):**
-  - [ ] Initialize changesets in root: `pnpm changeset init`.
-  - [ ] Configure fixed versioning in `.changeset/config.json`.
-  - [ ] Create `release` script in root `package.json`.
+- [x] **Release Strategy (Changesets):**
+  - [x] Initialize changesets in root: `pnpm changeset init`.
+  - [x] Configure fixed versioning in `.changeset/config.json`.
+  - [x] Create `release` script in root `package.json`.
