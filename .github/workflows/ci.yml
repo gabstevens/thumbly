@@ -3,6 +3,13 @@ name: CI
 on:
   pull_request:
     branches: [main]
+    paths:
+      - "apps/**"
+      - "packages/**"
+      - "infra/**"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - "turbo.json"
 
 jobs:
   quality:

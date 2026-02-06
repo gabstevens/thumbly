@@ -3,6 +3,11 @@ name: Deploy Web
 on:
   push:
     branches: [main]
+    paths:
+      - "apps/web/**"
+      - "packages/**"
+      - "package.json"
+      - "pnpm-lock.yaml"
 
 permissions:
   contents: read
