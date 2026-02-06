@@ -4,7 +4,7 @@
 
 **Type:** Modular Sentiment Feedback Toolkit
 
-**Version:** 0.1.0
+**Version:** 0.0.0
 
 **Status:** Draft / Specification
 
