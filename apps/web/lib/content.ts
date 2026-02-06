@@ -1,8 +1,10 @@
 import { Shield, Zap, Database, Server, Layout, Box } from "lucide-react";
 
+const VERSION = process.env.NEXT_PUBLIC_APP_VERSION || "0.0.0";
+
 export const SiteConfig = {
   name: "Thumbly",
-  version: "v1.5.2",
+  version: `v${VERSION}`,
   github: "https://github.com/gabstevens/thumbly",
   metadata: {
     title: "Thumbly - Modular Sentiment Feedback Toolkit",
@@ -17,7 +19,7 @@ export const SiteConfig = {
 
 export const LandingContent = {
   hero: {
-    badge: "Released v1.5.2",
+    badge: `Released v${VERSION}`,
     title: {
       plain: "Self-Hosted Feedback",
       italic: "Simple & Private",
