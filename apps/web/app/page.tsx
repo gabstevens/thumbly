@@ -162,21 +162,7 @@ export default function HomePage() {
       <section className="text-center py-32 bg-gradient-to-t from-primary/5 to-transparent border-t border-border/50 mt-20">
         <div className="max-w-3xl mx-auto px-4 flex flex-col items-center">
           <div className="w-20 h-20 rounded-[2rem] bg-gradient-to-br from-teal-400 to-emerald-600 flex items-center justify-center shadow-[0_0_40px_-5px_rgba(16,185,129,0.3)] mb-12">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="36"
-              height="36"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="white"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="m12 14 4-4" />
-              <path d="M3.34 19a10 10 0 1 1 17.32 0" />
-              <path d="m9 12 2 2 4-4" />
-            </svg>
+            <img src="/logo.svg" alt="Thumbly" className="w-12 h-12 invert brightness-0" />
           </div>
           <h2 className="text-4xl md:text-6xl font-black mb-8 text-foreground tracking-tighter">
             {LandingContent.cta.title}
