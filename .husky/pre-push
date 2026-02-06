@@ -1,1 +1,2 @@
+./scripts/check-changeset.sh
 pnpm exec turbo run lint typecheck test
