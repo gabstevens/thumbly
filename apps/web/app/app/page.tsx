@@ -138,8 +138,8 @@ export default function DashboardPage() {
                 },
               }}
               providers={["github"]}
+              onlyThirdPartyProviders={true}
               theme={theme === "dark" ? "dark" : "default"}
-              showLinks={true}
             />
           </div>
         </motion.div>
