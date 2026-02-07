@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { ThumblyBinary } from "@thumbly/react";
 import { CodeBlock } from "./components/CodeBlock";
@@ -14,6 +15,15 @@ export default function HomePage() {
   const surveyId = process.env.NEXT_PUBLIC_DOGFOOD_SURVEY_ID || "5468756d-626c-7930-0000-000000000000";
 
   const isConfigured = supabaseUrl && supabaseKey;
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    // We set mounted to true after the component has mounted on the client.
+    // This ensures that the initial client render matches the server render (using the fallback),
+    // and only updates to the actual window.location.host after hydration, preventing mismatches.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
+  }, []);
 
   return (
     <div className="flex flex-col gap-32">
@@ -89,7 +99,7 @@ export default function HomePage() {
             </div>
             <div className="flex-1 flex justify-center">
               <div className="bg-background rounded-lg px-4 py-1.5 text-[11px] text-muted-foreground flex items-center gap-2 w-full max-w-md justify-center border border-border font-mono uppercase tracking-wider">
-                {typeof window !== "undefined" ? window.location.host : "thumbly.dev"}
+                {mounted ? window.location.host : "thumbly.dev"}
               </div>
             </div>
             <div className="w-12" />
