@@ -11,6 +11,9 @@ on:
       - "pnpm-lock.yaml"
       - "turbo.json"
 
+env:
+  HUSKY: "0"
+
 jobs:
   quality:
     name: Lint & Unit Test

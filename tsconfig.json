@@ -8,6 +8,11 @@
     "declaration": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "baseUrl": ".",
+    "paths": {
+      "@thumbly/core": ["packages/core/src"],
+      "@thumbly/react": ["packages/react/src"]
+    }
   }
 }

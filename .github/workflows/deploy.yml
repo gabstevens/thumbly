@@ -9,6 +9,9 @@ on:
       - "package.json"
       - "pnpm-lock.yaml"
 
+env:
+  HUSKY: "0"
+
 permissions:
   contents: read
   pages: write
