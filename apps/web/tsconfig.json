@@ -13,13 +13,18 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "baseUrl": ".",
     "plugins": [
       {
         "name": "next"
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@thumbly/core": ["../../packages/core/src/index.ts"],
+      "@thumbly/core/*": ["../../packages/core/src/*"],
+      "@thumbly/react": ["../../packages/react/src/index.ts"],
+      "@thumbly/react/*": ["../../packages/react/src/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
