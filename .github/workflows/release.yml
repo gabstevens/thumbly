@@ -7,6 +7,8 @@ on:
 
 env:
   HUSKY: "0"
+  TURBO_TELEMETRY_DISABLED: "1"
+  NEXT_TELEMETRY_DISABLED: "1"
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
@@ -44,4 +46,3 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          HUSKY: "0"
