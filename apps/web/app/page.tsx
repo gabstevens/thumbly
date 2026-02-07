@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ThumblyBinary } from "@thumbly/react";
 import { CodeBlock } from "./components/CodeBlock";
 import { ArrowRight, Settings } from "lucide-react";
@@ -29,16 +30,18 @@ export default function HomePage() {
     <div className="flex flex-col gap-32">
       {/* Hero Section */}
       <section className="relative pt-10 text-center max-w-4xl mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-          className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-[13px] font-medium text-primary mb-10"
-        >
-          <span className="flex h-2 w-2 rounded-full bg-primary animate-pulse" />
-          {LandingContent.hero.badge}
-          <ArrowRight size={14} className="ml-1" />
-        </motion.div>
+        <Link href="/docs" className="inline-block mb-10">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-[13px] font-medium text-primary transition-colors hover:bg-primary/10 hover:border-primary/30 active:scale-95"
+          >
+            <span className="flex h-2 w-2 rounded-full bg-primary animate-pulse" />
+            {LandingContent.hero.badge}
+            <ArrowRight size={14} className="ml-1" />
+          </motion.div>
+        </Link>
 
         <motion.h1
           initial={{ opacity: 0, y: 10 }}
@@ -172,7 +175,7 @@ export default function HomePage() {
       <section className="text-center py-32 bg-gradient-to-t from-primary/5 to-transparent border-t border-border/50 mt-20">
         <div className="max-w-3xl mx-auto px-4 flex flex-col items-center">
           <div className="w-20 h-20 rounded-[2rem] bg-gradient-to-br from-teal-400 to-emerald-600 flex items-center justify-center shadow-[0_0_40px_-5px_rgba(16,185,129,0.3)] mb-12">
-            <img src="/logo.svg" alt="Thumbly" className="w-12 h-12 invert brightness-0" />
+            <Image src="/logo.svg" alt="Thumbly" width={48} height={48} className="w-12 h-12 invert brightness-0" />
           </div>
           <h2 className="text-4xl md:text-6xl font-black mb-8 text-foreground tracking-tighter">
             {LandingContent.cta.title}
