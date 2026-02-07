@@ -32,7 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   href="/"
                   className="flex items-center gap-2 font-bold text-xl tracking-tight hover:opacity-90 transition-opacity text-foreground"
                 >
-                  <Image src="/logo.svg" alt="Thumbly Logo" width={32} height={32} className="w-8 h-8" />
+                  <Image src="logo.svg" alt="Thumbly Logo" width={32} height={32} className="w-8 h-8" />
                   <span>{SiteConfig.name}</span>
                 </Link>
                 <nav className="hidden md:flex items-center gap-8 text-[15px] font-medium text-muted-foreground">
@@ -61,7 +61,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <div className="flex flex-col md:flex-row justify-between items-start gap-12">
                 <div className="max-w-xs">
                   <div className="flex items-center gap-2 font-bold text-lg mb-4 text-foreground">
-                    <Image src="/logo.svg" alt="Thumbly Logo" width={24} height={24} className="w-6 h-6" />
+                    <Image src="logo.svg" alt="Thumbly Logo" width={24} height={24} className="w-6 h-6" />
                     {SiteConfig.name}
                   </div>
                   <p className="text-sm text-muted-foreground leading-relaxed">{FooterContent.description}</p>

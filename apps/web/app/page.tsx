@@ -175,7 +175,7 @@ export default function HomePage() {
       <section className="text-center py-32 bg-gradient-to-t from-primary/5 to-transparent border-t border-border/50 mt-20">
         <div className="max-w-3xl mx-auto px-4 flex flex-col items-center">
           <div className="w-20 h-20 rounded-[2rem] bg-gradient-to-br from-teal-400 to-emerald-600 flex items-center justify-center shadow-[0_0_40px_-5px_rgba(16,185,129,0.3)] mb-12">
-            <Image src="/logo.svg" alt="Thumbly" width={48} height={48} className="w-12 h-12 invert brightness-0" />
+            <Image src="logo.svg" alt="Thumbly" width={48} height={48} className="w-12 h-12 invert brightness-0" />
           </div>
           <h2 className="text-4xl md:text-6xl font-black mb-8 text-foreground tracking-tighter">
             {LandingContent.cta.title}
