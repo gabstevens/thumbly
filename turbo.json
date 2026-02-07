@@ -7,9 +7,7 @@
     },
     "lint": {},
     "test": {},
-    "typecheck": {
-      "dependsOn": ["^build"]
-    },
+    "typecheck": {},
     "test:e2e": {},
     "dev": {
       "cache": false,

@@ -11,8 +11,10 @@
     "isolatedModules": true,
     "baseUrl": ".",
     "paths": {
-      "@thumbly/core": ["packages/core/src"],
-      "@thumbly/react": ["packages/react/src"]
+      "@thumbly/core": ["packages/core/src/index.ts"],
+      "@thumbly/core/*": ["packages/core/src/*"],
+      "@thumbly/react": ["packages/react/src/index.ts"],
+      "@thumbly/react/*": ["packages/react/src/*"]
     }
   }
 }
