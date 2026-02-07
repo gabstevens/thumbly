@@ -32,7 +32,6 @@ export const LandingContent = {
     },
   },
   demo: {
-    browserUrl: "demo.thumbly.dev",
     question: "How are you liking this redesign?",
     footer: "Connected to Supabase",
   },

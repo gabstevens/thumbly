@@ -89,7 +89,7 @@ export default function HomePage() {
             </div>
             <div className="flex-1 flex justify-center">
               <div className="bg-background rounded-lg px-4 py-1.5 text-[11px] text-muted-foreground flex items-center gap-2 w-full max-w-md justify-center border border-border font-mono uppercase tracking-wider">
-                {LandingContent.demo.browserUrl}
+                {typeof window !== "undefined" ? window.location.host : "thumbly.dev"}
               </div>
             </div>
             <div className="w-12" />

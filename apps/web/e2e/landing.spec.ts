@@ -18,7 +18,9 @@ test.describe("Landing Page", () => {
   test("should show the live demo section", async ({ page }) => {
     const demoSection = page.locator("#demo");
     await expect(demoSection).toBeVisible();
-    await expect(demoSection).toContainText("demo.thumbly.dev");
+    // Should contain the hostname (localhost in tests)
+    const host = await page.evaluate(() => window.location.host);
+    await expect(demoSection).toContainText(host);
   });
 
   test("should display the 'Why Thumbly?' features", async ({ page }) => {
