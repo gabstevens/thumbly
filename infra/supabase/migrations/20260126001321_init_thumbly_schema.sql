@@ -32,8 +32,17 @@ create or replace function submit_vote(
   survey_id uuid,
   option_index int
 )
-returns void as $$
+returns void 
+language plpgsql 
+security definer
+set search_path = public
+as $$
 begin
+  -- Validate Survey Existence
+  if not exists (select 1 from surveys where id = survey_id) then
+    raise exception 'SURVEY_NOT_FOUND: %', survey_id;
+  end if;
+
   -- Validate Input
   if option_index < 1 or option_index > 5 then
     raise exception 'INVALID_OPTION: Must be 1-5';
@@ -50,7 +59,7 @@ begin
     last_activity = now()
   where id = survey_id;
 end;
-$$ language plpgsql security definer;
+$$;
 -- Added security definer to allow public role to update counts without direct write access to table
 -- Actually, the design doc says "Public Role: EXECUTE on submit_vote".
 -- RLS handles table access. If we use security definer, it bypasses RLS for the function body.
