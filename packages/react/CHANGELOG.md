@@ -1,5 +1,12 @@
 # @thumbly/react
 
+## 0.1.1
+
+### Patch Changes
+
+- da09961: docs: add package readme with usage examples and features
+  - @thumbly/core@0.1.1
+
 ## 0.1.0
 
 ### Minor Changes
