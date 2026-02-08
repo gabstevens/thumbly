@@ -139,6 +139,9 @@ export default function DashboardPage() {
               }}
               providers={["github"]}
               onlyThirdPartyProviders={true}
+              redirectTo={
+                typeof window !== "undefined" ? `${window.location.origin}${window.location.pathname}` : undefined
+              }
               theme={theme === "dark" ? "dark" : "default"}
             />
           </div>
