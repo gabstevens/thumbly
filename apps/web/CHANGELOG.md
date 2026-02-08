@@ -1,5 +1,12 @@
 # web
 
+## 0.1.1
+
+### Patch Changes
+
+- Updated dependencies [da09961]
+  - @thumbly/react@0.1.1
+
 ## 0.1.0
 
 ### Minor Changes
