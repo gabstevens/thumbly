@@ -50,3 +50,7 @@ test-results
 
 # Next.js
 next-env.d.ts
+
+# Supabase
+infra/supabase/.temp/
+infra/supabase/.branches/
