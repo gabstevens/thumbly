@@ -5,7 +5,6 @@ import { ThemeProvider } from "./providers";
 import { ThemeToggle } from "./components/ThemeToggle";
 import { Inter } from "next/font/google";
 import { cn } from "@/lib/utils";
-import { Github } from "lucide-react";
 import { SiteConfig, FooterContent } from "@/lib/content";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
@@ -51,7 +50,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   rel="noopener noreferrer"
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  <Github size={22} />
+                  <Image
+                    src="github.svg"
+                    alt="GitHub"
+                    width={22}
+                    height={22}
+                    className="opacity-70 hover:opacity-100 transition-opacity theme-invert"
+                  />
                 </a>
               </div>
             </header>
