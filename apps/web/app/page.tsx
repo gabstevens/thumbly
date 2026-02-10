@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ThumblyBinary } from "@thumbly/react";
 import { CodeBlock } from "./components/CodeBlock";
-import { ArrowRight, Settings } from "lucide-react";
+import { ArrowRight, Settings, ThumbsUp, ThumbsDown } from "lucide-react";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import { LandingContent } from "@/lib/content";
@@ -13,7 +13,7 @@ import { LandingContent } from "@/lib/content";
 export default function HomePage() {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY || "";
-  const surveyId = process.env.NEXT_PUBLIC_DOGFOOD_SURVEY_ID || "5468756d-626c-7930-0000-000000000000";
+  const surveyId = process.env.NEXT_PUBLIC_DOGFOOD_SURVEY_ID || "";
 
   const isConfigured = supabaseUrl && supabaseKey;
   const [mounted, setMounted] = useState(false);
@@ -112,14 +112,34 @@ export default function HomePage() {
           <div className="p-16 md:p-24 flex flex-col items-center justify-center bg-card relative">
             <h3 className="text-2xl font-bold mb-14 text-foreground text-center">{LandingContent.demo.question}</h3>
 
-            <div className="relative group">
-              <div className="absolute -inset-4 bg-primary/10 rounded-3xl blur-2xl group-hover:bg-primary/20 transition-all opacity-0 group-hover:opacity-100" />
+            <div className="relative">
               {isConfigured ? (
-                <div className="relative scale-[1.3]">
+                <div className="relative scale-[1.2]">
                   <ThumblyBinary
                     surveyId={surveyId}
                     supabase={{ url: supabaseUrl, key: supabaseKey }}
-                    style={{ gap: "2.5rem" }}
+                    theme="base"
+                    labels={[
+                      <div key="up" className="flex flex-col items-center gap-3">
+                        <div className="w-16 h-16 rounded-2xl bg-emerald-500/5 flex items-center justify-center text-emerald-500 border border-emerald-500/10 group-hover:bg-emerald-500/10 group-hover:border-emerald-500/30 group-hover:scale-110 transition-all duration-300">
+                          <ThumbsUp size={28} />
+                        </div>
+                        <span className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em] group-hover:text-foreground transition-colors">
+                          Yes
+                        </span>
+                      </div>,
+                      <div key="down" className="flex flex-col items-center gap-3">
+                        <div className="w-16 h-16 rounded-2xl bg-rose-500/5 flex items-center justify-center text-rose-500 border border-rose-500/10 group-hover:bg-rose-500/10 group-hover:border-rose-500/30 group-hover:scale-110 transition-all duration-300">
+                          <ThumbsDown size={28} />
+                        </div>
+                        <span className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em] group-hover:text-foreground transition-colors">
+                          No
+                        </span>
+                      </div>,
+                    ]}
+                    // Using Tailwind to style the internal buttons
+                    // @ts-ignore - custom className
+                    className="gap-16 [&_.thumbly-option]:p-0 [&_.thumbly-option]:border-0 [&_.thumbly-option]:bg-transparent [&_.thumbly-option]:transition-all [&_.thumbly-option]:duration-200 [&_.thumbly-option]:hover:scale-105 [&_.thumbly-option]:active:scale-95 [&_.thumbly-option]:group"
                   />
                 </div>
               ) : (

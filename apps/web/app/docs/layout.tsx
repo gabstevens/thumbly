@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Book, Server, Rocket, Code2 } from "lucide-react";
+import { SiteConfig } from "@/lib/content";
 
 export default function DocsLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -11,7 +12,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
   const links = [
     { href: "/docs", label: "Introduction", icon: Book },
     { href: "/docs/getting-started", label: "Getting Started", icon: Rocket },
-    { href: "/docs/self-hosting", label: "Self Hosting", icon: Server },
+    { href: "/docs/byob", label: "Bring Your Own Backend", icon: Server },
     { href: "/docs/api", label: "API Reference", icon: Code2 },
   ];
 
@@ -53,10 +54,15 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
           <div className="p-6 rounded-2xl bg-card border border-border mx-4 hidden lg:block shadow-sm">
             <h4 className="text-xs font-bold text-foreground mb-2">Need help?</h4>
             <p className="text-[12px] text-muted-foreground leading-relaxed mb-4 font-medium">
-              Join our community discord to get help from other developers.
+              Open an issue or join the discussion on our GitHub repository.
             </p>
-            <a href="#" className="text-xs font-bold text-primary hover:underline flex items-center gap-1">
-              Join Discord <ArrowRightIcon />
+            <a
+              href={SiteConfig.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs font-bold text-primary hover:underline flex items-center gap-1"
+            >
+              Go to GitHub <ArrowRightIcon />
             </a>
           </div>
         </div>

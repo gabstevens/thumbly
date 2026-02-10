@@ -41,7 +41,7 @@ function App() {
   return (
     <ThumblyBinary
       surveyId="your-survey-uuid"
-      // Optional: if using self-hosted backend
+      // Optional: if using Bring Your Own Backend (BYOB)
       supabase={{
         url: "https://your-project.supabase.co",
         key: "your-anon-key",

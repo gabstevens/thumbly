@@ -12,7 +12,7 @@ test.describe("Landing Page", () => {
   test("should display the main hero heading", async ({ page }) => {
     const heading = page.getByRole("heading", { level: 1 });
     await expect(heading).toBeVisible();
-    await expect(heading).toContainText("Self-Hosted Feedback");
+    await expect(heading).toContainText("Instant Sentiment Feedback");
   });
 
   test("should show the live demo section", async ({ page }) => {

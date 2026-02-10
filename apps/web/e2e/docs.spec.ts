@@ -15,10 +15,10 @@ test.describe("Documentation", () => {
     await expect(page).toHaveURL(/\/docs\/getting-started/);
     await expect(page.getByRole("heading", { name: "Getting Started", level: 1 })).toBeVisible();
 
-    // Navigate to Self Hosting
-    await page.getByRole("link", { name: "Self Hosting" }).click();
-    await expect(page).toHaveURL(/\/docs\/self-hosting/);
-    await expect(page.getByRole("heading", { name: "Self-Hosting Guide", level: 1 })).toBeVisible();
+    // Navigate to Bring Your Own Backend
+    await page.getByRole("link", { name: "Bring Your Own Backend" }).click();
+    await expect(page).toHaveURL(/\/docs\/byob/);
+    await expect(page.getByRole("heading", { name: "Bring Your Own Backend", level: 1 })).toBeVisible();
 
     // Navigate to API Reference
     await page.getByRole("link", { name: "API Reference" }).click();

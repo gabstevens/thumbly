@@ -6,17 +6,19 @@ export default function DocsPage() {
     <>
       <h1>Introduction</h1>
       <p className="lead text-xl font-medium text-foreground mb-12">
-        Thumbly is a comprehensive, modular sentiment feedback toolkit designed for the modern web.
+        Thumbly is a toolkit for adding quick feedback surveys—like thumbs up/down, star ratings, or NPS—to your apps in
+        minutes.
       </p>
 
       <p>
-        Building feedback widgets usually involves two bad choices: installing a heavy, ugly iframe widget, or building
-        the entire backend, state management, and UI from scratch.
+        Collecting user feedback usually means choosing between two extremes: installing a clunky, unstyled iframe
+        widget, or building the entire backend, database, and UI components yourself.
       </p>
 
       <p>
-        Thumbly offers the middle ground:{" "}
-        <strong className="text-foreground">Headless logic + Presetted UI + Free Backend</strong>.
+        Thumbly provides the middle ground. It gives you <strong>beautiful, pre-built React components</strong> and a{" "}
+        <strong>managed backend service</strong> so you can start collecting feedback today, without the engineering
+        overhead.
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 not-prose my-16">
@@ -38,10 +40,10 @@ export default function DocsPage() {
               <path d="m14.5 4-5 16" />
             </svg>
           </div>
-          <h3 className="font-black text-xl mb-3 text-foreground">For Frontend Devs</h3>
+          <h3 className="font-black text-xl mb-3 text-foreground">React Components</h3>
           <p className="text-muted-foreground font-medium text-[15px] leading-relaxed">
-            Import <code>@thumbly/react</code> and drop in a component. It handles the API calls, loading states, and
-            optimism for you.
+            Need a widget now? Use our pre-built components like <code>&lt;ThumblyBinary /&gt;</code>. They come with
+            loading states, error handling, and accessibility built-in.
           </p>
         </div>
         <div className="p-10 rounded-3xl border border-border bg-card hover:border-primary/20 transition-all group shadow-sm">
@@ -62,10 +64,10 @@ export default function DocsPage() {
               <path d="M3 12A9 3 0 0 0 21 12" />
             </svg>
           </div>
-          <h3 className="font-black text-xl mb-3 text-foreground">For Backend Devs</h3>
+          <h3 className="font-black text-xl mb-3 text-foreground">Backend Flexibility</h3>
           <p className="text-muted-foreground font-medium text-[15px] leading-relaxed">
-            Use our core library to send data anywhere. We provide a default Supabase driver, but writing a custom
-            driver takes 5 lines of code.
+            Don&apos;t want to spin up a database? Use our free managed service. Have your own infrastructure? Plug in
+            your Supabase URL or custom API endpoint in seconds.
           </p>
         </div>
       </div>
@@ -79,8 +81,19 @@ export default function DocsPage() {
           <div>
             <strong className="text-foreground">Modular Architecture</strong>
             <p className="text-muted-foreground mt-1 text-[16px]">
-              The architecture is split into <code>core</code> (logic) and <code>react</code> (UI). You can use one
-              without the other.
+              The architecture is split into <code>core</code> (logic) and <code>react</code> (UI). You can use the
+              headless logic with any framework.
+            </p>
+          </div>
+        </li>
+        <li className="flex gap-4">
+          <div className="mt-1.5 flex-none w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center">
+            <div className="w-2 h-2 rounded-full bg-primary" />
+          </div>
+          <div>
+            <strong className="text-foreground">Bring Your Own Backend (BYOB)</strong>
+            <p className="text-muted-foreground mt-1 text-[16px]">
+              Complete flexibility to use our default managed service or host your own data layer with zero lock-in.
             </p>
           </div>
         </li>
@@ -91,18 +104,7 @@ export default function DocsPage() {
           <div>
             <strong className="text-foreground">Privacy-Native</strong>
             <p className="text-muted-foreground mt-1 text-[16px]">
-              We only store aggregate counts. No IP addresses, User IDs, or timestamps are stored by default.
-            </p>
-          </div>
-        </li>
-        <li className="flex gap-4">
-          <div className="mt-1.5 flex-none w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center">
-            <div className="w-2 h-2 rounded-full bg-primary" />
-          </div>
-          <div>
-            <strong className="text-foreground">Batteries Included</strong>
-            <p className="text-muted-foreground mt-1 text-[16px]">
-              We provide a hosted Supabase instance for free. You don&apos;t need to set up a database to start.
+              We only store aggregate counts. No IP addresses, User IDs, or browser fingerprints are tracked by default.
             </p>
           </div>
         </li>

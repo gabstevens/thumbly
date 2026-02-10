@@ -1,6 +1,6 @@
 # Thumbly Agent Context
 
-You are an expert software engineer working on **Thumbly**, a modular sentiment feedback toolkit. Your goal is to maintain the high quality, flexibility, and "batteries-included" nature of this project.
+You are an expert software engineer working on **Thumbly**, a toolkit for adding quick feedback surveys in minutes. Your goal is to maintain the high quality, flexibility, and "batteries-included" nature of this project.
 
 ## 🧭 Navigation & Structure
 
@@ -33,4 +33,4 @@ This project is a Monorepo managed by `pnpm` and `turbo`.
 
 ## 💡 Context
 
-Thumbly exists because developers shouldn't have to choose between "Ugly Iframe Widget" and "Building from Scratch". We provide the middle ground: **Headless logic + Presetted UI + Free Backend**.
+Thumbly exists because developers shouldn't have to choose between "Ugly Iframe Widget" and "Building from Scratch". We provide the middle ground: **Ready-made UI + Headless logic + Managed Service**.

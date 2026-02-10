@@ -7,8 +7,8 @@ export const SiteConfig = {
   version: `v${VERSION}`,
   github: "https://github.com/gabstevens/thumbly",
   metadata: {
-    title: "Thumbly - Modular Sentiment Feedback Toolkit",
-    description: "A comprehensive, batteries-included sentiment feedback system.",
+    title: "Thumbly - Quick feedback surveys in minutes",
+    description: "Add quick feedback surveys—like thumbs up/down, star ratings, or NPS—to your apps in minutes.",
   },
   navigation: [
     { label: "Docs", href: "/docs" },
@@ -21,23 +21,22 @@ export const LandingContent = {
   hero: {
     badge: `Released v${VERSION}`,
     title: {
-      plain: "Self-Hosted Feedback",
+      plain: "Instant User Feedback",
       italic: "Simple & Private",
     },
-    description:
-      "A lightweight, modular sentiment feedback toolkit for effortlessly capturing user thoughts. Open source, no tracking, free forever.",
+    description: "Add quick feedback surveys—like thumbs up/down, star ratings, or NPS—to your apps in minutes.",
     cta: {
       primary: { label: "Get Started", href: "/docs" },
       secondary: { label: "Live Demo", href: "#demo" },
     },
   },
   demo: {
-    question: "How are you liking this redesign?",
-    footer: "Connected to Supabase",
+    question: "Do you like the Thumbly approach?",
+    footer: "Real-time Feedback Demo",
   },
   why: {
     title: "Why Thumbly?",
-    description: "Self-hosted, fast, and private. Everything you need, nothing you don't.",
+    description: "Instant, fast, and private. Everything you need to collect feedback.",
     features: [
       {
         icon: Shield,
@@ -47,22 +46,22 @@ export const LandingContent = {
       {
         icon: Zap,
         title: "Blazing Fast",
-        desc: "Capture ideas at the speed of thought. Local-first architecture means zero lag, even with thousands of notes.",
+        desc: "Capture ideas at the speed of thought. Optimized architecture means minimal latency.",
       },
       {
         icon: Database,
-        title: "Future-Proof Format",
-        desc: "Write in Markdown. Own your content forever. No proprietary formats or vendor lock-in, just plain text that lasts.",
+        title: "Future-Proof Data",
+        desc: "We store aggregate counts. Want raw data? Plug in your own backend anytime.",
       },
       {
         icon: Server,
-        title: "Deploy Anywhere",
-        desc: "From a Raspberry Pi to enterprise clusters. Thumbly runs everywhere you can run a container.",
+        title: "Backend Agnostic",
+        desc: "Use our default managed service, or plug in your own API with a simple driver.",
       },
       {
         icon: Layout,
         title: "Truly Open Source",
-        desc: "MIT licensed and transparent. Join over 1,000 contributors on GitHub.",
+        desc: "MIT licensed and transparent. Join our community on GitHub.",
       },
       {
         icon: Box,
@@ -73,8 +72,7 @@ export const LandingContent = {
   },
   cta: {
     title: "Ready to Get Started?",
-    description:
-      "Deploy your own Thumbly instance in minutes. Keep your feedback private, organized, and always accessible.",
+    description: "Add Thumbly to your app in minutes. Keep your feedback private, organized, and always accessible.",
     buttons: [
       { label: "Install Now", href: "/docs", primary: true },
       { label: "View on GitHub", href: "https://github.com/gabstevens/thumbly", primary: false },
@@ -83,7 +81,7 @@ export const LandingContent = {
 };
 
 export const FooterContent = {
-  description: "A lightweight, modular sentiment feedback toolkit. Open source, private, and free.",
+  description: "Add quick feedback surveys—like thumbs up/down, star ratings, or NPS—to your apps in minutes.",
   sections: [
     {
       title: "Product",

@@ -2,19 +2,19 @@
 
 ## Project Name: Thumbly
 
-**Type:** Modular Sentiment Feedback Toolkit
+**Type:** Toolkit for Quick Sentiment Surveys (Votes, Star Ratings, NPS)
 
-**Version:** 0.0.0
+**Version:** 0.1.0
 
-**Status:** Draft / Specification
+**Status:** Beta / Implementation
 
 ## 1. Executive Summary
 
-Thumbly is a comprehensive, "batteries-included" sentiment feedback system designed for maximum developer flexibility.
+Thumbly is a toolkit for adding quick feedback surveys—like thumbs up/down, star ratings, or NPS—to your apps in minutes. It provides a "batteries-included" system that balances ready-made UI with complete developer flexibility.
 
-The architecture adopts a Modular Toolkit model within a Monorepo. Unlike traditional "headless" tools that force you to build your own UI, or "widget" tools that force a specific design, Thumbly provides both. Developers can use `@thumbly/react` for instant, customizable UI components, or use the core logic in `@thumbly/core` to build something entirely unique. The system remains Backend Agnostic, allowing data routing to the provided "Forever Free" Supabase stack, a custom API, or internal infrastructure.
+The architecture adopts a Modular Toolkit model within a Monorepo. Unlike traditional "headless" tools that force you to build your own UI, or "widget" tools that force a specific design, Thumbly provides both. Developers can use `@thumbly/react` for instant, customizable UI components, or use the core logic in `@thumbly/core` to build something entirely unique. The system remains Backend Agnostic, allowing data routing to the provided "Forever Free" managed service, a custom API, or internal infrastructure.
 
-Complementing the toolkit is a static Web Platform hosted on GitHub Pages, which serves as the marketing and documentation hub.
+Complementing the toolkit is a static Web Platform hosted on GitHub Pages, which serves as the marketing, documentation, and management hub.
 
 ## 2. Core Architecture Principles
 
@@ -22,10 +22,10 @@ Complementing the toolkit is a static Web Platform hosted on GitHub Pages, which
 
 We utilize `pnpm` workspaces and `turbo` repo for efficient build and dependency management.
 
-- `apps/web`: A static Next.js site (Marketing & Docs).
-- `packages/core`: Framework-agnostic core logic.
-- `packages/react`: React UI components (depends on `client`).
-- `infra/supabase`: Supabase configuration and migrations.
+- `apps/web`: A static Next.js site (Marketing, Docs & Dashboard).
+- `packages/core`: Framework-agnostic core logic (The "Brain").
+- `packages/react`: React UI components and hooks (The "Face").
+- `infra/supabase`: Supabase configuration, migrations, and seed data.
 
 ### 2.2 The "Plug & Play" Philosophy
 
@@ -33,24 +33,25 @@ Thumbly provides the entire stack but allows any layer to be swapped out:
 
 - **UI Layer:** Use `@thumbly/react` for ready-made components or build your own.
 - **Logic Layer:** Use `@thumbly/core` to handle state, retries, and storage.
-- **Data Layer:** Use the provided Supabase backend (default) or "Bring Your Own Backend" (BYOB).
+- **Data Layer:** Use the default managed service or "Bring Your Own Backend" (BYOB).
 
 ### 2.3 Backend Deployment Models
 
 Thumbly supports two distinct deployment models for the backend data layer:
 
 - **Managed Service (SaaS):**
-  - Developers use the official Thumbly API (hosted on a shared Supabase instance).
+  - Developers use the Thumbly API (hosted on a shared Supabase instance).
   - **Pros:** Zero setup, instant API keys, handled upgrades.
   - **Cons:** Rate limits apply, shared infrastructure.
-- **Self-Hosted (BYOB):**
-  - Developers spin up their own Supabase project using the provided `backend/supabase` migrations.
-  - **Pros:** Full control, RLS customization, direct database access.
-  - **Cons:** Requires managing a Supabase project.
+- **Bring Your Own Backend (BYOB):**
+  - Developers plug in their own backend (whether Supabase or a custom API) by providing their own credentials or driver.
+  - **Pros:** Full control, no rate limits, data ownership.
+  - **Cons:** Requires managing your own infrastructure.
+  - _Note:_ While Thumbly is open source, we do not officially distribute a "self-hosted" version of the platform. The `infra/supabase` code in this repo is the source for our managed service.
 
 ## 3. Database Schema & Logic (Default Backend)
 
-Note: This section applies only if using the default Supabase driver. Custom backends can implement any schema they desire.
+Note: This section applies only if using the default Supabase driver (Managed Service) or if you choose to replicate our schema in your own Supabase project.
 
 ### 3.1 Schema: `surveys` (Aggregate Only Strategy)
 
@@ -76,7 +77,7 @@ The Interface Contract (RPC): `submit_vote`
 
 - **Input:** `survey_id` (UUID), `option_index` (int: 1-5)
 - **Output:** `void` (Success) or `Error` (e.g., "Transient error" for retry).
-- **Security:** `SECURITY DEFINER` allows public execution without direct table write access.
+- **Security:** `SECURITY DEFINER` allows public execution without direct table write access, bypassing RLS for the atomic update while maintaining integrity.
 
 ## 4. Client-Side Engineering (The SDK Ecosystem)
 
@@ -111,7 +112,7 @@ interface ThumblyDriver {
 **Built-in Drivers:**
 
 - **SupabaseDriver (Default):**
-  - Connects to the "Forever Free" Supabase backend.
+  - Connects to the default managed service.
   - Uses `rpc('submit_vote')`.
 - **FetchDriver (Generic):**
   - Sends a standard POST request to any URL provided by the developer.
@@ -125,7 +126,7 @@ A React-specific wrapper offering three tiers of integration. Because it depends
 
 - **Hooks (`useThumbly`):**
   - Exposes `vote(index)`, `isLoading`, `error`, `hasVoted`.
-  - Automatically manages React state based on the core events.
+  - Automatically manages React state based on the core logic.
 - **Headless Components (`<Thumbly.Root>`, `<Thumbly.Option>`):**
   - Unstyled components that handle the wiring via React Context.
   - `Thumbly.Option` accepts an `index` prop (1-5) and handles the click event.
@@ -133,14 +134,14 @@ A React-specific wrapper offering three tiers of integration. Because it depends
   - `<ThumblyBinary />`: Configured to use Option 1 (Up) and Option 2 (Down).
   - `<ThumblyStarRating />`: Configured to use Options 1-5.
   - `<ThumblyNPS />`: Configured to use Options 1-3.
-  - **Styling Strategy (Presets):** Built-in presets utilize **Inline Styles** for zero-config "Plug & Play" usage. All presets accept a `style` and `className` prop for developer customization.
+  - **Styling Strategy (Presets):** Built-in presets utilize a mix of **Tailwind CSS** (for layout/responsive) and **Inline Styles** (for default themes). All presets accept a `style` and `className` prop for developer customization.
   - **Styling Strategy (Headless):** Root and Option components are unstyled and purely structural.
 
 ## 5. Security & Privacy Model
 
 ### 5.1 No PII (GDPR/CCPA)
 
-Thumbly remains privacy-native by default. It only tracks aggregate counts.
+Thumbly remains privacy-native by default. It only tracks aggregate counts. No IP addresses, user agents, or PII are stored in the default schema.
 
 ### 5.2 Row Level Security (RLS)
 
@@ -155,7 +156,7 @@ Applies to Default Backend Only
 
 By decoupling the client, scaling becomes a choice for the developer:
 
-- **Default Stack:** Relies on Supabase RPC performance (High throughput).
+- **Default Stack:** Relies on Supabase RPC performance (High throughput, atomic updates).
 - **Custom Stack:** Relies on the developer's infrastructure (Unlimited flexibility).
 
 ## 7. The Thumbly Platform (Web Interface)
@@ -170,69 +171,61 @@ A static Next.js application hosted on GitHub Pages.
   - `thumbly.dev/` → Landing Page & Demo.
   - `thumbly.dev/docs/*` → Documentation.
   - `thumbly.dev/app/*` → Dashboard (Client-side SPA).
-- **Styling:** Standard CSS (No Tailwind dependency to keep it lightweight).
+- **Styling:** Standard CSS + Tailwind CSS (using `lucide-react` for icons).
 - **Auth:** Client-side only Supabase Auth (active only on `/app` routes).
 
 ### 7.2 Core Sections
 
 - **Landing Page:**
-  - Value Proposition ("Batteries Included", "Modular").
-  - "Quick Start" code snippets (npm install...).
+  - Value Proposition ("A toolkit for adding quick surveys...").
+  - "Quick Start" code snippets.
   - **Live Demo:** Interactive playground of UI components.
-  - **Dogfooding:** A real Thumbly widget asking "Do you like this tool?" to collect actual feedback on the project.
+  - **Dogfooding:** A real Thumbly widget connected to the default managed service.
 - **Documentation:**
-  - **Format:** Standard Markdown + Next.js MDX.
-  - **API Reference:** Manually maintained Markdown derived from source TSDoc.
+  - **Format:** Next.js pages with Markdown content.
+  - **API Reference:** Detailed guide for `@thumbly/core` and `@thumbly/react`.
   - **Guides:** Step-by-step tutorials for React, Core, and Custom Backends.
-  - **Self-Hosting:** Instructions using **Supabase CLI** (IaC) rather than manual SQL execution.
-  - **Dogfooding:** A real Thumbly widget asking "Do you like this tool?" to collect actual feedback on the project.
+- **Dashboard (`/app`):**
+  - **Auth:** GitHub/Email authentication via Supabase Auth.
+  - **Survey Manager:**
+    - **Create:** Initialize a new survey endpoint.
+    - **Delete:** Remove a survey and its associated data.
+    - **Reset:** Zero out all counters (preserving the ID).
+    - **Export:** Download raw aggregate data as JSON.
+  - **Analytics:** Integrated bar visualizations showing vote distribution across options.
+  - **Snippet Generator:** Dynamic code snippets for Binary, StarRating, and NPS variants.
 
 ### 7.3 Infrastructure as Code (IaC)
 
-We treat the Supabase backend as code, managed via the **Supabase CLI**.
+We treat the Thumbly backend as code, managed via the **Supabase CLI**.
 
-- **Folder:** `infra/supabase` (renamed from `backend`).
-- **Source of Truth:** `migrations/*.sql` and `config.toml`.
-- **Scope:**
-  - **Schema (Tables, RPCs, RLS):** Managed fully via Migrations.
-  - **Auth/Project Config:** Managed via Dashboard (One-time setup), documented in the "Self-Hosting" guide.
-- **Deployment:** `supabase db push`.
-  - _Target:_ Users of the **Managed Service**.
-  - **Auth:** Supabase Auth (GitHub/Email) against the official Thumbly instance.
-  - **Survey Manager:**
-    - **Create:** Generate a new UUID and initialize counters to 0.
-    - **Delete:** Permanently remove a survey and its data.
-    - **Reset:** Set all `option_x` counters back to 0 (preserving the ID).
-    - **Export:** Download current aggregate data as JSON or CSV.
-  - **Analytics:** Visual graphs (Bar/Pie) of `option_1`...`option_5` counts.
-  - **Snippet Generator:** Dynamic code blocks pre-filled with the user's `surveyId`.
+- **Folder:** `infra/supabase`.
+- **Purpose:** Source code for the official Thumbly managed service.
+- **Note:** These migrations are provided for transparency and development of the platform itself. While they can be used as a reference for building a compatible backend, they are not packaged as a self-hosting product.
 
 ## 8. Testing Strategy
 
 To ensure reliability across the toolkit, we employ a multi-tiered testing approach.
 
 - **Unit Testing (Vitest):**
-  - Used in `@thumbly/core` to verify state transitions, retry logic (via mocked timers/fetch), and persistence.
+  - Used in `@thumbly/core` to verify state transitions, retry logic, and persistence.
   - Used in `@thumbly/react` to verify hook behavior and component rendering.
 - **End-to-End Testing (Playwright):**
-  - Used in `apps/web` to verify the Dashboard authentication flow and critical user journeys (e.g., creating a survey).
+  - Used in `apps/web` to verify the Dashboard authentication flow and critical user journeys.
 - **Manual Verification:**
-  - Performed via the "Dogfooding" widget on the Landing Page.
+  - Continuous dogfooding on the official website.
 
 ## 9. Release Process
 
 We use **Changesets** for automated versioning and package publishing.
 
-- **Versioning Strategy:** **Fixed Versioning**. All packages (`@thumbly/core`, `@thumbly/react`) share the same version number to ensure compatibility and simplify documentation.
-- **Workflow:**
-  1.  Feature/Fix development.
-  2.  Run `pnpm changeset` to document the change.
-  3.  Merge to `main`.
-  4.  CI/CD bumps versions and publishes to NPM.
+- **Versioning Strategy:** **Fixed Versioning** across all packages.
+- **Workflow:** `pnpm changeset` → `pnpm version-packages` → `pnpm release`.
 
 ## 10. Future Roadmap
 
-- **High-Concurrency Locking:** Implementing the "10ms Guard" logic inside the Supabase RPC function.
+- **Supabase Realtime:** Implementing live vote counter updates in the dashboard using Supabase Realtime.
 - **Optimistic Updates:** Updating the React hook to assume success immediately for better UX.
-- **Advanced Time-Series Analytics:** Adding a separate log table for developers who need historical data charts.
-- **Public Results API:** Optional `is_public` flag on surveys to allow the SDK to fetch and display live results to users.
+- **Advanced Time-Series Analytics:** Optional logging table for historical data charts.
+- **Custom Themes API:** A more robust way to define and apply themes to preset components.
+- **Additional Presets:** Support for more feedback types (e.g., Sliders, Emoji pickers).

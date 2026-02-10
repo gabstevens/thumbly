@@ -1,7 +1,7 @@
 {
   "name": "thumbly",
   "version": "0.0.0",
-  "description": "The open-source modular toolkit for sentiment feedback.",
+  "description": "Add quick feedback surveys—like thumbs up/down, star ratings, or NPS—to your apps in minutes.",
   "private": true,
   "author": "Gabriele Stefani",
   "license": "MIT",

@@ -1,7 +1,7 @@
 # Thumbly
 
 <p align="center">
-  <strong>The Modular Sentiment Feedback Toolkit.</strong>
+  <strong>Add quick feedback surveys—like thumbs up/down, star ratings, or NPS—to your apps in minutes.</strong>
 </p>
 
 <p align="center">
@@ -15,18 +15,18 @@
 
 ---
 
-**Thumbly** is a comprehensive, "batteries-included" sentiment feedback system designed for maximum developer flexibility.
+**Thumbly** is a toolkit for adding quick feedback surveys—like thumbs up/down, star ratings, or NPS—to your apps in minutes.
 
-Developers shouldn't have to choose between an ugly iframe widget and building a feedback system from scratch. Thumbly provides the middle ground: **Headless logic**, **Ready-made UI**, and a **Free Backend**.
+Developers shouldn't have to choose between an ugly iframe widget and building a feedback system from scratch. Thumbly provides the middle ground: **Ready-made UI**, **Headless logic**, and a **Managed Service**.
 
 ## 🌟 Features
 
 - **🔌 Plug & Play:** Swap out the UI, logic, or data layer as needed.
 - **⚛️ React Ready:** Beautiful, accessible components out of the box (`@thumbly/react`).
 - **🧠 Headless Core:** 100% logic separation in `@thumbly/core` for custom implementations.
-- **🚀 Forever Free Default:** Optional managed backend using Supabase (PostgreSQL).
+- **🚀 Forever Free Default:** Optional managed service for instant setup.
 - **🛡️ Privacy Native:** No PII collection by default. Only aggregate counts are stored.
-- **🔒 Backend Agnostic:** Use our backend, your own API, or any serverless function.
+- **🔒 Backend Agnostic:** Use our managed service or easily plug in your own API or custom backend.
 
 ## 📦 Packages
 
@@ -94,7 +94,7 @@ function CustomFeedback() {
 Thumbly is designed as a Monorepo to ensure modularity.
 
 - **Frontend:** Next.js (Static Export)
-- **Database:** Supabase (PostgreSQL + RLS)
+- **Database:** PostgreSQL (hosted on Supabase) + RLS
 - **Testing:** Vitest & Playwright
 
 For a deep dive into the system design, see [docs/DESIGN.md](./docs/DESIGN.md).

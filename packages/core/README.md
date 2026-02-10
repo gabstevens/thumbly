@@ -31,7 +31,7 @@ yarn add @thumbly/core
 
 ### Basic Usage (with Supabase)
 
-If you are using the Thumbly backend (or a self-hosted Supabase instance), it works out of the box.
+If you are using the Thumbly managed service (or your own Supabase instance), it works out of the box.
 
 ```typescript
 import { ThumblyClient } from "@thumbly/core";
