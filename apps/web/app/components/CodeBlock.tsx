@@ -5,6 +5,7 @@ import ts from "react-syntax-highlighter/dist/esm/languages/prism/typescript";
 import tsx from "react-syntax-highlighter/dist/esm/languages/prism/tsx";
 import bash from "react-syntax-highlighter/dist/esm/languages/prism/bash";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { cn } from "@/lib/utils";
 
 SyntaxHighlighter.registerLanguage("typescript", ts);
 SyntaxHighlighter.registerLanguage("tsx", tsx);
@@ -14,11 +15,17 @@ interface CodeBlockProps {
   code: string;
   language?: string;
   showLineNumbers?: boolean;
+  className?: string;
 }
 
-export const CodeBlock = ({ code, language = "typescript", showLineNumbers = false }: CodeBlockProps) => {
+export const CodeBlock = ({ code, language = "typescript", showLineNumbers = false, className }: CodeBlockProps) => {
   return (
-    <div className="not-prose rounded-xl overflow-hidden border border-border/50 bg-slate-950 shadow-sm my-4">
+    <div
+      className={cn(
+        "not-prose rounded-xl overflow-hidden border border-border/50 bg-slate-950 shadow-sm my-4",
+        className,
+      )}
+    >
       <SyntaxHighlighter
         language={language}
         style={vscDarkPlus}
