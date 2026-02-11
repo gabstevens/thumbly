@@ -30,6 +30,7 @@ export default function DashboardPage() {
   const [loading, setLoading] = useState(true);
   const [surveys, setSurveys] = useState<any[]>([]);
   const [snippetTypes, setSnippetTypes] = useState<Record<string, string>>({});
+  const [accepted, setAccepted] = useState(false);
   const { theme } = useTheme();
 
   async function fetchSurveys() {
@@ -116,34 +117,57 @@ export default function DashboardPage() {
           </div>
 
           <div className="bg-card border border-border rounded-3xl p-6 shadow-sm">
-            <Auth
-              supabaseClient={supabase}
-              appearance={{
-                theme: ThemeSupa,
-                variables: {
-                  default: {
-                    colors: {
-                      brand: "hsl(var(--primary))",
-                      brandAccent: "hsl(var(--primary) / 0.8)",
-                    },
-                    radii: {
-                      borderRadiusButton: "0.75rem",
-                      inputBorderRadius: "0.75rem",
+            <div className="flex items-start gap-3 mb-6 px-1">
+              <input
+                type="checkbox"
+                id="accept-terms"
+                checked={accepted}
+                onChange={(e) => setAccepted(e.target.checked)}
+                className="mt-1 h-4 w-4 rounded border-border text-primary focus:ring-primary"
+              />
+              <label htmlFor="accept-terms" className="text-xs text-muted-foreground leading-relaxed">
+                I agree to the{" "}
+                <Link href="/terms" target="_blank" className="text-primary hover:underline font-bold">
+                  Terms of Service
+                </Link>{" "}
+                and{" "}
+                <Link href="/privacy" target="_blank" className="text-primary hover:underline font-bold">
+                  Privacy Policy
+                </Link>
+                .
+              </label>
+            </div>
+
+            <div className={cn("transition-all duration-300", !accepted && "opacity-40 pointer-events-none grayscale")}>
+              <Auth
+                supabaseClient={supabase}
+                appearance={{
+                  theme: ThemeSupa,
+                  variables: {
+                    default: {
+                      colors: {
+                        brand: "hsl(var(--primary))",
+                        brandAccent: "hsl(var(--primary) / 0.8)",
+                      },
+                      radii: {
+                        borderRadiusButton: "0.75rem",
+                        inputBorderRadius: "0.75rem",
+                      },
                     },
                   },
-                },
-                className: {
-                  button: "h-10 font-medium",
-                  input: "h-10",
-                },
-              }}
-              providers={["github"]}
-              onlyThirdPartyProviders={true}
-              redirectTo={
-                typeof window !== "undefined" ? `${window.location.origin}${window.location.pathname}` : undefined
-              }
-              theme={theme === "dark" ? "dark" : "default"}
-            />
+                  className: {
+                    button: "h-10 font-medium",
+                    input: "h-10",
+                  },
+                }}
+                providers={["github"]}
+                onlyThirdPartyProviders={true}
+                redirectTo={
+                  typeof window !== "undefined" ? `${window.location.origin}${window.location.pathname}` : undefined
+                }
+                theme={theme === "dark" ? "dark" : "default"}
+              />
+            </div>
           </div>
         </motion.div>
       </div>
